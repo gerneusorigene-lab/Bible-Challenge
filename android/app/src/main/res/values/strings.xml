@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Three Truths and One Lie</string>
+    <string name="title_activity_main">Three Truths and One Lie</string>
+    <string name="package_name">com.threetruths.biblegame</string>
+    <string name="custom_url_scheme">com.threetruths.biblegame</string>
+</resources>

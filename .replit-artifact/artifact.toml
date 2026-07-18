@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Three Truths and One Lie"
+version = "1.0.0"
+id = "artifacts/bible-game"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19138
+
+[services.development]
+run = "pnpm --filter @workspace/bible-game run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/bible-game", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/bible-game/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19138"
+BASE_PATH = "/"
