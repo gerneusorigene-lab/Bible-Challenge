@@ -1,5 +1,6 @@
 import { LEVELS } from '@/data/questions';
 import { groupLevelsIntoStories } from '@/data/storyGroups';
+import { getMasteryClasses, getMasteryLabel, getMasteryLevel } from '@/data/storyProgress';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useSound } from '@/hooks/useSound';
 import { useGameState } from '@/hooks/useGameState';
@@ -133,6 +134,7 @@ export default function LevelSelect() {
     startStory,
     startDifficultyPlay,
     allTimeCorrectLevels,
+    storyProgress,
     setChallengeMode,
     setChallengeTimeLimit,
   } = useGameState();
@@ -181,7 +183,7 @@ export default function LevelSelect() {
     setLocation('/paywall');
   };
 
-  const handleStorySelect = (levelIds: string[]) => {
+  const handleStorySelect = (storyId: string, levelIds: string[]) => {
     const playableIds = isPremium
       ? levelIds
       : levelIds.filter((levelId) => isLevelFree(levelId));
@@ -192,7 +194,7 @@ export default function LevelSelect() {
     }
 
     playClick();
-    startStory(playableIds);
+    startStory(playableIds, storyId);
     setChallengeMode(challengeOn);
     setChallengeTimeLimit(timeLimit);
     setLocation('/game');
@@ -400,6 +402,12 @@ export default function LevelSelect() {
             const locked = journeyLocked || playableQuestionCount === 0;
             const description = getStoryDescription(level.topic.en, language);
             const emoji = getStoryEmoji(level.topic.en);
+            const progress = storyProgress[story.id];
+            const masteredCount = progress?.questionsMastered.filter((id) => story.levels.some((item) => item.id === id)).length ?? 0;
+            const masteryLevel = getMasteryLevel(progress, story.levels.length);
+            const masteryLabel = getMasteryLabel(masteryLevel, language);
+            const masteryPercent = story.levels.length > 0 ? Math.round((masteredCount / story.levels.length) * 100) : 0;
+            const bestScore = progress?.bestScore ?? 0;
 
             return (
               <motion.button
@@ -409,7 +417,7 @@ export default function LevelSelect() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: Math.min(index * 0.025, 0.3) }}
                 whileTap={{ scale: 0.985 }}
-                onClick={() => handleStorySelect(story.levels.map((item) => item.id))}
+                onClick={() => handleStorySelect(story.id, story.levels.map((item) => item.id))}
                 className={`group relative flex w-full items-center overflow-hidden rounded-2xl border ${theme.border} bg-gradient-to-r from-slate-900/95 via-slate-900/82 to-slate-800/75 text-left shadow-[0_9px_24px_rgba(0,0,0,.28)] transition hover:-translate-y-0.5 hover:brightness-110 ${locked ? 'opacity-65' : ''}`}
               >
                 <div className={`grid min-h-[112px] w-16 shrink-0 place-items-center bg-gradient-to-b ${theme.button} font-serif text-3xl font-black shadow-inner`}>
@@ -427,17 +435,30 @@ export default function LevelSelect() {
                   <p className="mt-1 line-clamp-2 text-xs font-semibold leading-relaxed text-white/55 sm:text-sm">
                     {description}
                   </p>
-                  <p className={`mt-2 text-[11px] font-black uppercase tracking-wider ${theme.accentText}`}>
-                    {playableQuestionCount} {playableQuestionCount === 1
-                      ? t('Question', 'Question')
-                      : t('Questions', 'Questions')}
-                  </p>
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <span className={`text-[11px] font-black uppercase tracking-wider ${theme.accentText}`}>
+                      {playableQuestionCount} {playableQuestionCount === 1
+                        ? t('Question', 'Question')
+                        : t('Questions', 'Questions')}
+                    </span>
+                    <span className={`rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-wider ${getMasteryClasses(masteryLevel)}`}>
+                      {masteryLabel}
+                    </span>
+                  </div>
+
+                  <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-[11px] font-bold text-white/60">
+                    <span>{t('Mastered', 'Maîtrisé')}: <strong className="text-white">{masteredCount}/{story.levels.length}</strong></span>
+                    <span>{t('Best Score', 'Meilleur score')}: <strong className="text-white">{bestScore}%</strong></span>
+                  </div>
+                  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
+                    <div className={`h-full rounded-full ${theme.progress} transition-all`} style={{ width: `${masteryPercent}%` }} />
+                  </div>
                   <div className="mt-2 flex gap-1">
-                    {[0, 1, 2].map((star) => (
+                    {[33, 66, 100].map((threshold) => (
                       <Star
-                        key={star}
+                        key={threshold}
                         size={17}
-                        className={completed ? 'fill-amber-300 text-amber-300' : 'text-white/20'}
+                        className={bestScore >= threshold ? 'fill-amber-300 text-amber-300' : 'text-white/20'}
                       />
                     ))}
                   </div>

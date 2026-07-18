@@ -10,7 +10,7 @@ import { Star, Share2, Check, BookOpen } from 'lucide-react';
 
 export default function End() {
   const {
-    score, levelsCompleted, playAllMode, difficultyPlayMode,
+    score, levelsCompleted, playAllMode, difficultyPlayMode, sessionQueue,
     wrongAnswers, allTimeMaxStreak, streak, resetGame,
   } = useGameState();
   const { t, language } = useLanguage();
@@ -21,11 +21,13 @@ export default function End() {
 
   useEffect(() => { playComplete(); }, [playComplete]);
 
-  const maxPossibleScore = playAllMode
-    ? LEVELS.length * 10
-    : difficultyPlayMode
-      ? LEVELS.filter(l => l.difficulty === difficultyPlayMode).length * 10
-      : 10;
+  const maxPossibleScore = sessionQueue
+    ? sessionQueue.length * 10
+    : playAllMode
+      ? LEVELS.length * 10
+      : difficultyPlayMode
+        ? LEVELS.filter(l => l.difficulty === difficultyPlayMode).length * 10
+        : 10;
 
   const starsCount = score >= maxPossibleScore ? 3 : score >= maxPossibleScore * 0.5 ? 2 : 1;
   const bestStreak = Math.max(streak, allTimeMaxStreak);

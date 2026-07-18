@@ -30,7 +30,7 @@ const GROUPS: Record<string, string[]> = {
   abrahamicCovenant: ['a21', 'a47'],
 };
 
-const GROUP_BY_LEVEL = new Map<string, string>();
+export const GROUP_BY_LEVEL = new Map<string, string>();
 Object.entries(GROUPS).forEach(([groupId, levelIds]) => {
   levelIds.forEach((levelId) => GROUP_BY_LEVEL.set(levelId, groupId));
 });
@@ -60,4 +60,8 @@ export function groupLevelsIntoStories(levels: Level[]): StoryGroup[] {
     representative: members[0],
     levels: members,
   }));
+}
+
+export function getStoryIdForLevel(levelId: string): string {
+  return GROUP_BY_LEVEL.get(levelId) ?? levelId;
 }

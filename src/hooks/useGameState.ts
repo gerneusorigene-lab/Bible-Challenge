@@ -1,10 +1,19 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { LEVELS } from '../data/questions';
+import { getStoryIdForLevel } from '../data/storyGroups';
 
 export interface WrongAnswer {
   levelId: string;
   selectedStatementId: string;
+}
+
+export interface StoryProgress {
+  timesPlayed: number;
+  bestScore: number;
+  questionsSeen: string[];
+  questionsMastered: string[];
+  lastPlayed: string | null;
 }
 
 interface GameState {
@@ -23,6 +32,7 @@ interface GameState {
   challengeMode: boolean;
   challengeTimeLimit: 30 | 45 | 60;
   sessionQueue: string[] | null;
+  activeStoryId: string | null;
 
   // ── Persisted ──────────────────────────────────────────────
   highScore: number;
@@ -35,10 +45,11 @@ interface GameState {
   perfectRuns: number;
   maxTimeBonusEarned: number;
   dailyChallengeLastCompleted: string | null;
+  storyProgress: Record<string, StoryProgress>;
 
   // ── Actions ────────────────────────────────────────────────
   startLevel: (levelId: string) => void;
-  startStory: (levelIds: string[]) => void;
+  startStory: (levelIds: string[], storyId?: string) => void;
   startPlayAll: () => void;
   startDifficultyPlay: (difficulty: 'Beginner' | 'Intermediate' | 'Advanced', questionLimit?: number, allowedLevelIds?: string[]) => void;
   submitAnswer: (statementId: string, isTruth: boolean, timeBonus?: number) => void;
@@ -63,7 +74,7 @@ function shuffle<T>(items: T[]): T[] {
 const SESSION_RESET: Pick<GameState,
   'score' | 'currentLevelId' | 'playAllMode' | 'difficultyPlayMode' |
   'levelsCompleted' | 'lastAnswerCorrect' | 'lastSelectedStatementId' |
-  'streak' | 'wrongAnswers' | 'hintsUsedThisLevel' | 'lastBonusEarned' | 'challengeMode' | 'challengeTimeLimit' | 'sessionQueue'
+  'streak' | 'wrongAnswers' | 'hintsUsedThisLevel' | 'lastBonusEarned' | 'challengeMode' | 'challengeTimeLimit' | 'sessionQueue' | 'activeStoryId'
 > = {
   score: 0,
   currentLevelId: null,
@@ -79,6 +90,7 @@ const SESSION_RESET: Pick<GameState,
   challengeMode: false,
   challengeTimeLimit: 30,
   sessionQueue: null,
+  activeStoryId: null,
 };
 
 export const useGameState = create<GameState>()(
@@ -96,14 +108,20 @@ export const useGameState = create<GameState>()(
       perfectRuns: 0,
       maxTimeBonusEarned: 0,
       dailyChallengeLastCompleted: null,
+      storyProgress: {},
 
       startLevel: (levelId) => set({ ...SESSION_RESET, currentLevelId: levelId }),
 
-      startStory: (levelIds) => {
+      startStory: (levelIds, storyId) => {
         const validIds = levelIds.filter((id) => LEVELS.some((level) => level.id === id));
         if (validIds.length === 0) return;
         const queue = shuffle(validIds);
-        set({ ...SESSION_RESET, currentLevelId: queue[0], sessionQueue: queue });
+        set({
+          ...SESSION_RESET,
+          currentLevelId: queue[0],
+          sessionQueue: queue,
+          activeStoryId: storyId ?? getStoryIdForLevel(queue[0]),
+        });
       },
 
       startPlayAll: () => set({
@@ -141,6 +159,22 @@ export const useGameState = create<GameState>()(
         const pointsEarned = correct ? 10 + totalBonus : 0;
         const newScore = state.score + pointsEarned;
 
+        const levelId = state.currentLevelId!;
+        const storyId = getStoryIdForLevel(levelId);
+        const previousProgress = state.storyProgress[storyId] ?? {
+          timesPlayed: 0,
+          bestScore: 0,
+          questionsSeen: [],
+          questionsMastered: [],
+          lastPlayed: null,
+        };
+        const questionsSeen = previousProgress.questionsSeen.includes(levelId)
+          ? previousProgress.questionsSeen
+          : [...previousProgress.questionsSeen, levelId];
+        const questionsMastered = correct && !previousProgress.questionsMastered.includes(levelId)
+          ? [...previousProgress.questionsMastered, levelId]
+          : previousProgress.questionsMastered;
+
         return {
           lastAnswerCorrect: correct,
           lastSelectedStatementId: statementId,
@@ -158,6 +192,10 @@ export const useGameState = create<GameState>()(
           totalCorrect: state.totalCorrect + (correct ? 1 : 0),
           lastBonusEarned: totalBonus,
           maxTimeBonusEarned: Math.max(state.maxTimeBonusEarned, timeBonus),
+          storyProgress: {
+            ...state.storyProgress,
+            [storyId]: { ...previousProgress, questionsSeen, questionsMastered },
+          },
         };
       }),
 
@@ -168,6 +206,29 @@ export const useGameState = create<GameState>()(
 
       nextLevel: () => set((state) => {
         if (!state.currentLevelId) return state;
+
+        const finalizeStoryProgress = () => {
+          if (!state.activeStoryId || !state.sessionQueue) return state.storyProgress;
+          const previous = state.storyProgress[state.activeStoryId] ?? {
+            timesPlayed: 0,
+            bestScore: 0,
+            questionsSeen: [],
+            questionsMastered: [],
+            lastPlayed: null,
+          };
+          const answered = state.levelsCompleted.length + 1;
+          const correct = Math.max(0, answered - state.wrongAnswers.length);
+          const scorePercent = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+          return {
+            ...state.storyProgress,
+            [state.activeStoryId]: {
+              ...previous,
+              timesPlayed: previous.timesPlayed + 1,
+              bestScore: Math.max(previous.bestScore, scorePercent),
+              lastPlayed: new Date().toISOString(),
+            },
+          };
+        };
 
         const newCompleted = [...state.levelsCompleted, state.currentLevelId];
         const noHintIncrement = !state.hintsUsedThisLevel ? 1 : 0;
@@ -196,6 +257,7 @@ export const useGameState = create<GameState>()(
             currentLevelId: null,
             levelsCompleted: newCompleted,
             perfectRuns: isPerfect ? state.perfectRuns + 1 : state.perfectRuns,
+            storyProgress: finalizeStoryProgress(),
           };
         } else if (state.difficultyPlayMode) {
           const tier = LEVELS.filter(l => l.difficulty === state.difficultyPlayMode);
@@ -237,6 +299,7 @@ export const useGameState = create<GameState>()(
         perfectRuns: 0,
         maxTimeBonusEarned: 0,
         dailyChallengeLastCompleted: null,
+        storyProgress: {},
       }),
     }),
     {
@@ -252,6 +315,7 @@ export const useGameState = create<GameState>()(
         perfectRuns: state.perfectRuns,
         maxTimeBonusEarned: state.maxTimeBonusEarned,
         dailyChallengeLastCompleted: state.dailyChallengeLastCompleted,
+        storyProgress: state.storyProgress,
       }),
     }
   )
