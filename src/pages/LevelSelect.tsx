@@ -1,3 +1,4 @@
+import { getStoryArtwork } from "@/data/storyArtwork";
 import { LEVELS } from '@/data/questions';
 import { groupLevelsIntoStories } from '@/data/storyGroups';
 import { getMasteryClasses, getMasteryLabel, getMasteryLevel } from '@/data/storyProgress';
@@ -94,22 +95,7 @@ const TESTAMENT_FILTERS: { key: Testament; label: string; labelFr: string }[] = 
   { key: 'New', label: 'New Testament', labelFr: 'Nouveau Testament' },
 ];
 
-function getStoryEmoji(topic: string): string {
-  const text = topic.toLowerCase();
-  if (text.includes('creation')) return '🌍';
-  if (text.includes('adam') || text.includes('eve')) return '🌳';
-  if (text.includes('noah') || text.includes('ark')) return '🌈';
-  if (text.includes('babel')) return '🏛️';
-  if (text.includes('abraham')) return '🌟';
-  if (text.includes('moses') || text.includes('exodus')) return '🌊';
-  if (text.includes('david') || text.includes('goliath')) return '🪨';
-  if (text.includes('daniel')) return '🦁';
-  if (text.includes('jonah')) return '🐋';
-  if (text.includes('jesus') || text.includes('christ')) return '✨';
-  if (text.includes('paul')) return '📜';
-  if (text.includes('peter')) return '🔑';
-  return '📖';
-}
+
 
 function getStoryDescription(topic: string, language: 'en' | 'fr'): string {
   const text = topic.toLowerCase();
@@ -401,7 +387,7 @@ export default function LevelSelect() {
               : story.levels.filter((item) => isLevelFree(item.id)).length;
             const locked = journeyLocked || playableQuestionCount === 0;
             const description = getStoryDescription(level.topic.en, language);
-            const emoji = getStoryEmoji(level.topic.en);
+            
             const progress = storyProgress[story.id];
             const masteredCount = progress?.questionsMastered.filter((id) => story.levels.some((item) => item.id === id)).length ?? 0;
             const masteryLevel = getMasteryLevel(progress, story.levels.length);
@@ -425,7 +411,11 @@ export default function LevelSelect() {
                 </div>
 
                 <div className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl border border-white/10 bg-black/25 text-4xl shadow-inner sm:ml-3">
-                  {emoji}
+                  <img
+                      src={getStoryArtwork(story.id)}
+                      alt={level.topic[language]}
+                      className="h-full w-full rounded-2xl object-cover"
+                  />
                 </div>
 
                 <div className="min-w-0 flex-1 px-4 py-4">
