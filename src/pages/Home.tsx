@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link, useLocation } from 'wouter';
 import { useGameState } from '@/hooks/useGameState';
 import { useEntitlement } from '@/hooks/useEntitlement';
+import { useAchievements, useAchievementsStore } from '@/hooks/useAchievements';
 import { DevPremiumToggle } from '@/components/DevPremiumToggle';
 import { GameMenuButton } from '@/components/GameMenuButton';
 import { Capacitor } from '@capacitor/core';
@@ -23,6 +24,8 @@ export default function Home() {
   const { t } = useLanguage();
   const { playClick } = useSound();
   const { highScore, resetAllProgress } = useGameState();
+  const { unlockedCount, total } = useAchievements();
+  const clearAchievements = useAchievementsStore((state) => state.clearAll);
   const { isPremium } = useEntitlement();
   const [, setLocation] = useLocation();
   const isAndroid = Capacitor.getPlatform() === 'android';
@@ -35,7 +38,10 @@ export default function Home() {
         'Réinitialiser toute la progression, les scores et les accomplissements? Cette action est irréversible.'
       )
     );
-    if (confirmed) resetAllProgress();
+    if (confirmed) {
+      resetAllProgress();
+      clearAchievements();
+    }
   };
 
   const exitApp = async () => {
@@ -126,10 +132,10 @@ export default function Home() {
           <GameMenuButton
             icon={<Trophy />}
             tone="green"
-            onClick={() => go('/levels')}
+            onClick={() => go('/achievements')}
             testId="button-achievements-home"
           >
-            {t('Achievements', 'Accomplissements')}
+            {t('Achievements', 'Accomplissements')} ({unlockedCount}/{total})
           </GameMenuButton>
 
           {!isPremium && (

@@ -17,9 +17,15 @@ export default function End() {
   const { playComplete, playClick } = useSound();
   const [, setLocation] = useLocation();
   const [copied, setCopied] = useState(false);
-  const { unlockedIds, newIds, ACHIEVEMENTS } = useAchievements();
+  const { newIds, achievements, markSeen } = useAchievements();
 
   useEffect(() => { playComplete(); }, [playComplete]);
+
+  useEffect(() => {
+    if (newIds.length === 0) return;
+    const timer = window.setTimeout(() => markSeen(newIds), 5000);
+    return () => window.clearTimeout(timer);
+  }, [markSeen, newIds]);
 
   const maxPossibleScore = sessionQueue
     ? sessionQueue.length * 10
@@ -118,7 +124,7 @@ export default function End() {
           >
             <p className="font-serif text-gold text-sm mb-2">{t('🏆 New Achievement!', '🏆 Nouvel Accomplissement !')}</p>
             {newIds.map(id => {
-              const a = ACHIEVEMENTS.find(ac => ac.id === id);
+              const a = achievements.find(ac => ac.id === id);
               return a ? (
                 <p key={id} className="text-card-foreground/80 text-sm">
                   {a.icon} {a.title[language]}

@@ -13,6 +13,7 @@ import Result from '@/pages/Result';
 import End from '@/pages/End';
 import Review from '@/pages/Review';
 import Paywall from '@/pages/Paywall';
+import Achievements from '@/pages/Achievements';
 import NotFound from '@/pages/not-found';
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ function Router() {
         <Route path="/end" component={End} />
         <Route path="/review" component={Review} />
         <Route path="/paywall" component={Paywall} />
+        <Route path="/achievements" component={Achievements} />
         <Route component={NotFound} />
       </Switch>
     </>
