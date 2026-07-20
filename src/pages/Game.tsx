@@ -35,7 +35,16 @@ function getTimeBonus(timeLeft: number): number {
   if (timeLeft > 10) return 5;
   return 0;
 }
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
 
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
+}
 export default function Game() {
   const {
     currentLevelId, submitAnswer, streak, hintsUsedThisLevel, useHint,
@@ -45,7 +54,8 @@ export default function Game() {
   const { language, t } = useLanguage();
   const { playCorrect, playWrong, playClick } = useSound();
   const [, setLocation] = useLocation();
-
+  const currentLevel = currentLevelId ? LEVELS.find(level => level.id === currentLevelId) : undefined;
+  const [shuffledStatements, setShuffledStatements] = useState<Level['statements']>([]);
   const [revealing, setRevealing] = useState(false);
   const [timeLeft, setTimeLeft] = useState<number>(challengeTimeLimit);
   const [eliminatedId, setEliminatedId] = useState<string | null>(null);
@@ -63,12 +73,18 @@ export default function Game() {
   }, [currentLevelId, setLocation]);
 
   useEffect(() => {
-    didAnswer.current = false;
-    setRevealing(false);
-    setEliminatedId(null);
-    setTimeLeft(challengeTimeLimit);
-    setStoryImageFailed(false);
-  }, [currentLevelId, challengeTimeLimit]);
+  didAnswer.current = false;
+  setRevealing(false);
+  setEliminatedId(null);
+  setTimeLeft(challengeTimeLimit);
+  setStoryImageFailed(false);
+
+  // Randomize the order of the 4 statements
+  if (currentLevel) {
+    setShuffledStatements(shuffleArray(currentLevel.statements));
+  }
+
+}, [currentLevelId, challengeTimeLimit, currentLevel]);
 
   // Timer tick — only in challenge mode
   useEffect(() => {
@@ -87,8 +103,7 @@ export default function Game() {
     }
   }, [challengeMode, timeLeft]);
 
-  if (!currentLevelId) return null;
-  const currentLevel = LEVELS.find(l => l.id === currentLevelId)!;
+  if (!currentLevel) return null;
 
   const handleAnswer = (statementId: string, isTruth: boolean) => {
     if (didAnswer.current || revealing) return;
@@ -105,16 +120,16 @@ export default function Game() {
     if (didAnswer.current) return;
     didAnswer.current = true;
     setRevealing(true);
-    const firstTruth = currentLevel.statements.find(s => s.isTruth)!;
+    const firstTruth = shuffledStatements.find(s => s.isTruth)!;
     playWrong();
     submitAnswer(firstTruth.id, true, 0);
     navTimeout.current = setTimeout(() => setLocation('/result'), 1500);
-  }, [currentLevel, submitAnswer, playWrong, setLocation]);
+  }, [shuffledStatements, submitAnswer, playWrong, setLocation]);
 
   const handleHint = () => {
     if (hintsUsedThisLevel || revealing) return;
     playClick();
-    const truths = currentLevel.statements.filter(s => s.isTruth && s.id !== eliminatedId);
+    const truths = shuffledStatements.filter(s => s.isTruth && s.id !== eliminatedId);
     if (truths.length === 0) return;
     const pick = truths[Math.floor(Math.random() * truths.length)];
     setEliminatedId(pick.id);
@@ -303,7 +318,7 @@ export default function Game() {
         {/* Large answer cards */}
         <div className="space-y-3">
           <AnimatePresence>
-            {currentLevel.statements.map((statement, idx) => {
+            {shuffledStatements.map((statement, idx) => {
               let status: 'default' | 'selected-correct' | 'selected-wrong' | 'revealed-correct' | 'dimmed' | 'hint-eliminated' = 'default';
 
               if (statement.id === eliminatedId && !revealing) {

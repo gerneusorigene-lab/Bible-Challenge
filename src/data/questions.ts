@@ -15,6 +15,11 @@ export interface Level {
   image: string;
   statements: Statement[];
   explanation: { en: string; fr: string };
+  scripture?: { en: string; fr: string };
+  keyLesson?: { en: string; fr: string };
+  teacherNote?: { en: string; fr: string };
+  didYouKnow?: { en: string; fr: string };
+  lifeApplication?: { en: string; fr: string };
   badgeColor: string;
   testament: 'Old' | 'New';
 }
@@ -100,7 +105,24 @@ export const LEVELS: Level[] = [
       { id: 'b7-c', isTruth: false, text: { en: "God commanded Noah to bring two of every animal — exactly one male and one female of every kind.", fr: "Dieu ordonna à Noé d'amener deux de chaque animal — exactement un mâle et une femelle de chaque espèce." } },
       { id: 'b7-d', isTruth: true,  text: { en: "God told Noah He would establish His covenant with him.", fr: "Dieu dit à Noé qu'Il établirait son alliance avec lui." } },
     ],
-    explanation: { en: "For clean animals, God commanded seven pairs (seven of every clean animal). Only unclean animals were limited to one pair each. So the command varied by animal type (Genesis 7:2-3).", fr: "Pour les animaux purs, Dieu en demanda sept couples. Seuls les animaux impurs étaient limités à un couple. La commande variait selon le type d'animal (Genèse 7:2-3)." }
+    explanation: { en: "For clean animals, God commanded seven pairs. Only unclean animals were limited to one pair each, so the command varied by animal type.", fr: "Pour les animaux purs, Dieu demanda sept couples. Seuls les animaux impurs étaient limités à un couple; le commandement variait donc selon le type d'animal." },
+    scripture: { en: "Genesis 7:2–3", fr: "Genèse 7:2–3" },
+    keyLesson: {
+      en: "God distinguished between clean and unclean animals before the Flood.",
+      fr: "Dieu faisait déjà une distinction entre les animaux purs et impurs avant le Déluge."
+    },
+    teacherNote: {
+      en: "The extra clean animals made it possible for Noah to offer sacrifices after leaving the ark without endangering the survival of those kinds.",
+      fr: "Les animaux purs supplémentaires permirent à Noé d'offrir des sacrifices après sa sortie de l'arche sans mettre en danger la survie de ces espèces."
+    },
+    didYouKnow: {
+      en: "The distinction between clean and unclean animals appears in Genesis before the Law of Moses was given.",
+      fr: "La distinction entre animaux purs et impurs apparaît dans la Genèse avant que la loi de Moïse ne soit donnée."
+    },
+    lifeApplication: {
+      en: "Careful reading matters: a small detail can change the meaning of an entire statement.",
+      fr: "Une lecture attentive est importante : un petit détail peut changer le sens d'une affirmation entière."
+    }
   },
   {
     id: 'b8', levelNumber: 8, difficulty: 'Beginner', difficultyFr: 'Débutant',
