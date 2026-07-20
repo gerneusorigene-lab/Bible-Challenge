@@ -1,9 +1,10 @@
+import { getStoryArtwork } from "@/data/storyArtwork";
 import { LEVELS } from '@/data/questions';
 import { groupLevelsIntoStories } from '@/data/storyGroups';
+import { getMasteryClasses, getMasteryLabel, getMasteryLevel } from '@/data/storyProgress';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useSound } from '@/hooks/useSound';
 import { useGameState } from '@/hooks/useGameState';
-import StoryCard from "@/components/StoryCard";
 import {
   FREE_DIFFICULTY,
   FREE_LEVEL_IDS,
@@ -16,11 +17,14 @@ import { useLocation } from 'wouter';
 import {
   ArrowLeft,
   BookOpen,
+  Check,
+  ChevronRight,
   Crown,
   Gift,
   Lock,
   Map,
   Sparkles,
+  Star,
   Trophy,
   Zap,
 } from 'lucide-react';
@@ -282,63 +286,34 @@ export default function LevelSelect() {
                 <Zap className="mr-1 inline" size={17} />
                 {t('Challenge Mode', 'Mode Défi')}
               </p>
-
               <button
                 type="button"
-                onClick={() => {
-                  playClick();
-                  setChallengeOn((value) => !value);
-                }}
-                className={`relative h-7 w-14 shrink-0 rounded-full border transition ${
-                  challengeOn
-                    ? 'border-emerald-200/60 bg-emerald-500'
-                    : 'border-white/20 bg-slate-600/70'
-                }`}
+                onClick={() => { playClick(); setChallengeOn((value) => !value); }}
+                className={`relative h-7 w-14 shrink-0 rounded-full border transition ${challengeOn ? 'border-emerald-200/60 bg-emerald-500' : 'border-white/20 bg-slate-600/70'}`}
                 aria-label={t('Toggle challenge mode', 'Activer le mode défi')}
                 aria-pressed={challengeOn}
               >
-                <span
-                  className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${
-                    challengeOn ? 'translate-x-7' : 'translate-x-0'
-                  }`}
-                />
+                <span className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${challengeOn ? 'translate-x-7' : 'translate-x-0'}`} />
               </button>
-
-              <span
-                className={`text-[11px] font-black uppercase tracking-widest ${
-                  challengeOn ? 'text-emerald-300' : 'text-white/50'
-                }`}
-              >
+              <span className={`text-[11px] font-black uppercase tracking-widest ${challengeOn ? 'text-emerald-300' : 'text-white/50'}`}>
                 {challengeOn ? t('On', 'Activé') : t('Off', 'Désactivé')}
               </span>
             </div>
 
             <div className="hidden h-10 w-px bg-white/15 sm:block" />
 
-            <div
-              className={`min-w-0 flex-1 transition-opacity ${
-                challengeOn ? 'opacity-100' : 'opacity-35'
-              }`}
-            >
+            <div className={`min-w-0 flex-1 transition-opacity ${challengeOn ? 'opacity-100' : 'opacity-35'}`}>
               <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                 <p className="mr-1 whitespace-nowrap text-[11px] font-black uppercase tracking-widest text-white/65">
                   {t('Number of Questions', 'Nombre de questions')}
                 </p>
-
                 {([10, 20, 40] as const).map((count) => (
                   <button
                     key={count}
                     type="button"
                     disabled={!challengeOn}
-                    onClick={() => {
-                      playClick();
-                      setQuestionCount(count);
-                    }}
-                    className={`min-w-12 rounded-full border px-3 py-1.5 text-xs font-black transition disabled:cursor-not-allowed ${
-                      challengeOn && questionCount === count
-                        ? `border-white/70 bg-gradient-to-r ${theme.button} text-white`
-                        : 'border-white/15 bg-black/20 text-white/55'
-                    }`}
+                    onClick={() => { playClick(); setQuestionCount(count); }}
+                    className={`min-w-12 rounded-full border px-3 py-1.5 text-xs font-black transition disabled:cursor-not-allowed ${challengeOn && questionCount === count ? `border-white/70 bg-gradient-to-r ${theme.button} text-white` : 'border-white/15 bg-black/20 text-white/55'}`}
                   >
                     {count}
                   </button>
@@ -347,40 +322,24 @@ export default function LevelSelect() {
             </div>
           </div>
 
-          <div
-            className={`mt-4 border-t border-white/10 pt-3 transition-opacity ${
-              challengeOn ? 'opacity-100' : 'opacity-35'
-            }`}
-          >
+          <div className={`mt-4 border-t border-white/10 pt-3 transition-opacity ${challengeOn ? 'opacity-100' : 'opacity-35'}`}>
             <div className="flex flex-wrap items-center gap-2">
               <p className="mr-1 whitespace-nowrap text-[11px] font-black uppercase tracking-widest text-white/65">
                 {t('Time Limit', 'Limite de temps')}
               </p>
-
               {([30, 45, 60] as const).map((seconds) => (
                 <button
                   key={seconds}
                   type="button"
                   disabled={!challengeOn}
-                  onClick={() => {
-                    playClick();
-                    setTimeLimit(seconds);
-                  }}
-                  className={`min-w-14 rounded-full border px-3 py-1.5 text-xs font-black transition disabled:cursor-not-allowed ${
-                    challengeOn && timeLimit === seconds
-                      ? `border-white/70 bg-gradient-to-r ${theme.button} text-white`
-                      : 'border-white/15 bg-black/20 text-white/55'
-                  }`}
+                  onClick={() => { playClick(); setTimeLimit(seconds); }}
+                  className={`min-w-14 rounded-full border px-3 py-1.5 text-xs font-black transition disabled:cursor-not-allowed ${challengeOn && timeLimit === seconds ? `border-white/70 bg-gradient-to-r ${theme.button} text-white` : 'border-white/15 bg-black/20 text-white/55'}`}
                 >
                   {seconds}s
                 </button>
               ))}
-
               <p className="basis-full pt-1 text-xs font-semibold text-white/55 sm:ml-2 sm:basis-auto sm:pt-0">
-                {t(
-                  'Timed play and speed bonuses',
-                  'Jeu chronométré et bonus de vitesse',
-                )}
+                {t('Timed play and speed bonuses', 'Jeu chronométré et bonus de vitesse')}
               </p>
             </div>
           </div>
@@ -431,34 +390,172 @@ export default function LevelSelect() {
             
             const progress = storyProgress[story.id];
             const masteredCount = progress?.questionsMastered.filter((id) => story.levels.some((item) => item.id === id)).length ?? 0;
-                  
+            const masteryLevel = getMasteryLevel(progress, story.levels.length);
+            const masteryLabel = getMasteryLabel(masteryLevel, language);
             const masteryPercent = story.levels.length > 0 ? Math.round((masteredCount / story.levels.length) * 100) : 0;
             const bestScore = progress?.bestScore ?? 0;
 
             return (
-              <StoryCard
-                key={story.id}
-                story={story}
-                level={level}
-                index={index}
-                theme={theme}
-                language={language}
-                description={description}
-                playableQuestionCount={playableQuestionCount}
-                masteredCount={masteredCount}
-                masteryPercent={masteryPercent}
-                bestScore={bestScore}
-                locked={locked}
-                completed={completed}
-                t={t}
-                onPlay={() =>
-                  handleStorySelect(
-                    story.id,
-                    story.levels.map((item) => item.id),
-                  )
-                }
-              />
-            );
+              <<motion.button
+  key={story.id}
+  type="button"
+  initial={{ opacity: 0, y: 10 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: Math.min(index * 0.025, 0.3) }}
+  whileHover={{
+    y: -4,
+    transition: { duration: 0.2 },
+  }}
+  whileTap={{ scale: 0.98 }}
+  onClick={() =>
+    handleStorySelect(
+      story.id,
+      story.levels.map((item) => item.id)
+    )
+  }
+  className={`group overflow-hidden rounded-3xl border ${
+    theme.border
+  } bg-slate-900 shadow-2xl transition ${
+    locked ? "opacity-60" : ""
+  }`}
+>
+  {/* ---------- HERO IMAGE ---------- */}
+
+  <div className="relative h-48 overflow-hidden">
+
+    <img
+      src={getStoryArtwork(story.id)}
+      alt={level.topic[language]}
+      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+    />
+
+    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+
+    <div className="absolute left-4 top-4">
+      <div
+        className={`rounded-full bg-gradient-to-r ${theme.button} px-3 py-1 text-xs font-black uppercase tracking-wider shadow-lg`}
+      >
+        #{level.levelNumber}
+      </div>
+    </div>
+
+    {locked && (
+      <div className="absolute right-4 top-4 rounded-full bg-black/60 p-2 backdrop-blur">
+        <Lock size={20} />
+      </div>
+    )}
+
+    {completed && !locked && (
+      <div className="absolute right-4 top-4 rounded-full bg-emerald-500 p-2 shadow-lg">
+        <Check size={18} strokeWidth={3} />
+      </div>
+    )}
+  </div>
+
+  {/* ---------- CONTENT ---------- */}
+
+  <div className="p-5">
+
+    <h2 className="font-serif text-2xl font-black text-white">
+      {level.topic[language]}
+    </h2>
+
+    <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/70">
+      {description}
+    </p>
+
+    {/* chips */}
+
+    <div className="mt-4 flex flex-wrap gap-2">
+
+      <span
+        className={`rounded-full bg-white/10 px-3 py-1 text-xs font-bold ${theme.accentText}`}
+      >
+        {playableQuestionCount}{" "}
+        {playableQuestionCount === 1
+          ? t("Question", "Question")
+          : t("Questions", "Questions")}
+      </span>
+
+      <span
+        className={`rounded-full px-3 py-1 text-xs font-bold ${getMasteryClasses(
+          masteryLevel
+        )}`}
+      >
+        {masteryLabel}
+      </span>
+
+      <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold">
+        {bestScore}%
+      </span>
+
+    </div>
+
+    {/* progress */}
+
+    <div className="mt-5">
+
+      <div className="mb-2 flex justify-between text-xs font-semibold text-white/70">
+        <span>
+          {t("Mastered", "Maîtrisé")}
+        </span>
+
+        <span>
+          {masteredCount}/{story.levels.length}
+        </span>
+      </div>
+
+      <div className="h-2 overflow-hidden rounded-full bg-white/10">
+
+        <div
+          className={`h-full ${theme.progress}`}
+          style={{
+            width: `${masteryPercent}%`,
+          }}
+        />
+
+      </div>
+
+    </div>
+
+    {/* stars */}
+
+    <div className="mt-4 flex justify-center gap-1">
+
+      {[33, 66, 100].map((threshold) => (
+        <Star
+          key={threshold}
+          size={18}
+          className={
+            bestScore >= threshold
+              ? "fill-amber-300 text-amber-300"
+              : "text-white/20"
+          }
+        />
+      ))}
+
+    </div>
+
+    {/* play */}
+
+    <div
+      className={`mt-5 flex items-center justify-center rounded-2xl bg-gradient-to-r ${theme.button} py-3 font-black uppercase tracking-wider shadow-lg`}
+    >
+      {locked ? (
+        <>
+          <Lock size={18} className="mr-2" />
+          {t("Locked", "Verrouillé")}
+        </>
+      ) : (
+        <>
+          {t("Play Story", "Jouer l'histoire")}
+          <ChevronRight size={18} className="ml-2" />
+        </>
+      )}
+    </div>
+
+  </div>
+</motion.button>
           })}
         </motion.div>
 
@@ -469,10 +566,7 @@ export default function LevelSelect() {
           </p>
           <button
             type="button"
-            onClick={() => {
-              playClick();
-              setLocation('/journey-map');
-            }}
+            onClick={() => { playClick(); }}
             className="flex items-center gap-2 rounded-xl border border-violet-300/40 bg-gradient-to-r from-blue-600 to-violet-700 px-5 py-3 font-serif text-sm font-black uppercase tracking-wide shadow-lg"
           >
             <Map size={19} />

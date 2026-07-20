@@ -1,18 +1,22 @@
-export const STORY_ARTWORK: Record<string, string> = {
-  creation: "/assets/images/beginner/creation.webp",
-  eden: "/assets/images/beginner/adam_eve.webp",
-  noah: "/assets/images/beginner/noahs_ark.webp",
-  abraham: "/assets/images/beginner/abraham_under_the_stars.webp",
-  jacob: "/assets/images/beginner/jacobs_ladder.webp",
+import noahArtwork from "@/assets/images/beginner/noahs_ark_v1.png";
+import abrahamArtwork from "@/assets/images/beginner/abraham_under_the_stars_v1.png";
+import jacobArtwork from "@/assets/images/beginner/jacobs_ladder_v1.png";
 
-  joseph: "/assets/images/intermediate/joseph_in_egypt.webp",
-  moses: "/assets/images/intermediate/burning_bush.webp",
-  david: "/assets/images/intermediate/david_and_goliath.webp",
-  jonah: "/assets/images/intermediate/jonah.webp",
+import josephArtwork from "@/assets/images/intermediate/joseph_in_egypt_v1.png";
+import mosesArtwork from "@/assets/images/intermediate/burning_bush_v1.png";
+import davidArtwork from "@/assets/images/intermediate/david_and_goliath_v1.png";
 
-  default: "/assets/images/ui/story_placeholder.webp",
-};
+export function getStoryArtwork(id: string): string | undefined {
+  const key = id.toLowerCase();
 
-export function getStoryArtwork(id: string) {
-    return STORY_ARTWORK[id] ?? STORY_ARTWORK.default;
+  if (key.includes("noah")) return noahArtwork;
+  if (key.includes("abraham")) return abrahamArtwork;
+  if (key.includes("jacob")) return jacobArtwork;
+
+  if (key.includes("joseph")) return josephArtwork;
+  if (key.includes("moses")) return mosesArtwork;
+  if (key.includes("david")) return davidArtwork;
+
+  // No artwork yet
+  return undefined;
 }

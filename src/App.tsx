@@ -15,8 +15,9 @@ import Review from '@/pages/Review';
 import Paywall from '@/pages/Paywall';
 import Achievements from '@/pages/Achievements';
 import NotFound from '@/pages/not-found';
-
+import JourneyMap from "@/pages/JourneyMap";
 const queryClient = new QueryClient();
+<Route path="/journey-map" component={JourneyMap} />
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
   constructor(props: { children: ReactNode }) {
