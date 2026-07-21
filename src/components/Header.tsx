@@ -5,13 +5,17 @@ import { Volume2, VolumeX, Home } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'wouter';
 
+const languages = ['en', 'fr', 'es', 'pt'] as const;
+
 export function LanguageToggle() {
   const { language, setLanguage } = useLanguage();
   const { playClick } = useSound();
 
   const handleToggle = () => {
     playClick();
-    setLanguage(language === 'en' ? 'fr' : 'en');
+    const currentIndex = languages.indexOf(language);
+    const nextIndex = (currentIndex + 1) % languages.length;
+    setLanguage(languages[nextIndex]);
   };
 
   return (
@@ -19,10 +23,16 @@ export function LanguageToggle() {
       onClick={handleToggle}
       className="flex items-center gap-2 rounded-full border-2 border-slate-900/70 bg-white/90 px-3 py-1.5 font-serif font-black text-slate-950 shadow-lg backdrop-blur transition-colors hover:bg-white"
       data-testid="button-language-toggle"
+      aria-label={`Current language: ${language.toUpperCase()}`}
     >
-      <span className={language === 'en' ? 'text-black' : 'text-black/55'}>EN</span>
-      <span className="text-black/45">/</span>
-      <span className={language === 'fr' ? 'text-black' : 'text-black/55'}>FR</span>
+      {languages.map((lang, index) => (
+        <span key={lang} className="flex items-center gap-2">
+          {index > 0 && <span className="text-black/45">/</span>}
+          <span className={language === lang ? 'text-black' : 'text-black/55'}>
+            {lang.toUpperCase()}
+          </span>
+        </span>
+      ))}
     </button>
   );
 }
@@ -34,7 +44,7 @@ export function SoundToggle() {
   return (
     <button
       onClick={toggleMute}
-      aria-label={isMuted ? t('Unmute sound', 'Activer le son') : t('Mute sound', 'Désactiver le son')}
+      aria-label={isMuted ? t('unmute_sound') : t('mute_sound')}
       className="p-2 rounded-full border border-gold/30 bg-card/10 backdrop-blur text-gold hover:bg-gold/10 transition-colors"
       data-testid="button-sound-toggle"
     >
@@ -47,6 +57,7 @@ export function Header() {
   const [location, setLocation] = useLocation();
   const { playClick } = useSound();
   const { resetGame } = useGameState();
+  const { t } = useLanguage();
 
   const showHomeButton = location === '/journey';
   const showLeftControls = !location.startsWith('/levels');
@@ -70,7 +81,7 @@ export function Header() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             onClick={handleHome}
-            aria-label="Return to main menu"
+            aria-label={t('return_home')}
             className="p-2 rounded-full border border-gold/30 bg-card/10 backdrop-blur text-gold hover:bg-gold/10 transition-colors"
             data-testid="button-home"
           >

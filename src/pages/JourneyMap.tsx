@@ -73,13 +73,13 @@ export default function JourneyMap() {
   const getStatusLabel = (status: StoryNode["status"]) => {
     switch (status) {
       case "completed":
-        return t("Completed", "Complétée");
+        return t("completed");
       case "current":
-        return t("Current", "En cours");
+        return t("current");
       case "locked":
-        return t("Locked", "Verrouillée");
+        return t("locked");
       default:
-        return t("Not started", "Non commencée");
+        return t("not_started");
     }
   };
 
@@ -95,21 +95,18 @@ export default function JourneyMap() {
           className="mb-8 flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2 transition hover:bg-white/10"
         >
           <ArrowLeft size={18} />
-          {t("Back", "Retour")}
+          {t("back")}
         </button>
 
         <div className="mb-10 text-center">
           <BookOpen className="mx-auto mb-3 text-yellow-400" size={48} />
 
           <h1 className="font-serif text-4xl font-bold">
-            {t("Journey Map", "Carte du parcours")}
+            {t("journey_map")}
           </h1>
 
           <p className="mt-2 text-white/70">
-            {t(
-              "Your adventure through the Bible",
-              "Votre aventure à travers la Bible",
-            )}
+            {t("journey_map_intro")}
           </p>
         </div>
 

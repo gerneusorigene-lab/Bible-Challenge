@@ -28,7 +28,7 @@ export function ResetProgressButton() {
         data-testid="button-reset-progress"
       >
         <Trash2 size={14} />
-        {t('Reset Progress', 'Réinitialiser')}
+        {t('reset_progress')}
       </button>
 
       <AnimatePresence>
@@ -49,27 +49,24 @@ export function ResetProgressButton() {
             >
               <AlertTriangle size={36} className="text-red-400 mx-auto mb-4" />
               <h2 className="font-serif text-xl font-bold text-card-foreground mb-2">
-                {t('Reset All Progress?', 'Tout réinitialiser ?')}
+                {t('reset_all_progress')}
               </h2>
               <p className="text-card-foreground/60 font-serif text-sm mb-8">
-                {t(
-                  'This will erase your high score, completed levels, achievements, and all stats. This cannot be undone.',
-                  'Cela effacera votre meilleur score, niveaux complétés, accomplissements et toutes les statistiques. Cette action est irréversible.'
-                )}
+                {t('reset_progress_warning')}
               </p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setConfirming(false)}
                   className="flex-1 py-3 rounded-xl border border-white/10 text-card-foreground/70 font-serif text-sm hover:bg-white/5 transition-colors"
                 >
-                  {t('Cancel', 'Annuler')}
+                  {t('cancel')}
                 </button>
                 <button
                   onClick={handleReset}
                   className="flex-1 py-3 rounded-xl bg-red-600/80 hover:bg-red-600 text-white font-serif text-sm font-bold transition-colors"
                   data-testid="button-confirm-reset"
                 >
-                  {t('Yes, Reset', 'Oui, effacer')}
+                  {t('yes_reset')}
                 </button>
               </div>
             </motion.div>

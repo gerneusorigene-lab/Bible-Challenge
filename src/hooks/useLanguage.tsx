@@ -1,32 +1,66 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+} from "react";
 
-type Language = 'en' | 'fr';
+import {
+  translations,
+  Language,
+  TranslationKey,
+} from "@/i18n/translations";
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (en: string, fr: string) => string;
+  t: (key: TranslationKey) => string;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext =
+  createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
+export function LanguageProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const [language, setLanguageState] = useState<Language>(() => {
-    const saved = localStorage.getItem('language');
-    return (saved === 'en' || saved === 'fr') ? saved : 'en';
+    const saved = localStorage.getItem("language");
+
+    if (
+      saved === "en" ||
+      saved === "fr" ||
+      saved === "es" ||
+      saved === "pt"
+    ) {
+      return saved;
+    }
+
+    return "en";
   });
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('language', lang);
+    localStorage.setItem("language", lang);
   };
 
-  const t = (en: string, fr: string) => {
-    return language === 'en' ? en : fr;
-  };
+ const t = (key: TranslationKey) => {
+  return (
+    translations[language][key] ??
+    translations.en[key] ??
+    key
+  );
+ };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider
+      value={{
+        language,
+        setLanguage,
+        t,
+      }}
+    >
       {children}
     </LanguageContext.Provider>
   );
@@ -34,8 +68,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
 export function useLanguage() {
   const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+
+  if (!context) {
+    throw new Error(
+      "useLanguage must be used within LanguageProvider"
+    );
   }
+
   return context;
 }

@@ -28,12 +28,11 @@ import { useMemo, useState } from 'react';
 
 type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced';
 type Testament = 'All' | 'Old' | 'New';
+type TranslationKey = Parameters<ReturnType<typeof useLanguage>['t']>[0];
 
 type JourneyTheme = {
-  title: string;
-  titleFr: string;
-  subtitle: string;
-  subtitleFr: string;
+  titleKey: TranslationKey;
+  subtitleKey: TranslationKey;
   accent: string;
   accentText: string;
   border: string;
@@ -45,10 +44,8 @@ type JourneyTheme = {
 
 const JOURNEY_THEMES: Record<Difficulty, JourneyTheme> = {
   Beginner: {
-    title: 'Beginner Journey',
-    titleFr: 'Parcours Débutant',
-    subtitle: 'Perfect for new explorers!',
-    subtitleFr: 'Parfait pour les nouveaux explorateurs !',
+    titleKey: 'beginner_journey',
+    subtitleKey: 'beginner_journey_subtitle',
     accent: 'from-emerald-300 via-emerald-500 to-green-700',
     accentText: 'text-emerald-300',
     border: 'border-emerald-400/45',
@@ -58,10 +55,8 @@ const JOURNEY_THEMES: Record<Difficulty, JourneyTheme> = {
     icon: '📖',
   },
   Intermediate: {
-    title: 'Intermediate Journey',
-    titleFr: 'Parcours Intermédiaire',
-    subtitle: 'For experienced explorers!',
-    subtitleFr: 'Pour les explorateurs expérimentés !',
+    titleKey: 'intermediate_journey',
+    subtitleKey: 'intermediate_journey_subtitle',
     accent: 'from-sky-300 via-blue-500 to-indigo-700',
     accentText: 'text-sky-300',
     border: 'border-blue-400/45',
@@ -71,10 +66,8 @@ const JOURNEY_THEMES: Record<Difficulty, JourneyTheme> = {
     icon: '🛡️',
   },
   Advanced: {
-    title: 'Advanced Journey',
-    titleFr: 'Parcours Avancé',
-    subtitle: 'A challenge for Bible masters!',
-    subtitleFr: 'Un défi pour les maîtres de la Bible !',
+    titleKey: 'advanced_journey',
+    subtitleKey: 'advanced_journey_subtitle',
     accent: 'from-fuchsia-300 via-violet-500 to-purple-800',
     accentText: 'text-fuchsia-300',
     border: 'border-violet-400/45',
@@ -85,28 +78,33 @@ const JOURNEY_THEMES: Record<Difficulty, JourneyTheme> = {
   },
 };
 
-const TESTAMENT_FILTERS: { key: Testament; label: string; labelFr: string }[] = [
-  { key: 'All', label: 'All Stories', labelFr: 'Toutes les histoires' },
-  { key: 'Old', label: 'Old Testament', labelFr: 'Ancien Testament' },
-  { key: 'New', label: 'New Testament', labelFr: 'Nouveau Testament' },
+const TESTAMENT_FILTERS: Array<{
+  key: Testament;
+  labelKey: TranslationKey;
+}> = [
+  { key: 'All', labelKey: 'all_stories' },
+  { key: 'Old', labelKey: 'old_testament' },
+  { key: 'New', labelKey: 'new_testament' },
 ];
 
+const STORY_DESCRIPTION_KEYS: Array<{
+  keyword: string;
+  descriptionKey: TranslationKey;
+}> = [
+  { keyword: 'creation', descriptionKey: 'story_description_creation' },
+  { keyword: 'adam', descriptionKey: 'story_description_adam' },
+  { keyword: 'noah', descriptionKey: 'story_description_noah' },
+  { keyword: 'babel', descriptionKey: 'story_description_babel' },
+  { keyword: 'abraham', descriptionKey: 'story_description_abraham' },
+];
 
+function getStoryDescriptionKey(topic: string): TranslationKey {
+  const normalizedTopic = topic.toLowerCase();
+  const match = STORY_DESCRIPTION_KEYS.find(({ keyword }) =>
+    normalizedTopic.includes(keyword),
+  );
 
-function getStoryDescription(topic: string, language: 'en' | 'fr'): string {
-  const text = topic.toLowerCase();
-  const descriptions: Array<[string, string, string]> = [
-    ['creation', 'In the beginning, God created the heavens and the earth.', 'Au commencement, Dieu créa les cieux et la terre.'],
-    ['adam', 'Discover the first man and woman in the Garden of Eden.', "Découvrez le premier homme et la première femme dans le jardin d'Éden."],
-    ['noah', 'God saved Noah, his family, and the animals through the flood.', 'Dieu sauva Noé, sa famille et les animaux pendant le déluge.'],
-    ['babel', 'People built a tower, and God confused their language.', 'Les hommes bâtirent une tour et Dieu confondit leur langage.'],
-    ['abraham', 'God called Abraham and promised to make a great nation.', 'Dieu appela Abraham et promit de faire de lui une grande nation.'],
-  ];
-  const match = descriptions.find(([keyword]) => text.includes(keyword));
-  if (match) return language === 'en' ? match[1] : match[2];
-  return language === 'en'
-    ? 'Explore this Bible story and uncover the truth.'
-    : 'Explorez cette histoire biblique et découvrez la vérité.';
+  return match?.descriptionKey ?? 'story_description_default';
 }
 
 export default function LevelSelect() {
@@ -135,7 +133,6 @@ export default function LevelSelect() {
 
   const theme = JOURNEY_THEMES[selectedDifficulty];
   const journeyLocked = !isPremium && selectedDifficulty !== FREE_DIFFICULTY;
-  const isLevelLocked = (levelId: string) => !isPremium && !isLevelFree(levelId);
 
   const journeyLevels = LEVELS.filter((level) => level.difficulty === selectedDifficulty);
   const journeyStories = groupLevelsIntoStories(journeyLevels);
@@ -220,15 +217,15 @@ export default function LevelSelect() {
             className="absolute left-0 top-0 z-[70] flex h-11 items-center gap-2 rounded-xl border border-white/20 bg-slate-950/35 px-3 text-xs font-black uppercase tracking-wider text-white/90 backdrop-blur transition hover:bg-white/10"
           >
             <ArrowLeft size={18} />
-            <span className="hidden sm:inline">{t('Back', 'Retour')}</span>
+            <span className="hidden sm:inline">{t('back')}</span>
           </button>
 
           <div className="mb-1 text-5xl drop-shadow-[0_5px_12px_rgba(0,0,0,.45)]">{theme.icon}</div>
           <h1 className={`bg-gradient-to-b ${theme.accent} bg-clip-text font-serif text-4xl font-black uppercase leading-none text-transparent drop-shadow-[0_4px_16px_rgba(0,0,0,.5)] sm:text-5xl`}>
-            {language === 'en' ? theme.title : theme.titleFr}
+            {t(theme.titleKey)}
           </h1>
           <p className="mt-3 text-sm font-bold text-white/90 sm:text-base">
-            {language === 'en' ? theme.subtitle : theme.subtitleFr}
+            {t(theme.subtitleKey)}
           </p>
         </header>
 
@@ -239,17 +236,17 @@ export default function LevelSelect() {
             </div>
             <div className="min-w-0 flex-1">
               <p className="font-serif text-xl font-black uppercase tracking-wide">
-                {t('Your Progress', 'Votre progression')}
+                {t('your_progress')}
               </p>
               <p className={`mt-1 text-xl font-black ${theme.accentText}`}>
-                {completedCount} / {journeyStories.length} {t('Completed', 'Complétés')}
+                {completedCount} / {journeyStories.length} {t('completed')}
               </p>
             </div>
             <div className="hidden items-center gap-2 sm:flex">
               <Gift className="text-amber-300" size={32} />
               <div className="text-right text-xs font-bold text-white/75">
-                <p>{t('Next Reward', 'Prochaine récompense')}</p>
-                <p className={theme.accentText}>{nextRewardAt} {t('Stories', 'Histoires')}</p>
+                <p>{t('next_reward')}</p>
+                <p className={theme.accentText}>{nextRewardAt} {t('stories')}</p>
               </div>
             </div>
           </div>
@@ -271,7 +268,7 @@ export default function LevelSelect() {
             className="mb-5 flex w-full items-center justify-center gap-2 rounded-2xl border border-amber-300/60 bg-amber-300/15 px-4 py-3 font-black text-amber-200 transition hover:bg-amber-300/25"
           >
             <Crown size={20} />
-            {t('This journey is Premium — tap to unlock', 'Ce parcours est Premium — appuyez pour le débloquer')}
+            {t('premium_journey_unlock')}
           </button>
         )}
 
@@ -280,7 +277,7 @@ export default function LevelSelect() {
             <div className="flex shrink-0 items-center gap-3">
               <p className={`whitespace-nowrap font-serif text-sm font-black uppercase ${theme.accentText}`}>
                 <Zap className="mr-1 inline" size={17} />
-                {t('Challenge Mode', 'Mode Défi')}
+                {t('challenge_mode')}
               </p>
 
               <button
@@ -294,7 +291,7 @@ export default function LevelSelect() {
                     ? 'border-emerald-200/60 bg-emerald-500'
                     : 'border-white/20 bg-slate-600/70'
                 }`}
-                aria-label={t('Toggle challenge mode', 'Activer le mode défi')}
+                aria-label={t('toggle_challenge_mode')}
                 aria-pressed={challengeOn}
               >
                 <span
@@ -309,7 +306,7 @@ export default function LevelSelect() {
                   challengeOn ? 'text-emerald-300' : 'text-white/50'
                 }`}
               >
-                {challengeOn ? t('On', 'Activé') : t('Off', 'Désactivé')}
+                {challengeOn ? t('on') : t('off')}
               </span>
             </div>
 
@@ -322,7 +319,7 @@ export default function LevelSelect() {
             >
               <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                 <p className="mr-1 whitespace-nowrap text-[11px] font-black uppercase tracking-widest text-white/65">
-                  {t('Number of Questions', 'Nombre de questions')}
+                  {t('number_of_questions')}
                 </p>
 
                 {([10, 20, 40] as const).map((count) => (
@@ -354,7 +351,7 @@ export default function LevelSelect() {
           >
             <div className="flex flex-wrap items-center gap-2">
               <p className="mr-1 whitespace-nowrap text-[11px] font-black uppercase tracking-widest text-white/65">
-                {t('Time Limit', 'Limite de temps')}
+                {t('time_limit')}
               </p>
 
               {([30, 45, 60] as const).map((seconds) => (
@@ -377,10 +374,7 @@ export default function LevelSelect() {
               ))}
 
               <p className="basis-full pt-1 text-xs font-semibold text-white/55 sm:ml-2 sm:basis-auto sm:pt-0">
-                {t(
-                  'Timed play and speed bonuses',
-                  'Jeu chronométré et bonus de vitesse',
-                )}
+                {t('timed_play_speed_bonus')}
               </p>
             </div>
           </div>
@@ -389,7 +383,7 @@ export default function LevelSelect() {
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="flex items-center gap-2 text-sm font-bold text-white/80">
             <BookOpen size={19} className={theme.accentText} />
-            {t('Choose a story to begin your adventure.', 'Choisissez une histoire pour commencer votre aventure.')}
+            {t('choose_story_begin_adventure')}
           </p>
           <button
             type="button"
@@ -397,7 +391,7 @@ export default function LevelSelect() {
             className={`flex items-center justify-center gap-2 rounded-full border border-white/35 bg-gradient-to-r ${theme.button} px-6 py-2 text-xs font-black uppercase tracking-widest shadow-lg transition hover:brightness-110`}
           >
             {journeyLocked ? <Lock size={15} /> : <Sparkles size={15} />}
-            {t('Play Journey', 'Jouer le parcours')}
+            {t('play_journey')}
           </button>
         </div>
 
@@ -409,7 +403,7 @@ export default function LevelSelect() {
               onClick={() => { playClick(); setTestament(filter.key); }}
               className={`whitespace-nowrap rounded-full border px-4 py-2 text-[11px] font-black uppercase tracking-wider transition ${testament === filter.key ? `border-white/55 bg-gradient-to-r ${theme.button}` : 'border-white/15 bg-black/20 text-white/55 hover:text-white'}`}
             >
-              {language === 'en' ? filter.label : filter.labelFr}
+              {t(filter.labelKey)}
             </button>
           ))}
         </div>
@@ -427,7 +421,7 @@ export default function LevelSelect() {
               ? story.levels.length
               : story.levels.filter((item) => isLevelFree(item.id)).length;
             const locked = journeyLocked || playableQuestionCount === 0;
-            const description = getStoryDescription(level.topic.en, language);
+            const description = t(getStoryDescriptionKey(level.topic.en));
             
             const progress = storyProgress[story.id];
             const masteredCount = progress?.questionsMastered.filter((id) => story.levels.some((item) => item.id === id)).length ?? 0;
@@ -465,7 +459,7 @@ export default function LevelSelect() {
         <div className="mt-7 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-5 sm:flex-row">
           <p className="flex items-center gap-2 text-sm font-bold text-white/60">
             <Trophy size={18} className="text-amber-300" />
-            {t('Complete stories to unlock rewards!', 'Complétez des histoires pour débloquer des récompenses !')}
+            {t('complete_stories_unlock_rewards')}
           </p>
           <button
             type="button"
@@ -476,7 +470,7 @@ export default function LevelSelect() {
             className="flex items-center gap-2 rounded-xl border border-violet-300/40 bg-gradient-to-r from-blue-600 to-violet-700 px-5 py-3 font-serif text-sm font-black uppercase tracking-wide shadow-lg"
           >
             <Map size={19} />
-            {t('Journey Map', 'Carte du parcours')}
+            {t('journey_map')}
           </button>
         </div>
       </motion.section>

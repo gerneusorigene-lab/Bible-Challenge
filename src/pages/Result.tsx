@@ -1,3 +1,5 @@
+
+
 import { LEVELS } from '@/data/questions';
 import { useGameState } from '@/hooks/useGameState';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -71,17 +73,17 @@ export default function Result() {
           {lastAnswerCorrect ? (
             <motion.div initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="inline-block">
               <h1 className="font-serif text-4xl md:text-5xl text-gold mb-2 drop-shadow-[0_0_15px_rgba(212,175,55,0.8)]">
-                {t('Divine Truth!', 'Vérité Divine!')}
+                {t('divine_truth')}
               </h1>
               <div className="flex items-center justify-center gap-3 flex-wrap">
-                <p className="text-xl text-green-400 font-serif">+10 {t('Points', 'Points')}</p>
+                <p className="text-xl text-green-400 font-serif">+10 {t('points')}</p>
                 {lastBonusEarned > 0 && (
                   <motion.p
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     className="text-lg text-amber-400 font-serif"
                   >
-                    +{lastBonusEarned} {t('Bonus!', 'Bonus !')}
+                    +{lastBonusEarned} {t('bonus')}
                   </motion.p>
                 )}
                 {streak >= 3 && (
@@ -92,7 +94,7 @@ export default function Result() {
                     className="flex items-center gap-1 text-orange-400 font-serif"
                   >
                     <Flame size={16} className="animate-pulse" />
-                    <span>{streak} {t('streak!', 'de suite !')}</span>
+                    <span>{streak} {t('streak_suffix')}</span>
                   </motion.div>
                 )}
               </div>
@@ -100,9 +102,9 @@ export default function Result() {
           ) : (
             <motion.div initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="inline-block">
               <h1 className="font-serif text-4xl md:text-5xl text-foreground/80 mb-2">
-                {t('Not Quite', 'Pas tout à fait')}
+                {t('not_quite')}
               </h1>
-              <p className="text-xl text-red-400/80 font-serif">0 {t('Points', 'Points')}</p>
+              <p className="text-xl text-red-400/80 font-serif">0 {t('points')}</p>
             </motion.div>
           )}
         </div>
@@ -110,7 +112,7 @@ export default function Result() {
         {/* The Lie */}
         <div className="mb-8 text-left">
           <p className="text-center font-serif text-gold/70 mb-4 uppercase tracking-widest text-sm">
-            {t('The Lie was', 'Le Mensonge était')}
+            {t('the_lie_was')}
           </p>
           <StatementCard
             statement={theLie}
@@ -129,7 +131,7 @@ export default function Result() {
           className="parchment-bg p-6 md:p-8 rounded-xl border border-gold/40 text-left mb-12 shadow-2xl relative"
         >
           <div className="absolute -top-4 left-6 bg-background px-4 py-1 border border-gold/40 rounded-full text-gold font-serif text-sm uppercase tracking-widest">
-            {t('Explanation', 'Explication')}
+            {t('explanation')}
           </div>
           <p className="text-card-foreground text-lg leading-relaxed mt-2">
             {currentLevel.explanation[language]}
@@ -150,7 +152,7 @@ export default function Result() {
           className="flex items-center gap-3 parchment-bg px-8 py-4 rounded-full text-card-foreground font-serif text-xl font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_40px_rgba(212,175,55,0.6)] border border-gold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           data-testid="button-next"
         >
-          {t('Continue', 'Continuer')}
+          {t('continue')}
           <ChevronRight />
         </button>
       </motion.div>

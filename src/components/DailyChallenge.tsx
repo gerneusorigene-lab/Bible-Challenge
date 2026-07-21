@@ -7,6 +7,15 @@ import { motion } from 'framer-motion';
 import { useLocation } from 'wouter';
 import { Calendar, Check, ChevronRight, Lock } from 'lucide-react';
 
+type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced';
+type TranslationKey = Parameters<ReturnType<typeof useLanguage>['t']>[0];
+
+const DIFFICULTY_KEYS: Record<Difficulty, TranslationKey> = {
+  Beginner: 'beginner',
+  Intermediate: 'intermediate',
+  Advanced: 'advanced',
+};
+
 export function DailyChallenge() {
   const { dailyChallengeLastCompleted, completeDailyChallenge, startLevel } = useGameState();
   const { isPremium } = useEntitlement();
@@ -40,7 +49,7 @@ export function DailyChallenge() {
       <div className="flex items-center gap-2 mb-2">
         <Calendar size={14} className={isCompletedToday ? 'text-emerald-400' : 'text-gold/60'} />
         <span className="text-xs uppercase tracking-widest font-serif text-gold/60">
-          {t('Daily Challenge', 'Défi du Jour')}
+          {t('daily_challenge')}
         </span>
       </div>
 
@@ -50,14 +59,14 @@ export function DailyChallenge() {
             {dailyLevel.topic[language]}
           </h3>
           <span className={`inline-block mt-1 text-xs px-2 py-0.5 rounded font-bold text-white ${dailyLevel.badgeColor}`}>
-            {language === 'en' ? dailyLevel.difficulty : dailyLevel.difficultyFr}
+            {t(DIFFICULTY_KEYS[dailyLevel.difficulty])}
           </span>
         </div>
 
         {isCompletedToday ? (
           <div className="flex items-center gap-1.5 text-emerald-400 font-serif text-sm shrink-0">
             <Check size={16} />
-            <span>{t('Done', 'Fait')}</span>
+            <span>{t('done')}</span>
           </div>
         ) : (
           <button
@@ -68,11 +77,11 @@ export function DailyChallenge() {
             {locked ? (
               <>
                 <Lock size={12} />
-                {t('Premium', 'Premium')}
+                {t('premium')}
               </>
             ) : (
               <>
-                {t('Play', 'Jouer')} <ChevronRight size={12} />
+                {t('play')} <ChevronRight size={12} />
               </>
             )}
           </button>

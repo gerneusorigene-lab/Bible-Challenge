@@ -28,7 +28,7 @@ export function AchievementsPanel() {
         <div className="flex items-center gap-2">
           <Trophy size={16} className="text-gold" />
           <span className="font-serif text-sm text-card-foreground">
-            {t('Achievements', 'Accomplissements')}
+            {t('achievements')}
           </span>
           {newIds.length > 0 && (
             <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />

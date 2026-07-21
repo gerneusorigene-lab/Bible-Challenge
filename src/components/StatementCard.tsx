@@ -16,7 +16,7 @@ interface StatementCardProps {
 }
 
 export function StatementCard({ statement, letter, onClick, disabled, status = 'default', index }: StatementCardProps) {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const isCorrectHighlight = status === 'selected-correct' || status === 'revealed-correct';
   const letterColors = ['bg-violet-700', 'bg-blue-700', 'bg-emerald-700', 'bg-orange-600'];
   const letterColor = letterColors[index % letterColors.length];
@@ -90,7 +90,7 @@ export function StatementCard({ statement, letter, onClick, disabled, status = '
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
         >
           <span className="text-emerald-400/70 font-serif text-xs uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">
-            Truth Revealed
+            {t('truth_revealed')}
           </span>
         </motion.div>
       )}

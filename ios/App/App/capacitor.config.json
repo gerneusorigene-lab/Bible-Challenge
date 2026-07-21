@@ -1,0 +1,10 @@
+{
+	"appId": "com.threetruths.biblegame",
+	"appName": "Bible Challenge",
+	"webDir": "dist/public",
+	"bundledWebRuntime": false,
+	"packageClassList": [
+		"PurchasesPlugin",
+		"AppPlugin"
+	]
+}

@@ -52,23 +52,20 @@ export default function Achievements() {
           <div className="flex items-center justify-center gap-3">
             <Trophy className="shrink-0 text-yellow-300" size={38} />
             <h1 className="font-serif text-3xl font-black text-gold sm:text-4xl">
-              {t('Achievement Gallery', 'Galerie des Accomplissements')}
+              {t('achievement_gallery')}
             </h1>
           </div>
 
           <p className="mt-2 text-sm text-white/70">
-            {t(
-              'Every trophy marks a step in your Bible-learning journey.',
-              "Chaque trophée marque une étape de votre apprentissage biblique.",
-            )}
+            {t('achievement_gallery_intro')}
           </p>
 
           <div className="mx-auto mt-4 max-w-sm">
             <p className="text-xs font-bold uppercase tracking-wider text-white/65">
-              {t('Achievements Unlocked', 'Accomplissements débloqués')}
+              {t('achievements_unlocked')}
             </p>
             <p className="mt-1 text-base font-extrabold text-white">
-              {unlockedCount} {t('of', 'sur')} {total} ({progressPercentage}%)
+              {unlockedCount} {t('of')} {total} ({progressPercentage}%)
             </p>
             <div className="mt-2 h-3 overflow-hidden rounded-full bg-white/10">
               <motion.div
@@ -84,16 +81,11 @@ export default function Achievements() {
           {categoryOrder.map((category) => {
             const items = achievements.filter((achievement) => achievement.category === category);
             const translatedCategory = t(
-              category,
-              category === 'Learning'
-                ? 'Apprentissage'
-                : category === 'Accuracy'
-                  ? 'Précision'
-                  : category === 'Exploration'
-                    ? 'Exploration'
-                    : category === 'Dedication'
-                      ? 'Persévérance'
-                      : 'Maîtrise',
+              category === 'Learning' ? 'learning' :
+              category === 'Accuracy' ? 'accuracy' :
+              category === 'Exploration' ? 'exploration' :
+              category === 'Dedication' ? 'dedication' :
+              'mastery'
             );
 
             return (
@@ -113,7 +105,7 @@ export default function Achievements() {
                           day: 'numeric',
                           year: 'numeric',
                         }).format(new Date(earnedDate))
-                      : t('Today', "Aujourd'hui");
+                      : t('today');
 
                     return (
                       <motion.article
@@ -158,18 +150,18 @@ export default function Achievements() {
                           {unlocked ? (
                             <>
                               <span className="inline-flex items-center gap-1.5 text-emerald-700">
-                                <CheckCircle2 size={15} /> {t('Unlocked', 'Débloqué')}
+                                <CheckCircle2 size={15} /> {t('unlocked')}
                               </span>
                               <span className="text-right normal-case tracking-normal text-card-foreground/55">
                                 <span className="block text-[10px] font-bold uppercase tracking-wider">
-                                  {t('Unlocked', 'Débloqué')}
+                                  {t('unlocked')}
                                 </span>
                                 <time className="block text-xs font-semibold">{formattedDate}</time>
                               </span>
                             </>
                           ) : (
                             <span className="inline-flex items-center gap-1.5 text-white/50">
-                              <LockKeyhole size={14} /> {t('Locked', 'Verrouillé')}
+                              <LockKeyhole size={14} /> {t('locked')}
                             </span>
                           )}
                         </div>

@@ -30,6 +30,15 @@ function splitExplanation(explanation: string) {
   };
 }
 
+type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced';
+type TranslationKey = Parameters<ReturnType<typeof useLanguage>['t']>[0];
+
+const DIFFICULTY_KEYS: Record<Difficulty, TranslationKey> = {
+  Beginner: 'beginner',
+  Intermediate: 'intermediate',
+  Advanced: 'advanced',
+};
+
 export default function Review() {
   const { wrongAnswers, resetGame } = useGameState();
   const { language, t } = useLanguage();
@@ -54,17 +63,17 @@ export default function Review() {
             <Sparkles size={30} />
           </div>
           <h1 className="font-serif text-2xl text-card-foreground mb-2">
-            {t('Excellent work!', 'Excellent travail !')}
+            {t('excellent_work')}
           </h1>
           <p className="text-card-foreground/65 mb-6">
-            {t('No mistakes to review this time.', "Aucune erreur à revoir cette fois-ci.")}
+            {t('no_mistakes_review')}
           </p>
           <button
             onClick={handleBack}
             className="inline-flex items-center justify-center gap-2 rounded-xl border border-gold/40 bg-gold/10 px-5 py-3 font-serif font-semibold text-gold transition-colors hover:bg-gold/20"
           >
             <Home size={17} />
-            {t('Return Home', "Retour à l'accueil")}
+            {t('return_home')}
           </button>
         </motion.div>
       </div>
@@ -82,7 +91,7 @@ export default function Review() {
           <div className="mb-5 flex items-center gap-3">
             <button
               onClick={handleBack}
-              aria-label={t('Return home', "Retour à l'accueil")}
+              aria-label={t('return_home')}
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-black/10 text-gold transition-colors hover:bg-gold/10"
             >
               <ChevronLeft size={21} />
@@ -90,19 +99,16 @@ export default function Review() {
 
             <div>
               <p className="mb-1 font-serif text-xs uppercase tracking-[0.24em] text-gold/65">
-                {t('Reflect and learn', 'Réfléchir et apprendre')}
+                {t('reflect_and_learn')}
               </p>
               <h1 className="font-serif text-3xl font-bold text-gold md:text-4xl">
-                {t('Bible Study Review', 'Révision biblique')}
+                {t('bible_study_review')}
               </h1>
             </div>
           </div>
 
           <p className="max-w-2xl text-sm leading-relaxed text-white/60 md:text-base">
-            {t(
-              'Every mistake is an opportunity to understand Scripture more deeply.',
-              "Chaque erreur est une occasion de mieux comprendre les Écritures.",
-            )}
+            {t('review_intro')}
           </p>
         </motion.header>
 
@@ -144,7 +150,7 @@ export default function Review() {
                         <X size={17} strokeWidth={2.5} />
                       </div>
                       <span className="font-serif text-sm font-bold uppercase tracking-[0.18em]">
-                        {t('Incorrect', 'Incorrect')}
+                        {t('incorrect')}
                       </span>
                     </div>
 
@@ -156,12 +162,9 @@ export default function Review() {
                       </div>
                       <div className="min-w-0">
                         <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-white/70">
-                          {language === 'en' ? level.difficulty : level.difficultyFr}
+                          {t(DIFFICULTY_KEYS[level.difficulty])}
                           {' • '}
-                          {t(
-                            level.testament === 'Old' ? 'Old Testament' : 'New Testament',
-                            level.testament === 'Old' ? 'Ancien Testament' : 'Nouveau Testament',
-                          )}
+                          {t(level.testament === 'Old' ? 'old_testament' : 'new_testament')}
                         </p>
                         <h2 className="font-serif text-2xl font-bold leading-snug text-white md:text-3xl">
                           {level.topic[language]}
@@ -179,10 +182,10 @@ export default function Review() {
                       </div>
                       <div>
                         <p className="text-xs uppercase tracking-[0.15em] text-card-foreground/45">
-                          {t('Question review', 'Révision de la question')}
+                          {t('question_review')}
                         </p>
                         <h3 className="font-serif text-xl font-bold text-card-foreground">
-                          {t('Review the four statements', 'Révisez les quatre affirmations')}
+                          {t('review_four_statements')}
                         </h3>
                       </div>
                     </div>
@@ -227,18 +230,18 @@ export default function Review() {
                                   {isLie ? (
                                     <span className="inline-flex items-center gap-1 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-gold">
                                       <X size={12} />
-                                      {t('The lie', 'Le mensonge')}
+                                      {t('the_lie')}
                                     </span>
                                   ) : (
                                     <span className="inline-flex items-center gap-1 rounded-full border border-emerald-800/25 bg-emerald-700/[0.07] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-800">
                                       <Check size={12} />
-                                      {t('True', 'Vrai')}
+                                      {t('true')}
                                     </span>
                                   )}
 
                                   {isSelected && (
                                     <span className="inline-flex items-center gap-1 rounded-full border border-red-700/30 bg-red-950/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-red-700">
-                                      {t('Your selection', 'Votre choix')}
+                                      {t('your_selection')}
                                     </span>
                                   )}
                                 </div>
@@ -260,10 +263,9 @@ export default function Review() {
                     </div>
 
                     <div className="mt-4 rounded-xl border border-gold/20 bg-black/[0.025] px-4 py-3 text-sm leading-relaxed text-card-foreground/65">
-                      {t(
-                        `You selected ${letters[selectedIdx]}, but the lie was ${letters[lieIdx]}.`,
-                        `Vous avez choisi ${letters[selectedIdx]}, mais le mensonge était ${letters[lieIdx]}.`,
-                      )}
+                      {t('review_selected_lie')
+                        .replace('{selected}', letters[selectedIdx])
+                        .replace('{lie}', letters[lieIdx])}
                     </div>
                   </section>
 
@@ -274,10 +276,10 @@ export default function Review() {
                       </div>
                       <div>
                         <p className="text-xs uppercase tracking-[0.15em] text-card-foreground/45">
-                          {t('Bible study', 'Étude biblique')}
+                          {t('bible_study')}
                         </p>
                         <h3 className="font-serif text-xl font-bold text-card-foreground">
-                          {t('Why is this false?', 'Pourquoi est-ce faux ?')}
+                          {t('why_false')}
                         </h3>
                       </div>
                     </div>
@@ -291,7 +293,7 @@ export default function Review() {
                         <BookOpen size={17} className="mt-0.5 shrink-0 text-gold" />
                         <div>
                           <p className="mb-0.5 text-xs font-semibold uppercase tracking-[0.13em] text-card-foreground/45">
-                            {t('Scripture', 'Écriture')}
+                            {t('scripture')}
                           </p>
                           <p className="font-serif font-semibold text-gold">
                             {scripture}
@@ -307,14 +309,11 @@ export default function Review() {
                     </div>
                     <div>
                       <h3 className="mb-1 font-serif font-bold text-card-foreground">
-                        {t('Key lesson', 'Leçon clé')}
+                        {t('key_lesson')}
                       </h3>
                       <p className="text-sm leading-relaxed text-card-foreground/70 md:text-base">
                         {level.keyLesson?.[language] ??
-                          t(
-                            'Read the complete statement carefully and verify every detail against the biblical account.',
-                            "Lisez attentivement l'énoncé complet et vérifiez chaque détail selon le récit biblique.",
-                          )}
+                          t('default_key_lesson')}
                       </p>
                     </div>
                   </section>
@@ -326,7 +325,7 @@ export default function Review() {
                       </div>
                       <div>
                         <h3 className="mb-1 font-serif font-bold text-card-foreground">
-                          {t("Teacher's note", 'Note pédagogique')}
+                          {t('teacher_note')}
                         </h3>
                         <p className="text-sm leading-relaxed text-card-foreground/70 md:text-base">
                           {level.teacherNote[language]}
@@ -342,7 +341,7 @@ export default function Review() {
                       </div>
                       <div>
                         <h3 className="mb-1 font-serif font-bold text-card-foreground">
-                          {t('Did you know?', 'Le saviez-vous ?')}
+                          {t('did_you_know')}
                         </h3>
                         <p className="text-sm leading-relaxed text-card-foreground/70 md:text-base">
                           {level.didYouKnow[language]}
@@ -358,7 +357,7 @@ export default function Review() {
                       </div>
                       <div>
                         <h3 className="mb-1 font-serif font-bold text-card-foreground">
-                          {t('Life application', 'Application pratique')}
+                          {t('life_application')}
                         </h3>
                         <p className="text-sm leading-relaxed text-card-foreground/70 md:text-base">
                           {level.lifeApplication[language]}
@@ -383,7 +382,7 @@ export default function Review() {
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-gold/45 bg-gold/10 px-6 py-3 font-serif font-bold text-gold transition-all hover:-translate-y-0.5 hover:bg-gold/20"
           >
             <Home size={18} />
-            {t('Continue Journey', 'Continuer le parcours')}
+            {t('continue_journey')}
           </button>
         </motion.div>
       </div>

@@ -8,11 +8,11 @@ import { useLocation } from 'wouter';
 import { Crown, Check, Sparkles, RotateCcw, X } from 'lucide-react';
 import { useState } from 'react';
 
-const BENEFITS: { en: string; fr: string }[] = [
-  { en: `All ${LEVELS.length} levels, across Beginner, Intermediate & Advanced`, fr: `Les ${LEVELS.length} niveaux, du Débutant à l'Avancé` },
-  { en: 'Unlimited questions — no more free-tier cap', fr: 'Questions illimitées — plus de limite gratuite' },
-  { en: 'Play All Levels and full Challenge Mode', fr: 'Jouer tous les niveaux et le Mode Défi complet' },
-  { en: 'One-time payment — yours forever, no subscription', fr: 'Paiement unique — à vous pour toujours, sans abonnement' },
+const BENEFITS = [
+  { key: 'benefit_all_levels', values: { levels: LEVELS.length } },
+  { key: 'benefit_unlimited_questions' },
+  { key: 'benefit_full_challenge' },
+  { key: 'benefit_one_time_purchase' },
 ];
 
 export default function Paywall() {
@@ -30,26 +30,17 @@ export default function Paywall() {
   const errorMessage = (reason: EntitlementErrorReason | null): string => {
     switch (reason) {
       case 'cancelled':
-        return t('Purchase cancelled.', 'Achat annulé.');
+        return t('purchase_cancelled');
       case 'network':
-        return t(
-          'No connection — check your internet and try again.',
-          'Pas de connexion — vérifiez votre accès internet et réessayez.'
-        );
+        return t('no_connection_retry');
       case 'store_unavailable':
-        return t(
-          'The store is unavailable right now. Please try again later.',
-          "La boutique n'est pas disponible pour le moment. Veuillez réessayer plus tard."
-        );
+        return t('store_unavailable');
       case 'no_offering':
-        return t(
-          'Premium is not available yet. Please try again later.',
-          "Premium n'est pas encore disponible. Veuillez réessayer plus tard."
-        );
+        return t('premium_unavailable');
       case 'no_previous_purchase':
-        return t('No previous purchase found.', 'Aucun achat antérieur trouvé.');
+        return t('no_previous_purchase');
       default:
-        return t('Something went wrong. Please try again.', "Une erreur s'est produite. Veuillez réessayer.");
+        return t('something_went_wrong');
     }
   };
 
@@ -58,7 +49,7 @@ export default function Paywall() {
     setFeedback(null);
     const success = await purchase();
     setFeedback(success
-      ? t('Premium unlocked! All levels are now available.', 'Premium débloqué ! Tous les niveaux sont maintenant disponibles.')
+      ? t('premium_unlocked')
       : errorMessage(useEntitlement.getState().lastError));
   };
 
@@ -67,7 +58,7 @@ export default function Paywall() {
     setFeedback(null);
     const restored = await restore();
     setFeedback(restored
-      ? t('Purchase restored — Premium is active.', 'Achat restauré — Premium est actif.')
+      ? t('purchase_restored')
       : errorMessage(useEntitlement.getState().lastError));
   };
 
@@ -80,7 +71,7 @@ export default function Paywall() {
       >
         <button
           onClick={handleClose}
-          aria-label={t('Close', 'Fermer')}
+          aria-label={t('close')}
           className="absolute -top-2 right-0 p-2 rounded-full text-gold/60 hover:text-gold hover:bg-white/5 transition-colors"
           data-testid="button-close-paywall"
         >
@@ -92,13 +83,10 @@ export default function Paywall() {
             <Crown size={32} className="text-gold" />
           </div>
           <h1 className="font-serif text-3xl text-gold mb-2">
-            {t('Go Premium', 'Passez à Premium')}
+            {t('go_premium')}
           </h1>
           <p className="text-card-foreground/60 font-serif text-sm max-w-xs">
-            {t(
-              `The free version includes the Beginner tier, capped at ${FREE_QUESTION_LIMIT} questions.`,
-              `La version gratuite inclut le niveau Débutant, limité à ${FREE_QUESTION_LIMIT} questions.`
-            )}
+            {t('free_version_limit')}
           </p>
         </div>
 
@@ -110,7 +98,7 @@ export default function Paywall() {
                   <Check size={12} className="text-white" strokeWidth={3} />
                 </span>
                 <span className="text-card-foreground font-serif text-sm leading-snug">
-                  {t(b.en, b.fr)}
+                  {t(b.key, b.values)}
                 </span>
               </li>
             ))}
@@ -118,7 +106,7 @@ export default function Paywall() {
 
           <div className="text-center border-t border-gold/20 pt-5">
             <p className="text-card-foreground/50 font-serif text-xs uppercase tracking-widest mb-1">
-              {t('One-time price', 'Prix unique')}
+              {t('one_time_price')}
             </p>
             <p className="font-serif text-4xl font-bold text-card-foreground">$4.99</p>
           </div>
@@ -127,7 +115,7 @@ export default function Paywall() {
         {isPremium ? (
           <div className="flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-emerald-700/30 border border-emerald-500/40 text-emerald-300 font-serif text-sm mb-4">
             <Sparkles size={16} />
-            {t('You already have Premium!', 'Vous avez déjà Premium !')}
+            {t('already_premium')}
           </div>
         ) : (
           <motion.button
@@ -138,7 +126,7 @@ export default function Paywall() {
             className="w-full py-4 rounded-full parchment-bg text-card-foreground border border-gold font-serif text-lg font-bold uppercase tracking-widest shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:shadow-[0_0_50px_rgba(212,175,55,0.4)] transition-shadow disabled:opacity-60 mb-3"
             data-testid="button-unlock-premium"
           >
-            {isProcessing ? t('Processing…', 'Traitement…') : t('Unlock Premium', 'Débloquer Premium')}
+            {isProcessing ? t('processing') : t('unlock_premium')}
           </motion.button>
         )}
 
@@ -150,7 +138,7 @@ export default function Paywall() {
             data-testid="button-restore-purchases"
           >
             <RotateCcw size={14} />
-            {t('Restore Purchases', 'Restaurer les achats')}
+            {t('restore_purchases')}
           </button>
         )}
 
@@ -169,7 +157,7 @@ export default function Paywall() {
             onClick={handleClose}
             className="w-full mt-3 py-3 rounded-full border border-gold text-gold font-serif text-sm uppercase tracking-widest hover:bg-gold/10 transition-colors"
           >
-            {t('Continue', 'Continuer')}
+            {t('continue')}
           </button>
         )}
       </motion.div>

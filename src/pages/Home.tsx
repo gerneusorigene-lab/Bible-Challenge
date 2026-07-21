@@ -33,10 +33,7 @@ export default function Home() {
   const resetProgress = () => {
     playClick();
     const confirmed = window.confirm(
-      t(
-        'Reset all progress, scores, and achievements? This cannot be undone.',
-        'Réinitialiser toute la progression, les scores et les accomplissements? Cette action est irréversible.'
-      )
+      t('reset_confirm')
     );
     if (confirmed) {
       resetAllProgress();
@@ -47,7 +44,7 @@ export default function Home() {
   const exitApp = async () => {
     playClick();
     const confirmed = window.confirm(
-      t('Exit Bible Challenge?', 'Quitter Bible Challenge?')
+      t('exit_confirm')
     );
     if (confirmed) await App.exitApp();
   };
@@ -84,22 +81,22 @@ export default function Home() {
           <div className="mb-1 flex items-center justify-center gap-2 text-amber-100">
             <Sparkles size={17} />
             <span className="font-serif text-xs font-bold uppercase tracking-[0.32em]">
-              {t('Belleus Educational Games', 'Jeux Éducatifs Belleus')}
+              {t('company_name')}
             </span>
             <Sparkles size={17} />
           </div>
           <h1 className="game-title font-serif text-4xl font-black leading-none sm:text-5xl">
-            {t('Bible Challenge', 'Défi Biblique')}
+            {t('app_name')}
           </h1>
           <div className="mt-2 flex items-center justify-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-amber-50/95">
             <BookOpen size={18} />
-            <span>{t('Three Truths & One Lie', 'Trois Vérités et Un Mensonge')}</span>
+            <span>{t('tagline')}</span>
           </div>
         </motion.div>
 
         <div className="mb-5 flex items-center gap-3 rounded-full border border-white/30 bg-slate-950/35 px-4 py-2 text-sm font-bold text-white shadow-lg backdrop-blur-md">
           <Trophy className="text-yellow-300" size={18} />
-          <span>{t('High Score', 'Meilleur Score')}</span>
+          <span>{t('high_score')}</span>
           <strong className="text-lg text-yellow-300">{highScore}</strong>
           {isPremium && (
             <span className="ml-1 rounded-full bg-violet-500/90 px-2 py-0.5 text-[10px] uppercase tracking-wider">
@@ -115,7 +112,7 @@ export default function Home() {
               transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
             >
               <GameMenuButton icon={<Play fill="currentColor" />} tone="gold" testId="button-play">
-                {t('Begin Journey', 'Commencer le Voyage')}
+                {t('begin_journey')}
               </GameMenuButton>
             </motion.div>
           </Link>
@@ -126,7 +123,7 @@ export default function Home() {
             onClick={() => go('/levels')}
             testId="button-daily-home"
           >
-            {t('Daily Challenge', 'Défi du Jour')}
+            {t('daily_challenge')}
           </GameMenuButton>
 
           <GameMenuButton
@@ -135,7 +132,7 @@ export default function Home() {
             onClick={() => go('/achievements')}
             testId="button-achievements-home"
           >
-            {t('Achievements', 'Accomplissements')} ({unlockedCount}/{total})
+            {t('achievements')} ({unlockedCount}/{total})
           </GameMenuButton>
 
           {!isPremium && (
@@ -145,7 +142,7 @@ export default function Home() {
               onClick={() => go('/paywall')}
               testId="button-premium-home"
             >
-              {t('Unlock Premium', 'Débloquer Premium')}
+              {t('unlock_premium')}
             </GameMenuButton>
           )}
 
@@ -156,7 +153,7 @@ export default function Home() {
             className="mt-1 py-3 text-sm opacity-95"
             testId="button-reset-home"
           >
-            {t('Reset Progress', 'Réinitialiser')}
+            {t('reset_progress')}
           </GameMenuButton>
 
           {isAndroid && (
@@ -167,7 +164,7 @@ export default function Home() {
               className="py-3 text-sm"
               testId="button-exit-app"
             >
-              {t('Exit App', "Quitter l'application")}
+              {t('exit_app')}
             </GameMenuButton>
           )}
         </div>

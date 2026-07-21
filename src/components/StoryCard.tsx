@@ -131,8 +131,8 @@ export default function StoryCard({
           <p className="mt-2 text-xs font-bold text-white/80">
             🧩 {playableQuestionCount}{" "}
             {playableQuestionCount === 1
-              ? t("Question", "Question")
-              : t("Questions", "Questions")}
+              ? t('question')
+              : t('questions')}
           </p>
 
           <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/10">
@@ -143,7 +143,7 @@ export default function StoryCard({
           </div>
 
           <p className="mt-1 text-xs text-white/60">
-            {t("Mastered", "Maîtrisé")} {masteredCount}/{story.levels.length}
+            {t('mastered')} {masteredCount}/{story.levels.length}
           </p>
         </div>
 

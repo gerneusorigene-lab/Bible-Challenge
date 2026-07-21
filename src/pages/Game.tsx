@@ -1,3 +1,5 @@
+
+
 import { LEVELS, type Level } from '@/data/questions';
 import { useGameState } from '@/hooks/useGameState';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -45,6 +47,15 @@ function shuffleArray<T>(array: T[]): T[] {
 
   return shuffled;
 }
+type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced';
+type TranslationKey = Parameters<ReturnType<typeof useLanguage>['t']>[0];
+
+const DIFFICULTY_KEYS: Record<Difficulty, TranslationKey> = {
+  Beginner: 'beginner',
+  Intermediate: 'intermediate',
+  Advanced: 'advanced',
+};
+
 export default function Game() {
   const {
     currentLevelId, submitAnswer, streak, hintsUsedThisLevel, useHint,
@@ -179,7 +190,7 @@ export default function Game() {
           <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-5">
             <div className="flex items-center gap-2 rounded-xl border border-slate-500/50 bg-black/25 px-2.5 py-1.5 font-serif shadow-lg">
               <Trophy size={17} className="text-amber-400" />
-              <span className="hidden text-xs uppercase tracking-[0.14em] text-white/80 sm:inline">{t('Score', 'Score')}</span>
+              <span className="hidden text-xs uppercase tracking-[0.14em] text-white/80 sm:inline">{t('score')}</span>
               <span className="text-xl font-bold text-amber-400">{score}</span>
             </div>
 
@@ -191,7 +202,7 @@ export default function Game() {
                 </h1>
               </div>
               <div className="mt-2 flex items-center justify-center gap-3">
-                <div className="flex max-w-md flex-1 gap-1.5" aria-label={t('Journey progress', 'Progression du parcours')}>
+                <div className="flex max-w-md flex-1 gap-1.5" aria-label={t('journey_progress')}>
                   {Array.from({ length: Math.min(questionTotal, 10) }).map((_, index) => {
                     const completed = index < Math.min(questionNumber, 10);
                     return <span key={index} className={`h-2 flex-1 rounded-full ${completed ? 'bg-amber-400' : 'bg-white/20'}`} />;
@@ -207,7 +218,7 @@ export default function Game() {
               whileTap={{ scale: 0.94 }}
               onClick={() => { playClick(); setMenuOpen(true); }}
               className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-slate-500/50 bg-black/25 text-white shadow-lg transition-colors hover:border-amber-400/70 hover:text-amber-400"
-              aria-label={t('Open game menu', 'Ouvrir le menu du jeu')}
+              aria-label={t('open_game_menu')}
             >
               <Menu size={23} />
             </motion.button>
@@ -249,7 +260,7 @@ export default function Game() {
                   className="flex items-center gap-2 rounded-xl border border-white/20 bg-black/60 px-3 py-2 font-serif text-sm text-white backdrop-blur"
                 >
                   <Flame size={16} className="text-orange-400" />
-                  <span>{streak} {t('Streak', 'Série')}</span>
+                  <span>{streak} {t('streak')}</span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -257,10 +268,10 @@ export default function Game() {
 
           <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-3 md:inset-x-4 md:bottom-4">
             <span className={`inline-flex items-center rounded-lg px-3 py-1.5 text-sm font-bold text-white shadow-lg ${currentLevel.badgeColor}`}>
-              {language === 'en' ? currentLevel.difficulty : currentLevel.difficultyFr}
+              {t(DIFFICULTY_KEYS[currentLevel.difficulty])}
             </span>
             <span className="rounded-lg border border-white/20 bg-black/55 px-3 py-1.5 font-serif text-sm font-bold text-white backdrop-blur">
-              {t('Level', 'Niveau')} {currentLevel.levelNumber}
+              {t('level')} {currentLevel.levelNumber}
             </span>
           </div>
         </motion.div>
@@ -269,7 +280,7 @@ export default function Game() {
         {challengeMode && (
           <div className="mb-4 rounded-xl border border-white/10 bg-black/20 px-3 py-2">
             <div className="mb-1.5 flex items-center justify-between font-serif text-xs">
-              <span className="text-foreground/60">{t('Time remaining', 'Temps restant')}</span>
+              <span className="text-foreground/60">{t('time_remaining')}</span>
               <span className={`tabular-nums ${timerPulse ? 'text-red-400' : 'text-gold/70'}`}>{revealing ? '—' : `${timeLeft}s`}</span>
             </div>
             <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
@@ -291,13 +302,13 @@ export default function Game() {
           <div className="mb-1.5 flex justify-center">
             <div className="inline-flex items-center gap-2 rounded-xl border border-purple-500/60 bg-purple-500/10 px-4 py-2 font-serif text-xs font-bold uppercase tracking-[0.16em] text-purple-300 shadow-[0_0_18px_rgba(168,85,247,0.16)] md:text-sm">
               <Brain size={17} />
-              <span>{t('3 Truths • 1 Lie', '3 vérités • 1 mensonge')}</span>
+              <span>{t('game_mode_title')}</span>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             <p className="font-serif text-xl font-semibold leading-snug text-white md:text-3xl">
-              {t('Which statement is the lie?', 'Quelle affirmation est fausse ?')}
+              {t('which_statement_lie')}
             </p>
             {!hintsUsedThisLevel && !revealing && (
               <motion.button
@@ -309,7 +320,7 @@ export default function Game() {
                 className="inline-flex items-center gap-2 rounded-full px-2 py-1 font-serif text-sm font-semibold text-amber-400 transition-colors hover:text-amber-300 md:text-base"
               >
                 <Lightbulb size={19} />
-                {t('Use a Hint', 'Utiliser un indice')}
+                {t('use_hint')}
               </motion.button>
             )}
           </div>
@@ -364,13 +375,13 @@ export default function Game() {
               <div className="flex items-center justify-between border-b border-amber-800/25 px-5 py-4">
                 <div>
                   <p className="font-serif text-xs font-bold uppercase tracking-[0.25em] text-amber-900/60">Bible Challenge</p>
-                  <h2 className="font-serif text-2xl font-black">{t('Game Menu', 'Menu du jeu')}</h2>
+                  <h2 className="font-serif text-2xl font-black">{t('game_menu')}</h2>
                 </div>
                 <button
                   type="button"
                   onClick={() => setMenuOpen(false)}
                   className="grid h-10 w-10 place-items-center rounded-full border border-amber-900/25 bg-white/20"
-                  aria-label={t('Close menu', 'Fermer le menu')}
+                  aria-label={t('close_menu')}
                 >
                   <X size={21} />
                 </button>
@@ -382,7 +393,7 @@ export default function Game() {
                   className="flex w-full items-center gap-3 rounded-2xl border border-amber-900/25 bg-white/35 px-4 py-4 text-left font-serif text-lg font-bold shadow-sm transition-transform active:scale-[0.98]"
                 >
                   <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-800 text-white"><Play size={19} fill="currentColor" /></span>
-                  {t('Resume Journey', 'Reprendre le parcours')}
+                  {t('resume_journey')}
                 </button>
                 <button
                   type="button"
@@ -390,7 +401,7 @@ export default function Game() {
                   className="flex w-full items-center gap-3 rounded-2xl border border-amber-900/25 bg-white/35 px-4 py-4 text-left font-serif text-lg font-bold shadow-sm transition-transform active:scale-[0.98]"
                 >
                   <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-800 text-white"><BookOpen size={20} /></span>
-                  {t('Story List', 'Liste des histoires')}
+                  {t('story_list')}
                 </button>
                 <button
                   type="button"
@@ -398,7 +409,7 @@ export default function Game() {
                   className="flex w-full items-center gap-3 rounded-2xl border border-amber-900/25 bg-white/35 px-4 py-4 text-left font-serif text-lg font-bold shadow-sm transition-transform active:scale-[0.98]"
                 >
                   <span className="grid h-10 w-10 place-items-center rounded-xl bg-amber-700 text-white"><Home size={20} /></span>
-                  {t('Home', 'Accueil')}
+                  {t('home')}
                 </button>
               </div>
             </motion.div>
@@ -421,9 +432,9 @@ export default function Game() {
               exit={{ scale: 0.94, opacity: 0 }}
               className="w-full max-w-sm rounded-3xl border border-gold/40 bg-[#17130c] p-6 text-center shadow-2xl"
             >
-              <h2 className="font-serif text-2xl font-bold text-gold">{t('Leave this game?', 'Quitter cette partie ?')}</h2>
+              <h2 className="font-serif text-2xl font-bold text-gold">{t('leave_game')}</h2>
               <p className="mt-3 text-sm leading-relaxed text-foreground/70">
-                {t('Your progress in the current journey will be lost.', 'Votre progression dans le parcours actuel sera perdue.')}
+                {t('leave_warning')}
               </p>
               <div className="mt-6 space-y-3">
                 <button
@@ -431,14 +442,14 @@ export default function Game() {
                   onClick={() => setLeaveTarget(null)}
                   className="w-full rounded-xl border border-gold/40 bg-gold/10 px-4 py-3 font-serif font-bold text-gold"
                 >
-                  {t('Continue Playing', 'Continuer à jouer')}
+                  {t('continue_playing')}
                 </button>
                 <button
                   type="button"
                   onClick={confirmLeave}
                   className="w-full rounded-xl border border-red-500/30 bg-red-950/40 px-4 py-3 font-serif font-bold text-red-300"
                 >
-                  {leaveTarget === 'home' ? t('Go Home', "Aller à l'accueil") : t('Back to Story List', 'Retour à la liste')}
+                  {leaveTarget === 'home' ? t('go_home') : t('back_story_list')}
                 </button>
               </div>
             </motion.div>

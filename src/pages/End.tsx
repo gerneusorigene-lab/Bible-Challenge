@@ -1,3 +1,6 @@
+
+
+
 import { useGameState } from '@/hooks/useGameState';
 import { useAchievements } from '@/hooks/useAchievements';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -44,9 +47,9 @@ export default function End() {
 
   const handleShare = async () => {
     playClick();
-    const text = language === 'en'
-      ? `I scored ${score} points on Three Truths & One Lie! 🔥 Best streak: ${bestStreak} | Test your biblical knowledge!`
-      : `J'ai obtenu ${score} points sur Trois Vérités et Un Mensonge ! 🔥 Meilleure série : ${bestStreak} | Testez vos connaissances bibliques !`;
+    const text = t('share_score_message')
+      .replace('{score}', String(score))
+      .replace('{streak}', String(bestStreak));
     if (navigator.share) {
       try { await navigator.share({ title: 'Three Truths & One Lie', text }); } catch { /* cancelled */ }
     } else {
@@ -79,7 +82,7 @@ export default function End() {
         className="relative z-10 w-full max-w-lg parchment-bg p-8 md:p-10 rounded-2xl border-2 border-gold shadow-[0_0_50px_rgba(212,175,55,0.3)] text-center"
       >
         <h1 className="font-serif text-3xl md:text-4xl text-card-foreground font-bold mb-6">
-          {t('Journey Complete', 'Voyage Terminé')}
+          {t('journey_complete')}
         </h1>
 
         {/* Stars */}
@@ -93,7 +96,7 @@ export default function End() {
 
         {/* Score */}
         <div className="mb-6">
-          <p className="font-serif text-card-foreground/60 uppercase tracking-widest text-sm mb-1">{t('Final Score', 'Score Final')}</p>
+          <p className="font-serif text-card-foreground/60 uppercase tracking-widest text-sm mb-1">{t('final_score')}</p>
           <p className="font-serif text-6xl text-gold font-bold">{score}</p>
         </div>
 
@@ -101,17 +104,17 @@ export default function End() {
         <div className="flex justify-center gap-6 mb-6 text-sm font-serif">
           <div className="text-center">
             <div className="text-gold text-lg font-bold">{levelsCompleted.length}</div>
-            <div className="text-card-foreground/50 uppercase tracking-wider text-xs">{t('Levels', 'Niveaux')}</div>
+            <div className="text-card-foreground/50 uppercase tracking-wider text-xs">{t('levels')}</div>
           </div>
           <div className="w-px bg-gold/20" />
           <div className="text-center">
             <div className="text-orange-400 text-lg font-bold">{bestStreak}</div>
-            <div className="text-card-foreground/50 uppercase tracking-wider text-xs">{t('Best Streak', 'Meilleure Série')}</div>
+            <div className="text-card-foreground/50 uppercase tracking-wider text-xs">{t('best_streak')}</div>
           </div>
           <div className="w-px bg-gold/20" />
           <div className="text-center">
             <div className="text-red-400 text-lg font-bold">{wrongAnswers.length}</div>
-            <div className="text-card-foreground/50 uppercase tracking-wider text-xs">{t('Mistakes', 'Erreurs')}</div>
+            <div className="text-card-foreground/50 uppercase tracking-wider text-xs">{t('mistakes')}</div>
           </div>
         </div>
 
@@ -122,7 +125,7 @@ export default function End() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-6 p-3 rounded-xl border border-gold/40 bg-gold/10"
           >
-            <p className="font-serif text-gold text-sm mb-2">{t('🏆 New Achievement!', '🏆 Nouvel Accomplissement !')}</p>
+            <p className="font-serif text-gold text-sm mb-2">{t('new_achievement')}</p>
             {newIds.map(id => {
               const a = achievements.find(ac => ac.id === id);
               return a ? (
@@ -141,7 +144,7 @@ export default function End() {
             className="w-full flex items-center justify-center gap-2 bg-gold/10 hover:bg-gold/20 border border-gold text-gold font-serif py-3 rounded-xl font-bold uppercase tracking-widest transition-colors"
             data-testid="button-share"
           >
-            {copied ? <><Check size={16} /> {t('Copied!', 'Copié !')}</> : <><Share2 size={16} /> {t('Share Score', 'Partager le Score')}</>}
+            {copied ? <><Check size={16} /> {t('copied')}</> : <><Share2 size={16} /> {t('share_score')}</>}
           </button>
 
           {wrongAnswers.length > 0 && (
@@ -150,7 +153,9 @@ export default function End() {
               className="w-full flex items-center justify-center gap-2 bg-black/20 hover:bg-black/30 border border-white/10 text-card-foreground font-serif py-3 rounded-xl font-bold uppercase tracking-widest transition-colors"
               data-testid="button-review"
             >
-              <BookOpen size={16} /> {t(`Review ${wrongAnswers.length} Mistake${wrongAnswers.length > 1 ? 's' : ''}`, `Revoir ${wrongAnswers.length} Erreur${wrongAnswers.length > 1 ? 's' : ''}`)}
+              <BookOpen size={16} />
+              {t(wrongAnswers.length === 1 ? 'review_one_mistake' : 'review_multiple_mistakes')
+                .replace('{count}', String(wrongAnswers.length))}
             </button>
           )}
 
@@ -159,7 +164,7 @@ export default function End() {
             className="w-full bg-black/20 hover:bg-black/30 text-card-foreground border border-white/10 font-serif py-3 rounded-xl font-bold uppercase tracking-widest transition-colors"
             data-testid="button-choose-level"
           >
-            {t('Choose Another Level', 'Choisir un autre niveau')}
+            {t('choose_another_level')}
           </button>
 
           <button
@@ -167,7 +172,7 @@ export default function End() {
             className="w-full text-card-foreground/50 hover:text-card-foreground font-serif py-2 rounded-xl text-sm uppercase tracking-widest transition-colors"
             data-testid="button-home"
           >
-            {t('Return Home', "Retour à l'accueil")}
+            {t('return_home')}
           </button>
         </div>
       </motion.div>
