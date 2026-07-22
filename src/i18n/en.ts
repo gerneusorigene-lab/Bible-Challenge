@@ -42,6 +42,7 @@ const en = {
   close_menu: "Close menu",
   resume_journey: "Resume Journey",
   story_list: "Story List",
+  verse_of_the_day: "Verse of the Day",
   leave_game: "Leave this game?",
   leave_warning: "Your progress in the current journey will be lost.",
   continue_playing: "Continue Playing",

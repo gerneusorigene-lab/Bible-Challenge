@@ -113,9 +113,17 @@ export const useGameState = create<GameState>()(
       startLevel: (levelId) => set({ ...SESSION_RESET, currentLevelId: levelId }),
 
       startStory: (levelIds, storyId) => {
-        const validIds = levelIds.filter((id) => LEVELS.some((level) => level.id === id));
+        const validIds = levelIds.filter((id) =>
+          LEVELS.some((level) => level.id === id)
+        );
+
         if (validIds.length === 0) return;
-        const queue = shuffle(validIds);
+
+        // Keep the story's representative level first, then randomize the rest.
+        const firstLevelId = validIds[0];
+        const remainingIds = shuffle(validIds.slice(1));
+        const queue = [firstLevelId, ...remainingIds];
+
         set({
           ...SESSION_RESET,
           currentLevelId: queue[0],

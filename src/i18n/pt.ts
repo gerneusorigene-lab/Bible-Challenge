@@ -14,6 +14,7 @@ const pt = {
   free: "Grátis",
   beginner: "Iniciante",
   intermediate: "Intermediário",
+  verse_of_the_day: "Versículo do dia",
   advanced: "Avançado",
   language: "Idioma",
   mute_sound: "Silenciar som",

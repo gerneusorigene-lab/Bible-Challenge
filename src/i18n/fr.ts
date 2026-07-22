@@ -12,6 +12,7 @@ const fr = {
   score: "Score",
   premium: "Premium",
   free: "Gratuit",
+  verse_of_the_day: "Verset du jour",
   beginner: "Débutant",
   intermediate: "Intermédiaire",
   advanced: "Avancé",

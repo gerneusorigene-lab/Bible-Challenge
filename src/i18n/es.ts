@@ -18,6 +18,7 @@ const es = {
   language: "Idioma",
   mute_sound: "Silenciar sonido",
   unmute_sound: "Activar sonido",
+  verse_of_the_day: "Versículo del día",
   return_home: "Volver al menú principal",
   app_name: "Desafío Bíblico",
   company_name: "Juegos Educativos Belleus",

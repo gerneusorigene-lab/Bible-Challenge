@@ -148,13 +148,7 @@ export default function LevelSelect() {
 
   const goBack = () => {
     playClick();
-
-    // Use an explicit document navigation here instead of relying only on
-    // Wouter's setter. This route is opened with a difficulty query string in
-    // both the browser and Capacitor builds; the explicit URL makes the Back
-    // action reliable on Windows, Android, and after a page refresh.
-    const journeyUrl = new URL('journey', document.baseURI);
-    window.location.assign(journeyUrl.href);
+    setLocation('/journey');
   };
 
   const goToPaywall = () => {
