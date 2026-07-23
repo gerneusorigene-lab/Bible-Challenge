@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   BookOpen,
@@ -7,7 +6,6 @@ import {
   Lock,
   Star,
 } from "lucide-react";
-import { getStoryArtwork } from "@/data/storyArtwork";
 
 type StoryCardProps = {
   story: any;
@@ -49,8 +47,6 @@ export default function StoryCard({
   t,
   onPlay,
 }: StoryCardProps) {
-  const [artworkFailed, setArtworkFailed] = useState(false);
-  const artworkSrc = getStoryArtwork(level.topic.en);
 
   return (
     <motion.button
@@ -68,37 +64,13 @@ export default function StoryCard({
       }`}
     >
       <div className="flex items-center gap-4 p-4">
-        {/* Artwork */}
-        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-slate-800">
-          {!artworkFailed && artworkSrc ? (
-            <img
-              src={artworkSrc}
-              alt={level.topic[language]}
-              loading="lazy"
-              onError={() => setArtworkFailed(true)}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
+        <div className={`flex h-24 w-24 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${theme.button}`}>
+          {locked ? (
+            <Lock size={26} className="text-white" />
+          ) : completed ? (
+            <Check size={28} className="text-white" />
           ) : (
-            <div
-              className={`grid h-full w-full place-items-center bg-gradient-to-br ${theme.button}`}
-              aria-label={level.topic[language]}
-            >
-              <BookOpen size={34} className="text-white/90 drop-shadow" />
-            </div>
-          )}
-
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
-
-          {locked && (
-            <div className="absolute inset-0 grid place-items-center bg-black/60">
-              <Lock size={20} />
-            </div>
-          )}
-
-          {completed && !locked && (
-            <div className="absolute right-1 top-1 rounded-full bg-emerald-500 p-1 shadow">
-              <Check size={14} strokeWidth={3} />
-            </div>
+            <BookOpen size={34} className="text-white" />
           )}
         </div>
 

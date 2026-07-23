@@ -1,5 +1,3 @@
-import { StoryImages } from './story_images';
-
 export type Language = 'en' | 'fr';
 
 export interface Statement {
@@ -14,7 +12,6 @@ export interface Level {
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
   difficultyFr: 'Débutant' | 'Intermédiaire' | 'Avancé';
   topic: { en: string; fr: string };
-  image: string;
   statements: Statement[];
   explanation: { en: string; fr: string };
   scripture?: { en: string; fr: string };
@@ -31,7 +28,7 @@ export const LEVELS: Level[] = [
   // ─── BEGINNER ────────────────────────────────────────────────────────────────
   {
     id: 'b1', levelNumber: 1, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Noah's Ark", fr: "L'Arche de Noé" }, image: StoryImages.b1, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Noah's Ark", fr: "L'Arche de Noé" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b1-a', isTruth: true,  text: { en: "God used a rainbow as a sign of His covenant to never flood the entire Earth again.", fr: "Dieu a utilisé l'arc-en-ciel comme signe de son alliance pour ne plus jamais inonder la Terre entière." } },
       { id: 'b1-b', isTruth: true,  text: { en: "Noah brought seven pairs of certain clean animals onto the ark.", fr: "Noé a fait monter sept couples de certains animaux purs dans l'arche." } },
@@ -42,7 +39,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b2', levelNumber: 2, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Creation — Days 1–3", fr: "La Création — Jours 1–3" }, image: StoryImages.b2, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "The Creation — Days 1–3", fr: "La Création — Jours 1–3" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b2-a', isTruth: true,  text: { en: "God created light on the first day and separated it from darkness.", fr: "Dieu a créé la lumière le premier jour et l'a séparée des ténèbres." } },
       { id: 'b2-b', isTruth: true,  text: { en: "God created the sky (firmament) to separate the waters on the second day.", fr: "Dieu a créé le ciel (firmament) pour séparer les eaux le deuxième jour." } },
@@ -53,7 +50,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b3', levelNumber: 3, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Creation — Days 4–7", fr: "La Création — Jours 4–7" }, image: StoryImages.b3, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "The Creation — Days 4–7", fr: "La Création — Jours 4–7" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b3-a', isTruth: true,  text: { en: "God created the sun, moon, and stars on the fourth day.", fr: "Dieu a créé le soleil, la lune et les étoiles le quatrième jour." } },
       { id: 'b3-b', isTruth: true,  text: { en: "God created birds and sea creatures on the fifth day.", fr: "Dieu a créé les oiseaux et les créatures marines le cinquième jour." } },
@@ -64,7 +61,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b4', levelNumber: 4, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Adam and Eve", fr: "Adam et Ève" }, image: StoryImages.b4, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Adam and Eve", fr: "Adam et Ève" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b4-a', isTruth: true,  text: { en: "God formed Adam from the dust of the ground and breathed life into him.", fr: "Dieu a formé Adam de la poussière de la terre et lui a insufflé la vie." } },
       { id: 'b4-b', isTruth: true,  text: { en: "God put Adam into a deep sleep to take a rib and form Eve.", fr: "Dieu a plongé Adam dans un profond sommeil pour prendre une côte et former Ève." } },
@@ -75,7 +72,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b5', levelNumber: 5, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Fall — The Serpent and the Fruit", fr: "La Chute — Le Serpent et le Fruit" }, image: StoryImages.b5, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "The Fall — The Serpent and the Fruit", fr: "La Chute — Le Serpent et le Fruit" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b5-a', isTruth: true,  text: { en: "The serpent was described as more crafty than any other animal God had made.", fr: "Le serpent était décrit comme plus rusé que tous les animaux que Dieu avait faits." } },
       { id: 'b5-b', isTruth: true,  text: { en: "Eve saw that the fruit was good for food, pleasing to the eye, and desirable for gaining wisdom.", fr: "Ève vit que le fruit était bon à manger, agréable à regarder et désirable pour acquérir la sagesse." } },
@@ -86,7 +83,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b6', levelNumber: 6, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Cain and Abel", fr: "Caïn et Abel" }, image: StoryImages.b6, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Cain and Abel", fr: "Caïn et Abel" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b6-a', isTruth: true,  text: { en: "Abel kept flocks while Cain worked the soil.", fr: "Abel était berger tandis que Caïn travaillait la terre." } },
       { id: 'b6-b', isTruth: true,  text: { en: "The LORD looked with favor on Abel's offering but not on Cain's.", fr: "L'Éternel porta un regard favorable sur l'offrande d'Abel, mais pas sur celle de Caïn." } },
@@ -97,7 +94,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b7', levelNumber: 7, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Noah Before the Flood", fr: "Noé Avant le Déluge" }, image: StoryImages.b7, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Noah Before the Flood", fr: "Noé Avant le Déluge" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b7-a', isTruth: true,  text: { en: "Noah was 600 years old when the floodwaters came upon the earth.", fr: "Noé avait 600 ans lorsque les eaux du déluge se répandirent sur la terre." } },
       { id: 'b7-b', isTruth: true,  text: { en: "God told Noah to make the ark with three decks.", fr: "Dieu ordonna à Noé de construire l'arche avec trois ponts." } },
@@ -125,7 +122,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b8', levelNumber: 8, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Tower of Babel", fr: "La Tour de Babel" }, image: StoryImages.b8, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "The Tower of Babel", fr: "La Tour de Babel" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b8-a', isTruth: true,  text: { en: "The whole world had one language before the Tower of Babel.", fr: "Le monde entier parlait une seule langue avant la tour de Babel." } },
       { id: 'b8-b', isTruth: true,  text: { en: "The people wanted to build a tower reaching to the heavens to make a name for themselves.", fr: "Le peuple voulait bâtir une tour atteignant les cieux pour se faire un nom." } },
@@ -136,7 +133,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b9', levelNumber: 9, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Abraham's Call", fr: "L'Appel d'Abraham" }, image: StoryImages.b9, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Abraham's Call", fr: "L'Appel d'Abraham" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b9-a', isTruth: true,  text: { en: "God called Abram to leave his country, his people, and his father's household.", fr: "Dieu appela Abram à quitter son pays, sa parenté et la maison de son père." } },
       { id: 'b9-b', isTruth: true,  text: { en: "Abram was 75 years old when he left Haran in obedience to God's command.", fr: "Abram avait 75 ans lorsqu'il quitta Haran en obéissant à l'ordre de Dieu." } },
@@ -147,7 +144,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b10', levelNumber: 10, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Sodom and Gomorrah", fr: "Sodome et Gomorrhe" }, image: StoryImages.b10, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Sodom and Gomorrah", fr: "Sodome et Gomorrhe" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b10-a', isTruth: true,  text: { en: "Abraham negotiated with God, asking Him to spare Sodom if ten righteous people were found there.", fr: "Abraham a négocié avec Dieu, lui demandant d'épargner Sodome si dix justes y étaient trouvés." } },
       { id: 'b10-b', isTruth: true,  text: { en: "Two angels visited Lot in Sodom and were threatened by the men of the city.", fr: "Deux anges rendirent visite à Lot à Sodome et furent menacés par les hommes de la ville." } },
@@ -158,7 +155,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b11', levelNumber: 11, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Abraham and Isaac — The Sacrifice", fr: "Abraham et Isaac — Le Sacrifice" }, image: StoryImages.b11, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Abraham and Isaac — The Sacrifice", fr: "Abraham et Isaac — Le Sacrifice" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b11-a', isTruth: true,  text: { en: "God told Abraham to sacrifice his son Isaac on a mountain in the region of Moriah.", fr: "Dieu ordonna à Abraham d'offrir son fils Isaac en sacrifice sur une montagne en pays de Moria." } },
       { id: 'b11-b', isTruth: true,  text: { en: "Isaac himself carried the wood for the burnt offering up the mountain.", fr: "Isaac porta lui-même le bois de l'holocauste jusqu'au sommet de la montagne." } },
@@ -169,7 +166,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b12', levelNumber: 12, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Jacob and Esau — The Birthright", fr: "Jacob et Ésaü — Le Droit d'Aînesse" }, image: StoryImages.b12, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Jacob and Esau — The Birthright", fr: "Jacob et Ésaü — Le Droit d'Aînesse" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b12-a', isTruth: true,  text: { en: "Esau was born first and came out covered in red hair.", fr: "Ésaü est né en premier et était couvert de poils roux." } },
       { id: 'b12-b', isTruth: true,  text: { en: "Esau sold his birthright to Jacob for bread and lentil stew.", fr: "Ésaü vendit son droit d'aînesse à Jacob pour du pain et de la soupe aux lentilles." } },
@@ -180,7 +177,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b13', levelNumber: 13, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Jacob's Dream — The Ladder", fr: "Le Rêve de Jacob — L'Échelle" }, image: StoryImages.b13, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Jacob's Dream — The Ladder", fr: "Le Rêve de Jacob — L'Échelle" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b13-a', isTruth: true,  text: { en: "Jacob dreamed of a stairway (ladder) reaching from earth to heaven.", fr: "Jacob rêva d'une échelle allant de la terre jusqu'au ciel." } },
       { id: 'b13-b', isTruth: true,  text: { en: "Angels of God were ascending and descending on the stairway in Jacob's dream.", fr: "Des anges de Dieu montaient et descendaient l'échelle dans le rêve de Jacob." } },
@@ -191,7 +188,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b14', levelNumber: 14, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Joseph — His Brothers' Betrayal", fr: "Joseph — La Trahison de ses Frères" }, image: StoryImages.b14, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Joseph — His Brothers' Betrayal", fr: "Joseph — La Trahison de ses Frères" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b14-a', isTruth: true,  text: { en: "Joseph's father gave him a richly ornamented robe (coat of many colors).", fr: "Le père de Joseph lui offrit une tunique de plusieurs couleurs (une robe brodée)." } },
       { id: 'b14-b', isTruth: true,  text: { en: "Joseph dreamed that his brothers' sheaves bowed down to his sheaf.", fr: "Joseph rêva que les gerbes de ses frères se prosternaient devant la sienne." } },
@@ -202,7 +199,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b15', levelNumber: 15, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Joseph — From Prison to Palace", fr: "Joseph — De la Prison au Palais" }, image: StoryImages.b15, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Joseph — From Prison to Palace", fr: "Joseph — De la Prison au Palais" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b15-a', isTruth: true,  text: { en: "Pharaoh dreamed of seven fat cows devoured by seven thin cows.", fr: "Pharaon rêva de sept vaches grasses dévorées par sept vaches maigres." } },
       { id: 'b15-b', isTruth: true,  text: { en: "Joseph interpreted the dreams as seven years of abundance followed by seven years of famine.", fr: "Joseph interpréta les rêves comme sept années d'abondance suivies de sept années de famine." } },
@@ -213,7 +210,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b16', levelNumber: 16, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Baby Moses", fr: "Bébé Moïse" }, image: StoryImages.b16, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Baby Moses", fr: "Bébé Moïse" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b16-a', isTruth: true,  text: { en: "Moses' mother hid him for three months after he was born.", fr: "La mère de Moïse l'a caché pendant trois mois après sa naissance." } },
       { id: 'b16-b', isTruth: true,  text: { en: "Moses was placed in a papyrus basket coated with tar and pitch on the Nile River.", fr: "Moïse fut placé dans un panier de papyrus enduit de bitume et de poix sur le Nil." } },
@@ -224,7 +221,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b17', levelNumber: 17, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Moses and the Burning Bush", fr: "Moïse et le Buisson Ardent" }, image: StoryImages.b17, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Moses and the Burning Bush", fr: "Moïse et le Buisson Ardent" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b17-a', isTruth: true,  text: { en: "Moses saw a bush on fire that was not burning up.", fr: "Moïse vit un buisson en feu qui ne se consumait pas." } },
       { id: 'b17-b', isTruth: true,  text: { en: "God told Moses to remove his sandals because he was standing on holy ground.", fr: "Dieu dit à Moïse d'ôter ses sandales car il se tenait sur une terre sainte." } },
@@ -235,7 +232,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b18', levelNumber: 18, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Ten Plagues — Overview", fr: "Les Dix Plaies — Aperçu" }, image: StoryImages.b18, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "The Ten Plagues — Overview", fr: "Les Dix Plaies — Aperçu" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b18-a', isTruth: true,  text: { en: "The first plague turned all the water of the Nile River into blood.", fr: "La première plaie transforma toute l'eau du Nil en sang." } },
       { id: 'b18-b', isTruth: true,  text: { en: "The ninth plague was three days of total darkness covering all of Egypt.", fr: "La neuvième plaie fut trois jours de ténèbres totales couvrant toute l'Égypte." } },
@@ -246,7 +243,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b19', levelNumber: 19, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Passover", fr: "La Pâque" }, image: StoryImages.b19, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "The Passover", fr: "La Pâque" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b19-a', isTruth: true,  text: { en: "God commanded the Israelites to smear lamb's blood on their doorposts and lintel.", fr: "Dieu ordonna aux Israélites de mettre le sang d'un agneau sur leurs montants de portes et leur linteau." } },
       { id: 'b19-b', isTruth: true,  text: { en: "The Israelites were to eat the Passover lamb with bitter herbs and unleavened bread.", fr: "Les Israélites devaient manger l'agneau pascal avec des herbes amères et du pain sans levain." } },
@@ -257,7 +254,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b20', levelNumber: 20, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Crossing the Red Sea", fr: "La Traversée de la Mer Rouge" }, image: StoryImages.b20, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Crossing the Red Sea", fr: "La Traversée de la Mer Rouge" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b20-a', isTruth: true,  text: { en: "Moses stretched out his hand and God drove the sea back with a strong east wind.", fr: "Moïse étendit la main et Dieu repoussa la mer par un fort vent d'est." } },
       { id: 'b20-b', isTruth: true,  text: { en: "The Israelites walked through the sea on dry ground with walls of water on both sides.", fr: "Les Israélites traversèrent la mer à pied sur la terre sèche, avec des murs d'eau de chaque côté." } },
@@ -268,7 +265,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b21', levelNumber: 21, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Manna in the Wilderness", fr: "La Manne dans le Désert" }, image: StoryImages.b21, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Manna in the Wilderness", fr: "La Manne dans le Désert" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b21-a', isTruth: true,  text: { en: "Manna appeared on the ground like thin flakes or frost each morning.", fr: "La manne apparaissait sur le sol comme de minces flocons ou du givre chaque matin." } },
       { id: 'b21-b', isTruth: true,  text: { en: "The Israelites gathered twice as much manna on the sixth day to prepare for the Sabbath.", fr: "Les Israélites ramassèrent deux fois plus de manne le sixième jour pour préparer le Sabbat." } },
@@ -279,7 +276,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b22', levelNumber: 22, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Ten Commandments", fr: "Les Dix Commandements" }, image: StoryImages.b22, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "The Ten Commandments", fr: "Les Dix Commandements" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b22-a', isTruth: true,  text: { en: "God wrote the Ten Commandments on two stone tablets.", fr: "Dieu écrivit les Dix Commandements sur deux tables de pierre." } },
       { id: 'b22-b', isTruth: true,  text: { en: "The Sabbath commandment instructs rest on the seventh day.", fr: "Le commandement du Sabbat ordonne de se reposer le septième jour." } },
@@ -290,7 +287,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b23', levelNumber: 23, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Golden Calf", fr: "Le Veau d'Or" }, image: StoryImages.b23, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "The Golden Calf", fr: "Le Veau d'Or" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b23-a', isTruth: true,  text: { en: "The Israelites gave Aaron their gold earrings to make the golden calf.", fr: "Les Israélites remirent à Aaron leurs boucles d'oreilles en or pour fabriquer le veau d'or." } },
       { id: 'b23-b', isTruth: true,  text: { en: "Aaron declared of the calf, 'These are your gods, Israel, who brought you up out of Egypt.'", fr: "Aaron déclara au sujet du veau : 'Israël, voici ton dieu qui t'a fait monter du pays d'Égypte.'" } },
@@ -301,7 +298,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b24', levelNumber: 24, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Joshua and Jericho", fr: "Josué et Jéricho" }, image: StoryImages.b24, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Joshua and Jericho", fr: "Josué et Jéricho" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b24-a', isTruth: true,  text: { en: "God commanded Israel to march around Jericho once a day for six days.", fr: "Dieu ordonna à Israël de faire le tour de Jéricho une fois par jour pendant six jours." } },
       { id: 'b24-b', isTruth: true,  text: { en: "On the seventh day, the Israelites marched around Jericho seven times.", fr: "Le septième jour, les Israélites firent sept fois le tour de Jéricho." } },
@@ -312,7 +309,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b25', levelNumber: 25, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Samson and Delilah", fr: "Samson et Dalila" }, image: StoryImages.b25, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Samson and Delilah", fr: "Samson et Dalila" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b25-a', isTruth: true,  text: { en: "Samson's great strength was connected to his Nazirite vow, which included never cutting his hair.", fr: "La grande force de Samson était liée à son vœu de naziréat, qui incluait de ne jamais couper ses cheveux." } },
       { id: 'b25-b', isTruth: true,  text: { en: "Delilah repeatedly asked Samson the source of his strength on behalf of the Philistine leaders.", fr: "Dalila demanda à plusieurs reprises à Samson la source de sa force au nom des chefs philistins." } },
@@ -323,7 +320,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b26', levelNumber: 26, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Ruth and Naomi", fr: "Ruth et Naomi" }, image: StoryImages.b26, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Ruth and Naomi", fr: "Ruth et Naomi" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b26-a', isTruth: true,  text: { en: "Naomi's two sons both died in Moab, leaving two Moabite widows.", fr: "Les deux fils de Naomi moururent tous deux à Moab, laissant deux veuves moabites." } },
       { id: 'b26-b', isTruth: true,  text: { en: "Ruth declared: 'Where you go I will go, and where you stay I will stay.'", fr: "Ruth déclara : 'Où tu iras, j'irai, et où tu demeureras, je demeurerai.'" } },
@@ -334,7 +331,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b27', levelNumber: 27, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Hannah and the Birth of Samuel", fr: "Hannah et la Naissance de Samuel" }, image: StoryImages.b27, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Hannah and the Birth of Samuel", fr: "Hannah et la Naissance de Samuel" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b27-a', isTruth: true,  text: { en: "Hannah was one of Elkanah's two wives and had no children.", fr: "Hannah était l'une des deux femmes d'Elqana et n'avait pas d'enfants." } },
       { id: 'b27-b', isTruth: true,  text: { en: "Hannah prayed at the tabernacle in Shiloh and Eli the priest thought she was drunk.", fr: "Hannah pria au tabernacle à Silo et Éli le sacrificateur pensa qu'elle était ivre." } },
@@ -345,7 +342,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b28', levelNumber: 28, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "David and Goliath", fr: "David et Goliath" }, image: StoryImages.b28, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "David and Goliath", fr: "David et Goliath" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b28-a', isTruth: true,  text: { en: "Goliath was from the Philistine city of Gath and stood over nine feet tall.", fr: "Goliath venait de la ville philistine de Gath et mesurait plus de trois mètres." } },
       { id: 'b28-b', isTruth: true,  text: { en: "David chose five smooth stones from a stream before facing Goliath.", fr: "David choisit cinq pierres lisses dans un ruisseau avant d'affronter Goliath." } },
@@ -356,7 +353,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b29', levelNumber: 29, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Solomon's Wisdom", fr: "La Sagesse de Salomon" }, image: StoryImages.b29, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Solomon's Wisdom", fr: "La Sagesse de Salomon" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b29-a', isTruth: true,  text: { en: "Solomon asked God for wisdom and discernment to govern the people of Israel.", fr: "Salomon demanda à Dieu la sagesse et l'intelligence pour gouverner le peuple d'Israël." } },
       { id: 'b29-b', isTruth: true,  text: { en: "God was pleased with Solomon's request because he did not ask for riches or long life.", fr: "Dieu fut satisfait de la demande de Salomon car il n'avait pas demandé la richesse ni une longue vie." } },
@@ -367,7 +364,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b30', levelNumber: 30, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Elijah and the Prophets of Baal", fr: "Élie et les Prophètes de Baal" }, image: StoryImages.b30, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Elijah and the Prophets of Baal", fr: "Élie et les Prophètes de Baal" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b30-a', isTruth: true,  text: { en: "Elijah challenged 450 prophets of Baal to a contest on Mount Carmel.", fr: "Élie défia 450 prophètes de Baal lors d'un concours sur le mont Carmel." } },
       { id: 'b30-b', isTruth: true,  text: { en: "The prophets of Baal called on their god from morning until noon with no answer.", fr: "Les prophètes de Baal invoquèrent leur dieu depuis le matin jusqu'à midi sans réponse." } },
@@ -378,7 +375,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b31', levelNumber: 31, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Elijah and the Still Small Voice", fr: "Élie et la Voix Douce et Légère" }, image: StoryImages.b31, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Elijah and the Still Small Voice", fr: "Élie et la Voix Douce et Légère" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b31-a', isTruth: true,  text: { en: "Queen Jezebel threatened to kill Elijah after he slew the prophets of Baal.", fr: "La reine Jézabel menaça de tuer Élie après qu'il eut tué les prophètes de Baal." } },
       { id: 'b31-b', isTruth: true,  text: { en: "Elijah fled into the wilderness and sat under a broom tree, wishing he could die.", fr: "Élie s'enfuit dans le désert et s'assit sous un genêt, souhaitant mourir." } },
@@ -389,7 +386,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b32', levelNumber: 32, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Jonah and the Great Fish", fr: "Jonas et le Grand Poisson" }, image: StoryImages.b32, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Jonah and the Great Fish", fr: "Jonas et le Grand Poisson" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b32-a', isTruth: true,  text: { en: "God commanded Jonah to go to Nineveh and preach against it.", fr: "Dieu ordonna à Jonas d'aller à Ninive et de prêcher contre elle." } },
       { id: 'b32-b', isTruth: true,  text: { en: "Jonah boarded a ship to Tarshish, fleeing in the opposite direction from Nineveh.", fr: "Jonas monta à bord d'un bateau pour Tarsis, fuyant dans la direction opposée à Ninive." } },
@@ -400,7 +397,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b33', levelNumber: 33, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Shadrach, Meshach, and Abednego", fr: "Shadrach, Méschac et Abed-Nego" }, image: StoryImages.b33, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Shadrach, Meshach, and Abednego", fr: "Shadrach, Méschac et Abed-Nego" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b33-a', isTruth: true,  text: { en: "Nebuchadnezzar built a golden statue ninety feet high and nine feet wide.", fr: "Nébucadnetsar fit construire une statue d'or de vingt-sept mètres de haut et de deux mètres soixante de large." } },
       { id: 'b33-b', isTruth: true,  text: { en: "The three men refused to bow to the statue and were thrown into a blazing furnace.", fr: "Les trois hommes refusèrent de se prosterner devant la statue et furent jetés dans une fournaise ardente." } },
@@ -411,7 +408,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b34', levelNumber: 34, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Daniel in the Lions' Den", fr: "Daniel dans la Fosse aux Lions" }, image: StoryImages.b34, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Daniel in the Lions' Den", fr: "Daniel dans la Fosse aux Lions" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b34-a', isTruth: true,  text: { en: "Daniel was thrown into the lions' den because he continued to pray three times a day.", fr: "Daniel fut jeté dans la fosse aux lions parce qu'il continuait à prier trois fois par jour." } },
       { id: 'b34-b', isTruth: true,  text: { en: "King Darius sealed the lions' den with a stone and with his own signet ring.", fr: "Le roi Darius scella la fosse aux lions avec une pierre et son propre anneau." } },
@@ -422,7 +419,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b35', levelNumber: 35, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Esther Saves Her People", fr: "Esther Sauve son Peuple" }, image: StoryImages.b35, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Esther Saves Her People", fr: "Esther Sauve son Peuple" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b35-a', isTruth: true,  text: { en: "Esther was a Jewish orphan raised by her older cousin Mordecai.", fr: "Esther était une orpheline juive élevée par son cousin aîné Mardochée." } },
       { id: 'b35-b', isTruth: true,  text: { en: "Haman plotted to destroy all Jews because Mordecai refused to bow down to him.", fr: "Haman complota de détruire tous les Juifs parce que Mardochée refusait de s'incliner devant lui." } },
@@ -433,7 +430,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b36', levelNumber: 36, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Birth of Jesus", fr: "La Naissance de Jésus" }, image: StoryImages.b36, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Birth of Jesus", fr: "La Naissance de Jésus" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b36-a', isTruth: true,  text: { en: "Jesus was born in Bethlehem of Judea.", fr: "Jésus est né à Bethléhem en Judée." } },
       { id: 'b36-b', isTruth: true,  text: { en: "Mary wrapped the baby Jesus in cloths and laid Him in a manger.", fr: "Marie emmaillota le bébé Jésus et le coucha dans une crèche." } },
@@ -444,7 +441,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b37', levelNumber: 37, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Wise Men", fr: "Les Mages" }, image: StoryImages.b37, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Wise Men", fr: "Les Mages" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b37-a', isTruth: true,  text: { en: "The Magi came from the East and followed a star to find the child Jesus.", fr: "Les mages vinrent de l'Orient et suivirent une étoile pour trouver l'enfant Jésus." } },
       { id: 'b37-b', isTruth: true,  text: { en: "The Magi brought gifts of gold, frankincense, and myrrh.", fr: "Les mages apportèrent des dons d'or, d'encens et de myrrhe." } },
@@ -455,7 +452,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b38', levelNumber: 38, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Jesus' Baptism", fr: "Le Baptême de Jésus" }, image: StoryImages.b38, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "Jesus' Baptism", fr: "Le Baptême de Jésus" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b38-a', isTruth: true,  text: { en: "Jesus was baptized by John the Baptist in the Jordan River.", fr: "Jésus fut baptisé par Jean-Baptiste dans le Jourdain." } },
       { id: 'b38-b', isTruth: true,  text: { en: "The Holy Spirit descended on Jesus like a dove after His baptism.", fr: "Le Saint-Esprit descendit sur Jésus comme une colombe après son baptême." } },
@@ -466,7 +463,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b39', levelNumber: 39, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Temptation of Jesus", fr: "La Tentation de Jésus" }, image: StoryImages.b39, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Temptation of Jesus", fr: "La Tentation de Jésus" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b39-a', isTruth: true,  text: { en: "Jesus was led by the Spirit into the wilderness to be tempted by the devil.", fr: "Jésus fut conduit par l'Esprit dans le désert pour être tenté par le diable." } },
       { id: 'b39-b', isTruth: true,  text: { en: "Jesus fasted for forty days and forty nights before the temptation.", fr: "Jésus jeûna quarante jours et quarante nuits avant la tentation." } },
@@ -477,7 +474,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b40', levelNumber: 40, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Jesus Feeds 5,000", fr: "Jésus Nourrit 5 000 Personnes" }, image: StoryImages.b40, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "Jesus Feeds 5,000", fr: "Jésus Nourrit 5 000 Personnes" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b40-a', isTruth: true,  text: { en: "A boy had five loaves and two fish that Jesus used to feed the multitude.", fr: "Un garçon avait cinq pains et deux poissons que Jésus utilisa pour nourrir la foule." } },
       { id: 'b40-b', isTruth: true,  text: { en: "After everyone ate, the disciples collected twelve basketfuls of leftovers.", fr: "Après que tout le monde eut mangé, les disciples ramassèrent douze corbeilles de restes." } },
@@ -488,7 +485,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b41', levelNumber: 41, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Jesus Walks on Water", fr: "Jésus Marche sur l'Eau" }, image: StoryImages.b41, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "Jesus Walks on Water", fr: "Jésus Marche sur l'Eau" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b41-a', isTruth: true,  text: { en: "The disciples thought Jesus was a ghost when they saw Him walking on the water.", fr: "Les disciples pensèrent que Jésus était un fantôme lorsqu'ils le virent marcher sur l'eau." } },
       { id: 'b41-b', isTruth: true,  text: { en: "Peter stepped out of the boat and walked on water toward Jesus.", fr: "Pierre sortit du bateau et marcha sur l'eau en direction de Jésus." } },
@@ -499,7 +496,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b42', levelNumber: 42, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Zacchaeus", fr: "Zachée" }, image: StoryImages.b42, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "Zacchaeus", fr: "Zachée" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b42-a', isTruth: true,  text: { en: "Zacchaeus was a chief tax collector who was very wealthy.", fr: "Zachée était un chef des publicains et il était très riche." } },
       { id: 'b42-b', isTruth: true,  text: { en: "Zacchaeus climbed a sycamore-fig tree to see Jesus because he was short in stature.", fr: "Zachée grimpa sur un sycomore pour voir Jésus car il était de petite taille." } },
@@ -510,7 +507,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b43', levelNumber: 43, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Good Samaritan", fr: "Le Bon Samaritain" }, image: StoryImages.b43, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Good Samaritan", fr: "Le Bon Samaritain" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b43-a', isTruth: true,  text: { en: "A man was attacked by robbers on the road from Jerusalem to Jericho.", fr: "Un homme fut attaqué par des bandits sur la route de Jérusalem à Jéricho." } },
       { id: 'b43-b', isTruth: true,  text: { en: "A priest and then a Levite both passed by the wounded man without helping.", fr: "Un sacrificateur puis un lévite passèrent tous deux devant l'homme blessé sans l'aider." } },
@@ -521,7 +518,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b44', levelNumber: 44, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Prodigal Son", fr: "Le Fils Prodigue" }, image: StoryImages.b44, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Prodigal Son", fr: "Le Fils Prodigue" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b44-a', isTruth: true,  text: { en: "The younger son demanded his share of the inheritance while his father was still alive.", fr: "Le fils cadet réclama sa part d'héritage du vivant de son père." } },
       { id: 'b44-b', isTruth: true,  text: { en: "The younger son squandered his wealth in wild living and ended up feeding pigs.", fr: "Le fils cadet dilapida ses biens dans une vie dissolue et se retrouva à nourrir des porcs." } },
@@ -532,7 +529,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b45', levelNumber: 45, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Last Supper", fr: "La Cène" }, image: StoryImages.b45, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Last Supper", fr: "La Cène" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b45-a', isTruth: true,  text: { en: "Jesus told his disciples that one of them would betray Him at the Last Supper.", fr: "Jésus dit à ses disciples que l'un d'eux le trahirait lors de la Cène." } },
       { id: 'b45-b', isTruth: true,  text: { en: "Jesus broke bread and said 'This is my body, given for you; do this in remembrance of me.'", fr: "Jésus rompit le pain et dit : 'Ceci est mon corps, livré pour vous ; faites ceci en mémoire de moi.'" } },
@@ -543,7 +540,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b46', levelNumber: 46, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Resurrection", fr: "La Résurrection" }, image: StoryImages.b46, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Resurrection", fr: "La Résurrection" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b46-a', isTruth: true,  text: { en: "Jesus rose from the dead on the first day of the week — Sunday.", fr: "Jésus ressuscita le premier jour de la semaine — le dimanche." } },
       { id: 'b46-b', isTruth: true,  text: { en: "Mary Magdalene was among the first to discover the empty tomb.", fr: "Marie-Madeleine fut parmi les premières à découvrir le tombeau vide." } },
@@ -554,7 +551,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b47', levelNumber: 47, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Pentecost", fr: "La Pentecôte" }, image: StoryImages.b47, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "Pentecost", fr: "La Pentecôte" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b47-a', isTruth: true,  text: { en: "The disciples were all together in one place when the Holy Spirit came at Pentecost.", fr: "Les disciples étaient tous réunis au même endroit lorsque le Saint-Esprit vint à la Pentecôte." } },
       { id: 'b47-b', isTruth: true,  text: { en: "What appeared as tongues of fire rested on each of them at Pentecost.", fr: "Ce qui ressemblait à des langues de feu se posa sur chacun d'eux à la Pentecôte." } },
@@ -565,7 +562,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b48', levelNumber: 48, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Jesus at the Temple — Age 12", fr: "Jésus au Temple — 12 Ans" }, image: StoryImages.b48, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "Jesus at the Temple — Age 12", fr: "Jésus au Temple — 12 Ans" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b48-a', isTruth: true,  text: { en: "Jesus' parents found Him in the temple courts sitting among the teachers, listening and asking questions.", fr: "Les parents de Jésus le trouvèrent dans le temple, assis au milieu des docteurs, les écoutant et les interrogeant." } },
       { id: 'b48-b', isTruth: true,  text: { en: "Mary and Joseph searched for Jesus for three days before finding Him in Jerusalem.", fr: "Marie et Joseph cherchèrent Jésus pendant trois jours avant de le trouver à Jérusalem." } },
@@ -576,7 +573,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b49', levelNumber: 49, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Lost Sheep", fr: "La Brebis Perdue" }, image: StoryImages.b49, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Lost Sheep", fr: "La Brebis Perdue" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b49-a', isTruth: true,  text: { en: "In the parable, a shepherd left ninety-nine sheep to search for one lost sheep.", fr: "Dans la parabole, un berger laissa les quatre-vingt-dix-neuf brebis pour en chercher une seule perdue." } },
       { id: 'b49-b', isTruth: true,  text: { en: "When the shepherd found the lost sheep, he joyfully put it on his shoulders and carried it home.", fr: "Quand le berger trouva la brebis perdue, il la posa joyeusement sur ses épaules et la ramena chez lui." } },
@@ -587,7 +584,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b50', levelNumber: 50, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Wedding at Cana", fr: "Les Noces de Cana" }, image: StoryImages.b50, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Wedding at Cana", fr: "Les Noces de Cana" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b50-a', isTruth: true,  text: { en: "The wedding at Cana was the first of Jesus' miracles recorded in the Gospel of John.", fr: "Les noces de Cana marquent le premier miracle de Jésus rapporté dans l'Évangile de Jean." } },
       { id: 'b50-b', isTruth: true,  text: { en: "Mary told the servants to do whatever Jesus said when the wine ran out.", fr: "Marie dit aux serviteurs de faire tout ce que Jésus leur dirait lorsque le vin manqua." } },
@@ -598,7 +595,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b51', levelNumber: 51, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Lazarus Raised from the Dead", fr: "Lazare Ressuscité" }, image: StoryImages.b51, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "Lazarus Raised from the Dead", fr: "Lazare Ressuscité" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b51-a', isTruth: true,  text: { en: "Lazarus had been in the tomb for four days when Jesus arrived.", fr: "Lazare était dans le tombeau depuis quatre jours quand Jésus arriva." } },
       { id: 'b51-b', isTruth: true,  text: { en: "Jesus wept when He saw the grief of Mary and those with her.", fr: "Jésus pleura en voyant le deuil de Marie et de ceux qui l'accompagnaient." } },
@@ -609,7 +606,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b52', levelNumber: 52, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Palm Sunday", fr: "Le Dimanche des Rameaux" }, image: StoryImages.b52, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "Palm Sunday", fr: "Le Dimanche des Rameaux" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b52-a', isTruth: true,  text: { en: "Jesus rode into Jerusalem on a donkey to fulfill the prophecy of Zechariah.", fr: "Jésus entra dans Jérusalem sur un âne pour accomplir la prophétie de Zacharie." } },
       { id: 'b52-b', isTruth: true,  text: { en: "The crowds spread their cloaks and palm branches on the road before Jesus.", fr: "Les foules étendirent leurs manteaux et des branches de palmiers sur la route devant Jésus." } },
@@ -620,7 +617,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b53', levelNumber: 53, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Peter's Denial", fr: "Le Reniement de Pierre" }, image: StoryImages.b53, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "Peter's Denial", fr: "Le Reniement de Pierre" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b53-a', isTruth: true,  text: { en: "Jesus predicted Peter would deny Him three times before the rooster crowed.", fr: "Jésus prédit que Pierre le renierait trois fois avant que le coq ne chante." } },
       { id: 'b53-b', isTruth: true,  text: { en: "Peter denied knowing Jesus to a servant girl and then to others by the fire.", fr: "Pierre nia connaître Jésus devant une servante, puis devant d'autres personnes près du feu." } },
@@ -631,7 +628,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b54', levelNumber: 54, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Sermon on the Mount — The Beatitudes", fr: "Le Sermon sur la Montagne — Les Béatitudes" }, image: StoryImages.b54, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Sermon on the Mount — The Beatitudes", fr: "Le Sermon sur la Montagne — Les Béatitudes" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b54-a', isTruth: true,  text: { en: "Jesus taught the Beatitudes on a mountainside, beginning with 'Blessed are the poor in spirit.'", fr: "Jésus enseigna les Béatitudes sur une montagne, en commençant par 'Heureux les pauvres en esprit.'" } },
       { id: 'b54-b', isTruth: true,  text: { en: "Jesus declared 'Blessed are the peacemakers, for they will be called children of God.'", fr: "Jésus déclara : 'Heureux les artisans de paix, car ils seront appelés fils de Dieu.'" } },
@@ -642,7 +639,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b55', levelNumber: 55, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Transfiguration", fr: "La Transfiguration" }, image: StoryImages.b55, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Transfiguration", fr: "La Transfiguration" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b55-a', isTruth: true,  text: { en: "Jesus' face shone like the sun and His clothes became as white as light during the Transfiguration.", fr: "Le visage de Jésus brilla comme le soleil et ses vêtements devinrent blancs comme la lumière lors de la Transfiguration." } },
       { id: 'b55-b', isTruth: true,  text: { en: "Moses and Elijah appeared with Jesus and talked with Him during the Transfiguration.", fr: "Moïse et Élie apparurent avec Jésus et s'entretinrent avec lui lors de la Transfiguration." } },
@@ -653,7 +650,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b56', levelNumber: 56, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Healing of Ten Lepers", fr: "La Guérison de Dix Lépreux" }, image: StoryImages.b56, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Healing of Ten Lepers", fr: "La Guérison de Dix Lépreux" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b56-a', isTruth: true,  text: { en: "Jesus healed ten lepers who called out to Him for mercy.", fr: "Jésus guérit dix lépreux qui l'appelèrent à l'aide." } },
       { id: 'b56-b', isTruth: true,  text: { en: "Only one of the ten healed lepers returned to thank Jesus.", fr: "Un seul des dix lépreux guéris revint remercier Jésus." } },
@@ -664,7 +661,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b57', levelNumber: 57, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Lord's Prayer", fr: "La Prière du Seigneur" }, image: StoryImages.b57, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Lord's Prayer", fr: "La Prière du Seigneur" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b57-a', isTruth: true,  text: { en: "Jesus taught His disciples to pray 'Our Father in heaven, hallowed be your name.'", fr: "Jésus apprit à ses disciples à prier : 'Notre Père qui es aux cieux, que ton nom soit sanctifié.'" } },
       { id: 'b57-b', isTruth: true,  text: { en: "The Lord's Prayer includes asking for daily bread and forgiveness of debts/sins.", fr: "La Prière du Seigneur comprend une demande de pain quotidien et de pardon des dettes/péchés." } },
@@ -675,7 +672,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b58', levelNumber: 58, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Jacob's Blessing — Disguise of Isaac", fr: "La Bénédiction de Jacob — La Ruse d'Isaac" }, image: StoryImages.b58, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Jacob's Blessing — Disguise of Isaac", fr: "La Bénédiction de Jacob — La Ruse d'Isaac" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b58-a', isTruth: true,  text: { en: "Rebekah helped Jacob deceive his father Isaac to steal Esau's blessing.", fr: "Rébecca aida Jacob à tromper son père Isaac pour lui voler la bénédiction d'Ésaü." } },
       { id: 'b58-b', isTruth: true,  text: { en: "Jacob wore goatskins on his arms and neck to feel like the hairy Esau to his blind father.", fr: "Jacob mit des peaux de chevreau sur ses bras et son cou pour paraître poilu comme Ésaü à son père aveugle." } },
@@ -686,7 +683,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b59', levelNumber: 59, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Balaam's Donkey", fr: "L'Ânesse de Balaam" }, image: StoryImages.b59, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Balaam's Donkey", fr: "L'Ânesse de Balaam" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b59-a', isTruth: true,  text: { en: "Balaam was a prophet hired by King Balak to curse the Israelites.", fr: "Balaam était un prophète engagé par le roi Balak pour maudire les Israélites." } },
       { id: 'b59-b', isTruth: true,  text: { en: "An angel of the LORD stood in the road with a drawn sword, and Balaam's donkey saw it but Balaam did not.", fr: "Un ange de l'Éternel se tint sur le chemin avec une épée nue ; l'ânesse de Balaam le vit, mais pas Balaam." } },
@@ -697,7 +694,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b60', levelNumber: 60, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Saul Becomes King", fr: "Saül Devient Roi" }, image: StoryImages.b60, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Saul Becomes King", fr: "Saül Devient Roi" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b60-a', isTruth: true,  text: { en: "The Israelites asked Samuel for a king so they could be like other nations.", fr: "Les Israélites demandèrent à Samuel un roi pour être comme les autres nations." } },
       { id: 'b60-b', isTruth: true,  text: { en: "Saul was from the tribe of Benjamin and was taller than anyone else in Israel.", fr: "Saül appartenait à la tribu de Benjamin et était plus grand que quiconque en Israël." } },
@@ -708,7 +705,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b61', levelNumber: 61, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Crucifixion", fr: "La Crucifixion" }, image: StoryImages.b61, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Crucifixion", fr: "La Crucifixion" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b61-a', isTruth: true,  text: { en: "Jesus was crucified at a place called Golgotha, meaning 'The Place of the Skull.'", fr: "Jésus fut crucifié en un lieu appelé Golgotha, signifiant 'Le Lieu du Crâne.'" } },
       { id: 'b61-b', isTruth: true,  text: { en: "Darkness covered the land for three hours during the crucifixion.", fr: "Les ténèbres couvrirent le pays pendant trois heures lors de la crucifixion." } },
@@ -719,7 +716,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b62', levelNumber: 62, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Gideon's Army", fr: "L'Armée de Gédéon" }, image: StoryImages.b62, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Gideon's Army", fr: "L'Armée de Gédéon" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b62-a', isTruth: true,  text: { en: "God told Gideon his army of 32,000 was too large to defeat the Midianites, so God would get no glory.", fr: "Dieu dit à Gédéon que son armée de 32 000 hommes était trop grande, sinon Dieu n'en recevrait aucune gloire." } },
       { id: 'b62-b', isTruth: true,  text: { en: "God reduced Gideon's army to 300 men by observing how they drank water from a stream.", fr: "Dieu réduisit l'armée de Gédéon à 300 hommes en observant comment ils buvaient l'eau d'un ruisseau." } },
@@ -730,7 +727,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b63', levelNumber: 63, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "The Parable of the Talents", fr: "La Parabole des Talents" }, image: StoryImages.b63, badgeColor: 'bg-emerald-700', testament: 'New',
+    topic: { en: "The Parable of the Talents", fr: "La Parabole des Talents" }, badgeColor: 'bg-emerald-700', testament: 'New',
     statements: [
       { id: 'b63-a', isTruth: true,  text: { en: "A master gave talents (large sums of money) to his three servants before going on a journey.", fr: "Un maître donna des talents (grandes sommes d'argent) à ses trois serviteurs avant de partir en voyage." } },
       { id: 'b63-b', isTruth: true,  text: { en: "The servant who received five talents doubled his master's investment to ten.", fr: "Le serviteur qui reçut cinq talents doubla l'investissement de son maître jusqu'à dix." } },
@@ -741,7 +738,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b64', levelNumber: 64, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Job's Suffering", fr: "La Souffrance de Job" }, image: StoryImages.b64, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Job's Suffering", fr: "La Souffrance de Job" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b64-a', isTruth: true,  text: { en: "God allowed Satan to test Job, but initially Satan was forbidden to touch Job's body.", fr: "Dieu permit à Satan d'éprouver Job, mais Satan ne put d'abord pas toucher son corps." } },
       { id: 'b64-b', isTruth: true,  text: { en: "Job lost his children, his livestock, and his servants in sudden disasters.", fr: "Job perdit ses enfants, son bétail et ses serviteurs dans des catastrophes soudaines." } },
@@ -752,7 +749,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b65', levelNumber: 65, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Solomon and the Baby — Judgment", fr: "Salomon et le Bébé — Le Jugement" }, image: StoryImages.b65, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Solomon and the Baby — Judgment", fr: "Salomon et le Bébé — Le Jugement" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b65-a', isTruth: true,  text: { en: "Two women came before Solomon, each claiming to be the mother of a living baby.", fr: "Deux femmes se présentèrent devant Salomon, chacune se disant la mère d'un bébé vivant." } },
       { id: 'b65-b', isTruth: true,  text: { en: "Solomon commanded that a sword be brought and the living child cut in two.", fr: "Salomon ordonna qu'on apporte une épée et qu'on coupe l'enfant vivant en deux." } },
@@ -763,7 +760,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b66', levelNumber: 66, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Isaac and Rebekah", fr: "Isaac et Rébecca" }, image: StoryImages.b66, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Isaac and Rebekah", fr: "Isaac et Rébecca" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b66-a', isTruth: true,  text: { en: "Abraham sent his servant to find a wife for Isaac from his own relatives in Mesopotamia.", fr: "Abraham envoya son serviteur trouver une épouse pour Isaac parmi ses propres proches en Mésopotamie." } },
       { id: 'b66-b', isTruth: true,  text: { en: "Abraham's servant prayed at a well and asked God to show him the right woman through a specific sign.", fr: "Le serviteur d'Abraham pria près d'un puits et demanda à Dieu de lui indiquer la bonne femme par un signe précis." } },
@@ -774,7 +771,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b67', levelNumber: 67, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Deborah the Judge", fr: "Déborah la Juge" }, image: StoryImages.b67, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Deborah the Judge", fr: "Déborah la Juge" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b67-a', isTruth: true,  text: { en: "Deborah was a prophetess and the only female judge mentioned in the book of Judges.", fr: "Déborah était une prophétesse et la seule femme juge mentionnée dans le livre des Juges." } },
       { id: 'b67-b', isTruth: true,  text: { en: "Deborah summoned Barak to lead Israel's army against Sisera, commander of Canaan's forces.", fr: "Déborah convoqua Barak pour conduire l'armée d'Israël contre Sisera, commandant des forces cananéennes." } },
@@ -785,7 +782,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'b68', levelNumber: 68, difficulty: 'Beginner', difficultyFr: 'Débutant',
-    topic: { en: "Abraham and the Covenant of Circumcision", fr: "Abraham et l'Alliance de la Circoncision" }, image: StoryImages.b68, badgeColor: 'bg-emerald-700', testament: 'Old',
+    topic: { en: "Abraham and the Covenant of Circumcision", fr: "Abraham et l'Alliance de la Circoncision" }, badgeColor: 'bg-emerald-700', testament: 'Old',
     statements: [
       { id: 'b68-a', isTruth: true,  text: { en: "God changed Abram's name to Abraham when He established the covenant of circumcision.", fr: "Dieu changea le nom d'Abram en Abraham lorsqu'Il établit l'alliance de la circoncision." } },
       { id: 'b68-b', isTruth: true,  text: { en: "God also changed Sarai's name to Sarah at the same time.", fr: "Dieu changea aussi le nom de Saraï en Sarah au même moment." } },
@@ -798,7 +795,7 @@ export const LEVELS: Level[] = [
   // ─── INTERMEDIATE ──────────────────────────────────────────────────────────────
   {
     id: 'i1', levelNumber: 1, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "David and Saul", fr: "David et Saül" }, image: StoryImages.i1, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "David and Saul", fr: "David et Saül" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i1-a', isTruth: true,  text: { en: "King Saul tried to kill David by throwing a spear at him while David played the harp.", fr: "Le roi Saül tenta de tuer David en lui jetant une lance pendant que David jouait de la harpe." } },
       { id: 'i1-b', isTruth: true,  text: { en: "David spared Saul's life in a cave and only cut off a corner of his robe.", fr: "David épargna la vie de Saül dans une grotte et se contenta de couper le pan de son manteau." } },
@@ -809,7 +806,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i2', levelNumber: 2, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Twelve Spies", fr: "Les Douze Espions" }, image: StoryImages.i2, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "The Twelve Spies", fr: "Les Douze Espions" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i2-a', isTruth: true,  text: { en: "Moses sent twelve spies, one from each tribe, to explore the land of Canaan.", fr: "Moïse envoya douze espions, un par tribu, pour explorer le pays de Canaan." } },
       { id: 'i2-b', isTruth: true,  text: { en: "The spies were gone for forty days before returning with their report.", fr: "Les espions partirent pendant quarante jours avant de revenir avec leur rapport." } },
@@ -820,7 +817,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i3', levelNumber: 3, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "David and Bathsheba", fr: "David et Bethsabée" }, image: StoryImages.i3, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "David and Bathsheba", fr: "David et Bethsabée" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i3-a', isTruth: true,  text: { en: "David saw Bathsheba bathing from the roof of his palace and sent for her.", fr: "David vit Bethsabée se baigner depuis le toit de son palais et la fit appeler." } },
       { id: 'i3-b', isTruth: true,  text: { en: "David arranged for Bathsheba's husband Uriah to be placed in the front lines of battle to be killed.", fr: "David fit placer Urie, le mari de Bethsabée, en première ligne de combat pour qu'il soit tué." } },
@@ -831,7 +828,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i4', levelNumber: 4, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Solomon's Temple", fr: "Le Temple de Salomon" }, image: StoryImages.i4, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Solomon's Temple", fr: "Le Temple de Salomon" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i4-a', isTruth: true,  text: { en: "Solomon began building the temple in the fourth year of his reign.", fr: "Salomon commença à construire le temple la quatrième année de son règne." } },
       { id: 'i4-b', isTruth: true,  text: { en: "The temple took seven years to build.", fr: "La construction du temple dura sept ans." } },
@@ -842,7 +839,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i5', levelNumber: 5, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Queen of Sheba", fr: "La Reine de Saba" }, image: StoryImages.i5, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "The Queen of Sheba", fr: "La Reine de Saba" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i5-a', isTruth: true,  text: { en: "The Queen of Sheba visited Solomon to test him with hard questions after hearing of his fame.", fr: "La reine de Saba rendit visite à Salomon pour l'éprouver par des questions difficiles après avoir entendu parler de sa renommée." } },
       { id: 'i5-b', isTruth: true,  text: { en: "She arrived in Jerusalem with a very great caravan — camels carrying spices, gold, and precious stones.", fr: "Elle arriva à Jérusalem avec une très grande caravane — des chameaux chargés d'épices, d'or et de pierres précieuses." } },
@@ -853,7 +850,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i6', levelNumber: 6, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Divided Kingdom", fr: "Le Royaume Divisé" }, image: StoryImages.i6, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "The Divided Kingdom", fr: "Le Royaume Divisé" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i6-a', isTruth: true,  text: { en: "After Solomon's death, his son Rehoboam refused to lighten the heavy burden of taxes and labor.", fr: "Après la mort de Salomon, son fils Roboam refusa d'alléger le lourd fardeau des impôts et des corvées." } },
       { id: 'i6-b', isTruth: true,  text: { en: "Jeroboam led the ten northern tribes in rebellion against Rehoboam.", fr: "Jéroboam mena les dix tribus du nord à la rébellion contre Roboam." } },
@@ -864,7 +861,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i7', levelNumber: 7, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Elijah and the Widow of Zarephath", fr: "Élie et la Veuve de Sarepta" }, image: StoryImages.i7, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Elijah and the Widow of Zarephath", fr: "Élie et la Veuve de Sarepta" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i7-a', isTruth: true,  text: { en: "God sent Elijah to Zarephath in Sidon, outside of Israel, to be cared for by a widow.", fr: "Dieu envoya Élie à Sarepta en Sidon, hors d'Israël, pour être pris en charge par une veuve." } },
       { id: 'i7-b', isTruth: true,  text: { en: "The widow's jar of flour and jug of oil did not run out throughout the drought, just as Elijah promised.", fr: "Le pot de farine et la cruche d'huile de la veuve ne s'épuisèrent pas pendant la sécheresse, comme Élie l'avait promis." } },
@@ -875,7 +872,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i8', levelNumber: 8, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Naaman and the Leprosy", fr: "Naaman et la Lèpre" }, image: StoryImages.i8, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Naaman and the Leprosy", fr: "Naaman et la Lèpre" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i8-a', isTruth: true,  text: { en: "Naaman was commander of the army of Aram and was a great man, but he had leprosy.", fr: "Naaman était le commandant de l'armée d'Aram, un grand homme, mais il était lépreux." } },
       { id: 'i8-b', isTruth: true,  text: { en: "An Israelite slave girl told Naaman's wife that the prophet in Samaria could cure his leprosy.", fr: "Une jeune esclave israélite dit à la femme de Naaman que le prophète en Samarie pourrait guérir sa lèpre." } },
@@ -886,7 +883,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i9', levelNumber: 9, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Hezekiah and Sennacherib", fr: "Ézéchias et Sennachérib" }, image: StoryImages.i9, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Hezekiah and Sennacherib", fr: "Ézéchias et Sennachérib" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i9-a', isTruth: true,  text: { en: "The Assyrian king Sennacherib sent messengers to mock God and intimidate Jerusalem's people.", fr: "Le roi assyrien Sennachérib envoya des messagers pour se moquer de Dieu et intimider le peuple de Jérusalem." } },
       { id: 'i9-b', isTruth: true,  text: { en: "Hezekiah spread Sennacherib's letter before the LORD in the temple and prayed.", fr: "Ézéchias étendit la lettre de Sennachérib devant l'Éternel dans le temple et pria." } },
@@ -897,7 +894,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i10', levelNumber: 10, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Fall of Jerusalem to Babylon", fr: "La Chute de Jérusalem à Babylone" }, image: StoryImages.i10, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "The Fall of Jerusalem to Babylon", fr: "La Chute de Jérusalem à Babylone" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i10-a', isTruth: true,  text: { en: "Nebuchadnezzar of Babylon destroyed Jerusalem and the temple of Solomon.", fr: "Nébucadnetsar de Babylone détruisit Jérusalem et le temple de Salomon." } },
       { id: 'i10-b', isTruth: true,  text: { en: "Most of the people of Judah were taken into exile in Babylon.", fr: "La plupart des habitants de Juda furent emmenés en exil à Babylone." } },
@@ -908,7 +905,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i11', levelNumber: 11, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Nehemiah and the Wall", fr: "Néhémie et le Mur" }, image: StoryImages.i11, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Nehemiah and the Wall", fr: "Néhémie et le Mur" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i11-a', isTruth: true,  text: { en: "Nehemiah was the cupbearer to King Artaxerxes of Persia before rebuilding Jerusalem's walls.", fr: "Néhémie était l'échanson du roi Artaxerxès de Perse avant de reconstruire les murs de Jérusalem." } },
       { id: 'i11-b', isTruth: true,  text: { en: "Sanballat and Tobiah mocked the Jews and tried to stop the rebuilding through intimidation and plots.", fr: "Sanballat et Tobiya se moquèrent des Juifs et tentèrent d'arrêter la reconstruction par l'intimidation et les complots." } },
@@ -919,7 +916,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i12', levelNumber: 12, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "John the Baptist", fr: "Jean-Baptiste" }, image: StoryImages.i12, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "John the Baptist", fr: "Jean-Baptiste" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i12-a', isTruth: true,  text: { en: "John the Baptist wore clothing made of camel's hair and a leather belt around his waist.", fr: "Jean-Baptiste portait des vêtements de poils de chameau et une ceinture de cuir autour de la taille." } },
       { id: 'i12-b', isTruth: true,  text: { en: "John ate locusts and wild honey in the wilderness.", fr: "Jean mangeait des sauterelles et du miel sauvage dans le désert." } },
@@ -930,7 +927,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i13', levelNumber: 13, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Jesus and Nicodemus", fr: "Jésus et Nicodème" }, image: StoryImages.i13, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Jesus and Nicodemus", fr: "Jésus et Nicodème" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i13-a', isTruth: true,  text: { en: "Nicodemus was a Pharisee and member of the Jewish ruling council who came to Jesus at night.", fr: "Nicodème était un Pharisien et membre du Sanhédrin qui vint trouver Jésus de nuit." } },
       { id: 'i13-b', isTruth: true,  text: { en: "Jesus told Nicodemus that no one can see the kingdom of God unless they are born again.", fr: "Jésus dit à Nicodème que nul ne peut voir le royaume de Dieu s'il ne naît de nouveau." } },
@@ -941,7 +938,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i14', levelNumber: 14, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Woman at the Well", fr: "La Femme au Puits" }, image: StoryImages.i14, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Woman at the Well", fr: "La Femme au Puits" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i14-a', isTruth: true,  text: { en: "Jesus spoke to a Samaritan woman at Jacob's Well in the region of Samaria.", fr: "Jésus s'entretint avec une femme samaritaine au puits de Jacob dans la région de Samarie." } },
       { id: 'i14-b', isTruth: true,  text: { en: "Jesus told the woman He could give her 'living water' so she would never thirst again.", fr: "Jésus dit à la femme qu'il pourrait lui donner 'l'eau vive' afin qu'elle n'ait plus jamais soif." } },
@@ -952,7 +949,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i15', levelNumber: 15, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Ananias and Sapphira", fr: "Ananias et Saphira" }, image: StoryImages.i15, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Ananias and Sapphira", fr: "Ananias et Saphira" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i15-a', isTruth: true,  text: { en: "Ananias and his wife Sapphira sold a piece of property and secretly kept part of the money.", fr: "Ananias et sa femme Saphira vendirent un terrain et gardèrent secrètement une partie de l'argent." } },
       { id: 'i15-b', isTruth: true,  text: { en: "Peter told Ananias that he had not lied to men but to God, and Ananias fell down and died.", fr: "Pierre dit à Ananias qu'il n'avait pas menti aux hommes mais à Dieu, et Ananias tomba et mourut." } },
@@ -963,7 +960,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i16', levelNumber: 16, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Stephen's Martyrdom", fr: "Le Martyre d'Étienne" }, image: StoryImages.i16, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Stephen's Martyrdom", fr: "Le Martyre d'Étienne" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i16-a', isTruth: true,  text: { en: "Stephen was a man full of faith and the Holy Spirit, chosen as one of the first seven deacons.", fr: "Étienne était un homme plein de foi et du Saint-Esprit, choisi parmi les sept premiers diacres." } },
       { id: 'i16-b', isTruth: true,  text: { en: "Stephen said he saw heaven open and the Son of Man standing at the right hand of God.", fr: "Étienne dit qu'il vit le ciel ouvert et le Fils de l'homme debout à la droite de Dieu." } },
@@ -974,7 +971,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i17', levelNumber: 17, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Saul's Conversion", fr: "La Conversion de Saül" }, image: StoryImages.i17, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Saul's Conversion", fr: "La Conversion de Saül" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i17-a', isTruth: true,  text: { en: "Saul was on his way to Damascus to arrest Christians when a light from heaven flashed around him.", fr: "Saül se rendait à Damas pour arrêter des chrétiens quand une lumière venant du ciel l'enveloppa." } },
       { id: 'i17-b', isTruth: true,  text: { en: "Jesus said to Saul, 'I am Jesus, whom you are persecuting.'", fr: "Jésus dit à Saül : 'Je suis Jésus que tu persécutes.'" } },
@@ -985,7 +982,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i18', levelNumber: 18, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Peter and Cornelius", fr: "Pierre et Corneille" }, image: StoryImages.i18, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Peter and Cornelius", fr: "Pierre et Corneille" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i18-a', isTruth: true,  text: { en: "Cornelius was a Roman centurion described as devout, God-fearing, and generous to the poor.", fr: "Corneille était un centurion romain décrit comme pieux, craignant Dieu et généreux envers les pauvres." } },
       { id: 'i18-b', isTruth: true,  text: { en: "Peter had a vision of a sheet filled with unclean animals, and God told him not to call anything impure.", fr: "Pierre eut une vision d'un drap rempli d'animaux impurs, et Dieu lui dit de ne rien appeler impur." } },
@@ -996,7 +993,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i19', levelNumber: 19, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Paul and Silas in Philippi", fr: "Paul et Silas à Philippes" }, image: StoryImages.i19, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Paul and Silas in Philippi", fr: "Paul et Silas à Philippes" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i19-a', isTruth: true,  text: { en: "Paul and Silas were beaten with rods and thrown into prison in Philippi.", fr: "Paul et Silas furent battus de verges et jetés en prison à Philippes." } },
       { id: 'i19-b', isTruth: true,  text: { en: "At midnight, Paul and Silas were praying and singing hymns to God when a violent earthquake shook the prison.", fr: "À minuit, Paul et Silas priaient et chantaient des cantiques quand un violent tremblement de terre ébranla la prison." } },
@@ -1007,7 +1004,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i20', levelNumber: 20, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Paul in Athens — the Areopagus", fr: "Paul à Athènes — l'Aréopage" }, image: StoryImages.i20, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Paul in Athens — the Areopagus", fr: "Paul à Athènes — l'Aréopage" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i20-a', isTruth: true,  text: { en: "Paul observed that Athens was full of idols, which provoked his spirit to speak out.", fr: "Paul observa qu'Athènes était remplie d'idoles, ce qui l'incita à s'exprimer." } },
       { id: 'i20-b', isTruth: true,  text: { en: "Paul used an altar inscribed 'TO AN UNKNOWN GOD' as the starting point of his sermon.", fr: "Paul utilisa un autel portant l'inscription 'AU DIEU INCONNU' comme point de départ de son discours." } },
@@ -1018,7 +1015,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i21', levelNumber: 21, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Paul's Shipwreck", fr: "Le Naufrage de Paul" }, image: StoryImages.i21, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Paul's Shipwreck", fr: "Le Naufrage de Paul" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i21-a', isTruth: true,  text: { en: "Paul warned the crew before the voyage that the journey would be disastrous, but he was not heeded.", fr: "Paul avertit l'équipage avant le voyage que le trajet serait désastreux, mais on ne l'écouta pas." } },
       { id: 'i21-b', isTruth: true,  text: { en: "An angel appeared to Paul on the ship and told him he must stand before Caesar and all on board would be saved.", fr: "Un ange apparut à Paul sur le bateau et lui dit qu'il devait comparaître devant César et que tous à bord seraient sauvés." } },
@@ -1029,7 +1026,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i22', levelNumber: 22, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Isaiah the Prophet", fr: "Le Prophète Ésaïe" }, image: StoryImages.i22, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Isaiah the Prophet", fr: "Le Prophète Ésaïe" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i22-a', isTruth: true,  text: { en: "Isaiah saw a vision of God seated on a high and exalted throne, surrounded by seraphim.", fr: "Ésaïe vit une vision de Dieu assis sur un trône élevé et sublime, entouré de séraphins." } },
       { id: 'i22-b', isTruth: true,  text: { en: "A seraph touched Isaiah's lips with a live coal from the altar to cleanse his sin.", fr: "Un séraphin toucha les lèvres d'Ésaïe avec un charbon ardent pris sur l'autel pour purifier son péché." } },
@@ -1040,7 +1037,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i23', levelNumber: 23, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Jeremiah the Prophet", fr: "Le Prophète Jérémie" }, image: StoryImages.i23, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Jeremiah the Prophet", fr: "Le Prophète Jérémie" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i23-a', isTruth: true,  text: { en: "God told Jeremiah He had known him and set him apart before he was born.", fr: "Dieu dit à Jérémie qu'Il le connaissait et l'avait consacré avant même sa naissance." } },
       { id: 'i23-b', isTruth: true,  text: { en: "Jeremiah is called 'the weeping prophet' because of his laments over Jerusalem's destruction.", fr: "Jérémie est appelé 'le prophète qui pleure' en raison de ses lamentations sur la destruction de Jérusalem." } },
@@ -1051,7 +1048,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i24', levelNumber: 24, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Parable of the Ten Virgins", fr: "La Parabole des Dix Vierges" }, image: StoryImages.i24, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Parable of the Ten Virgins", fr: "La Parabole des Dix Vierges" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i24-a', isTruth: true,  text: { en: "Five virgins were wise and five were foolish, based on whether they brought extra oil.", fr: "Cinq vierges étaient sages et cinq étaient insensées, selon qu'elles avaient apporté de l'huile supplémentaire ou non." } },
       { id: 'i24-b', isTruth: true,  text: { en: "The bridegroom was delayed, and all ten virgins fell asleep waiting.", fr: "Le marié tarda, et les dix vierges s'endormirent toutes en attendant." } },
@@ -1062,7 +1059,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i25', levelNumber: 25, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Rich Young Ruler", fr: "Le Jeune Homme Riche" }, image: StoryImages.i25, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Rich Young Ruler", fr: "Le Jeune Homme Riche" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i25-a', isTruth: true,  text: { en: "A rich young man asked Jesus what he must do to inherit eternal life.", fr: "Un jeune homme riche demanda à Jésus ce qu'il devait faire pour hériter de la vie éternelle." } },
       { id: 'i25-b', isTruth: true,  text: { en: "Jesus told the man to sell everything, give to the poor, and follow Him.", fr: "Jésus dit à l'homme de tout vendre, de donner aux pauvres et de le suivre." } },
@@ -1073,7 +1070,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i26', levelNumber: 26, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Elisha's Miracles", fr: "Les Miracles d'Élisée" }, image: StoryImages.i26, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Elisha's Miracles", fr: "Les Miracles d'Élisée" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i26-a', isTruth: true,  text: { en: "Elisha parted the Jordan River by striking it with Elijah's cloak.", fr: "Élisée fendit le Jourdain en le frappant avec le manteau d'Élie." } },
       { id: 'i26-b', isTruth: true,  text: { en: "Elisha multiplied a widow's small jar of olive oil to fill many containers.", fr: "Élisée multiplia la petite cruche d'huile d'olive d'une veuve pour remplir de nombreux récipients." } },
@@ -1084,7 +1081,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i27', levelNumber: 27, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Mary and Martha", fr: "Marie et Marthe" }, image: StoryImages.i27, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Mary and Martha", fr: "Marie et Marthe" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i27-a', isTruth: true,  text: { en: "Martha was distracted by all the preparations while Mary sat at Jesus' feet listening.", fr: "Marthe était absorbée par les préparatifs tandis que Marie était assise aux pieds de Jésus, l'écoutant." } },
       { id: 'i27-b', isTruth: true,  text: { en: "Martha complained to Jesus that Mary had left her to do all the work alone.", fr: "Marthe se plaignit à Jésus que Marie l'avait laissée seule à tout faire." } },
@@ -1095,7 +1092,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i28', levelNumber: 28, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Parable of the Sower", fr: "La Parabole du Semeur" }, image: StoryImages.i28, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Parable of the Sower", fr: "La Parabole du Semeur" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i28-a', isTruth: true,  text: { en: "Some seed fell on the path and birds ate it up, representing those who do not understand the word.", fr: "Une partie de la semence tomba sur le chemin et les oiseaux la mangèrent, représentant ceux qui ne comprennent pas la parole." } },
       { id: 'i28-b', isTruth: true,  text: { en: "Seed on rocky ground sprung up quickly but withered because it had no root.", fr: "La semence sur le sol rocailleux leva rapidement mais sécha faute de racines." } },
@@ -1106,7 +1103,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i29', levelNumber: 29, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Job's Restoration", fr: "La Restauration de Job" }, image: StoryImages.i29, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Job's Restoration", fr: "La Restauration de Job" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i29-a', isTruth: true,  text: { en: "God spoke to Job out of a whirlwind and challenged him with a series of unanswerable questions.", fr: "Dieu parla à Job du sein d'un tourbillon et le défia avec une série de questions sans réponse." } },
       { id: 'i29-b', isTruth: true,  text: { en: "God rebuked Job's three friends, saying they had not spoken the truth about Him as Job had.", fr: "Dieu réprimanda les trois amis de Job, disant qu'ils n'avaient pas parlé de Lui avec justesse, comme Job l'avait fait." } },
@@ -1117,7 +1114,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i30', levelNumber: 30, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Book of Psalms", fr: "Le Livre des Psaumes" }, image: StoryImages.i30, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "The Book of Psalms", fr: "Le Livre des Psaumes" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i30-a', isTruth: true,  text: { en: "The Psalms contain 150 songs, poems, and prayers.", fr: "Le Psautier contient 150 chants, poèmes et prières." } },
       { id: 'i30-b', isTruth: true,  text: { en: "The shortest chapter in the Bible is Psalm 117, with only two verses.", fr: "Le chapitre le plus court de la Bible est le Psaume 117, avec seulement deux versets." } },
@@ -1128,7 +1125,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i31', levelNumber: 31, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Proverbs and Solomon", fr: "Les Proverbes et Salomon" }, image: StoryImages.i31, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Proverbs and Solomon", fr: "Les Proverbes et Salomon" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i31-a', isTruth: true,  text: { en: "The book of Proverbs begins: 'The fear of the LORD is the beginning of wisdom.'", fr: "Le livre des Proverbes commence par : 'La crainte de l'Éternel est le commencement de la sagesse.'" } },
       { id: 'i31-b', isTruth: true,  text: { en: "Proverbs 31 describes a 'wife of noble character' and is a famous passage about virtue.", fr: "Proverbes 31 décrit une 'femme vaillante' et est un passage célèbre sur la vertu." } },
@@ -1139,7 +1136,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i32', levelNumber: 32, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Triumphal Entry — Details", fr: "L'Entrée Triomphale — Détails" }, image: StoryImages.i32, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Triumphal Entry — Details", fr: "L'Entrée Triomphale — Détails" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i32-a', isTruth: true,  text: { en: "Jesus sent two disciples to fetch a donkey and colt tied in a nearby village.", fr: "Jésus envoya deux disciples chercher une ânesse et un ânon attachés dans un village voisin." } },
       { id: 'i32-b', isTruth: true,  text: { en: "Matthew records that Jesus rode on a donkey with a colt, fulfilling Zechariah 9:9.", fr: "Matthieu rapporte que Jésus monta sur une ânesse avec un ânon, accomplissant Zacharie 9:9." } },
@@ -1150,7 +1147,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i33', levelNumber: 33, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Jesus Cleanses the Temple", fr: "Jésus Purifie le Temple" }, image: StoryImages.i33, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Jesus Cleanses the Temple", fr: "Jésus Purifie le Temple" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i33-a', isTruth: true,  text: { en: "Jesus drove out those who were buying and selling in the temple courts.", fr: "Jésus chassa ceux qui achetaient et vendaient dans le parvis du temple." } },
       { id: 'i33-b', isTruth: true,  text: { en: "Jesus overturned the tables of the money-changers and the benches of those selling doves.", fr: "Jésus renversa les tables des changeurs et les sièges de ceux qui vendaient des colombes." } },
@@ -1161,7 +1158,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i34', levelNumber: 34, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Philip and the Ethiopian Eunuch", fr: "Philippe et l'Eunuque Éthiopien" }, image: StoryImages.i34, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Philip and the Ethiopian Eunuch", fr: "Philippe et l'Eunuque Éthiopien" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i34-a', isTruth: true,  text: { en: "An angel of the Lord told Philip to go south on the desert road from Jerusalem to Gaza.", fr: "Un ange du Seigneur dit à Philippe d'aller vers le sud sur la route du désert menant de Jérusalem à Gaza." } },
       { id: 'i34-b', isTruth: true,  text: { en: "The Ethiopian official was reading aloud from the book of Isaiah when Philip found him.", fr: "Le fonctionnaire éthiopien lisait à voix haute le livre d'Ésaïe quand Philippe le trouva." } },
@@ -1172,7 +1169,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i35', levelNumber: 35, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Thomas the Apostle", fr: "Thomas l'Apôtre" }, image: StoryImages.i35, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Thomas the Apostle", fr: "Thomas l'Apôtre" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i35-a', isTruth: true,  text: { en: "Thomas was absent when Jesus first appeared to the other disciples after the Resurrection.", fr: "Thomas était absent lorsque Jésus apparut pour la première fois aux autres disciples après la Résurrection." } },
       { id: 'i35-b', isTruth: true,  text: { en: "Thomas said he would not believe unless he saw and touched the nail marks and Jesus' side.", fr: "Thomas dit qu'il ne croirait pas à moins de voir et de toucher les marques des clous et le côté de Jésus." } },
@@ -1183,7 +1180,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i36', levelNumber: 36, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Council of Jerusalem (Acts 15)", fr: "Le Concile de Jérusalem (Actes 15)" }, image: StoryImages.i36, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Council of Jerusalem (Acts 15)", fr: "Le Concile de Jérusalem (Actes 15)" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i36-a', isTruth: true,  text: { en: "The Jerusalem Council debated whether Gentile believers needed to be circumcised to be saved.", fr: "Le Concile de Jérusalem débattit si les croyants d'origine non juive devaient être circoncis pour être sauvés." } },
       { id: 'i36-b', isTruth: true,  text: { en: "Peter argued that God had not distinguished between Jews and Gentiles and gave the Spirit to all.", fr: "Pierre argua que Dieu n'avait pas fait de distinction entre Juifs et non-Juifs et avait donné l'Esprit à tous." } },
@@ -1194,7 +1191,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i37', levelNumber: 37, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Transfiguration — Details", fr: "La Transfiguration — Détails" }, image: StoryImages.i37, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Transfiguration — Details", fr: "La Transfiguration — Détails" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i37-a', isTruth: true,  text: { en: "Peter suggested building three shelters — one for Jesus, one for Moses, one for Elijah.", fr: "Pierre proposa de construire trois tentes — une pour Jésus, une pour Moïse, une pour Élie." } },
       { id: 'i37-b', isTruth: true,  text: { en: "The disciples fell facedown to the ground when they heard the voice from the cloud.", fr: "Les disciples tombèrent face contre terre en entendant la voix venant de la nuée." } },
@@ -1205,7 +1202,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i38', levelNumber: 38, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Jonah in Nineveh", fr: "Jonas à Ninive" }, image: StoryImages.i38, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Jonah in Nineveh", fr: "Jonas à Ninive" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i38-a', isTruth: true,  text: { en: "God gave Nineveh forty days before its judgment, according to Jonah's proclamation.", fr: "Dieu accorda à Ninive quarante jours avant le jugement, selon la proclamation de Jonas." } },
       { id: 'i38-b', isTruth: true,  text: { en: "The king of Nineveh proclaimed a fast and commanded everyone — including animals — to wear sackcloth.", fr: "Le roi de Ninive proclama un jeûne et ordonna à tous — même aux animaux — de porter le sac." } },
@@ -1216,7 +1213,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i39', levelNumber: 39, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Sermon on the Mount — Salt and Light", fr: "Le Sermon sur la Montagne — Sel et Lumière" }, image: StoryImages.i39, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Sermon on the Mount — Salt and Light", fr: "Le Sermon sur la Montagne — Sel et Lumière" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i39-a', isTruth: true,  text: { en: "Jesus told His followers they were 'the salt of the earth' and 'the light of the world.'", fr: "Jésus dit à ses disciples qu'ils étaient 'le sel de la terre' et 'la lumière du monde.'" } },
       { id: 'i39-b', isTruth: true,  text: { en: "Jesus said a city on a hill cannot be hidden.", fr: "Jésus dit qu'une ville placée sur une montagne ne peut être cachée." } },
@@ -1227,7 +1224,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i40', levelNumber: 40, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Bartimaeus Healed", fr: "Bartimée Guéri" }, image: StoryImages.i40, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Bartimaeus Healed", fr: "Bartimée Guéri" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i40-a', isTruth: true,  text: { en: "Bartimaeus was a blind beggar sitting by the roadside near Jericho.", fr: "Bartimée était un mendiant aveugle assis au bord de la route près de Jéricho." } },
       { id: 'i40-b', isTruth: true,  text: { en: "Bartimaeus called out 'Jesus, Son of David, have mercy on me!' repeatedly despite being told to be quiet.", fr: "Bartimée cria à plusieurs reprises : 'Jésus, fils de David, aie pitié de moi !' malgré les injonctions de se taire." } },
@@ -1238,7 +1235,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i41', levelNumber: 41, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Apostle Paul's Early Ministry", fr: "Le Début du Ministère de l'Apôtre Paul" }, image: StoryImages.i41, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Apostle Paul's Early Ministry", fr: "Le Début du Ministère de l'Apôtre Paul" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i41-a', isTruth: true,  text: { en: "After his conversion, Paul went to Arabia and then returned to Damascus.", fr: "Après sa conversion, Paul alla en Arabie et retourna ensuite à Damas." } },
       { id: 'i41-b', isTruth: true,  text: { en: "Paul first visited Peter in Jerusalem only three years after his conversion.", fr: "Paul ne rendit visite à Pierre à Jérusalem que trois ans après sa conversion." } },
@@ -1249,7 +1246,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i42', levelNumber: 42, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Widow's Offering", fr: "L'Offrande de la Veuve" }, image: StoryImages.i42, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Widow's Offering", fr: "L'Offrande de la Veuve" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i42-a', isTruth: true,  text: { en: "Jesus sat opposite the temple treasury and watched people putting money in.", fr: "Jésus s'assit en face du trésor du temple et observa les gens y déposer de l'argent." } },
       { id: 'i42-b', isTruth: true,  text: { en: "A poor widow put in two very small copper coins — all she had to live on.", fr: "Une pauvre veuve déposa deux petites pièces de cuivre — tout ce qu'elle avait pour vivre." } },
@@ -1260,7 +1257,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i43', levelNumber: 43, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Parable of the Lost Coin", fr: "La Parabole de la Pièce Perdue" }, image: StoryImages.i43, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Parable of the Lost Coin", fr: "La Parabole de la Pièce Perdue" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i43-a', isTruth: true,  text: { en: "A woman had ten silver coins and lost one, so she swept the house and searched carefully.", fr: "Une femme avait dix pièces d'argent et en perdit une ; elle balaya la maison et chercha soigneusement." } },
       { id: 'i43-b', isTruth: true,  text: { en: "When the woman found the lost coin, she called her neighbors and friends to rejoice with her.", fr: "Quand la femme trouva la pièce perdue, elle appela ses voisines et amies pour se réjouir avec elle." } },
@@ -1271,7 +1268,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i44', levelNumber: 44, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Call of Moses' Successor", fr: "La Désignation du Successeur de Moïse" }, image: StoryImages.i44, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "The Call of Moses' Successor", fr: "La Désignation du Successeur de Moïse" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i44-a', isTruth: true,  text: { en: "God told Moses to commission Joshua before the whole assembly as his successor.", fr: "Dieu dit à Moïse d'établir Josué devant toute l'assemblée comme son successeur." } },
       { id: 'i44-b', isTruth: true,  text: { en: "Moses died on Mount Nebo in the land of Moab after seeing the Promised Land from a distance.", fr: "Moïse mourut sur le mont Nébo au pays de Moab après avoir vu la Terre Promise de loin." } },
@@ -1282,7 +1279,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i45', levelNumber: 45, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Jephthah's Vow", fr: "Le Vœu de Jephthah" }, image: StoryImages.i45, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Jephthah's Vow", fr: "Le Vœu de Jephthah" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i45-a', isTruth: true,  text: { en: "Jephthah was a mighty warrior and judge, the son of Gilead and a prostitute.", fr: "Jephthah était un vaillant guerrier et juge, fils de Galaad et d'une prostituée." } },
       { id: 'i45-b', isTruth: true,  text: { en: "Jephthah vowed to sacrifice whatever came out of his house first if God gave him victory over the Ammonites.", fr: "Jephthah fit le vœu de sacrifier ce qui sortirait en premier de chez lui si Dieu lui donnait la victoire sur les Ammonites." } },
@@ -1293,7 +1290,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i46', levelNumber: 46, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Ark of the Covenant Captured", fr: "L'Arche de l'Alliance Capturée" }, image: StoryImages.i46, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "The Ark of the Covenant Captured", fr: "L'Arche de l'Alliance Capturée" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i46-a', isTruth: true,  text: { en: "The Philistines captured the Ark of the Covenant in battle and placed it in the temple of Dagon.", fr: "Les Philistins capturèrent l'arche de l'alliance au combat et la placèrent dans le temple de Dagon." } },
       { id: 'i46-b', isTruth: true,  text: { en: "The statue of Dagon fell face down before the Ark, and the next day was found with its head and hands broken off.", fr: "La statue de Dagon tomba face contre terre devant l'arche, et le lendemain on la trouva avec la tête et les mains coupées." } },
@@ -1304,7 +1301,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i47', levelNumber: 47, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Road to Emmaus", fr: "Le Chemin d'Emmaüs" }, image: StoryImages.i47, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Road to Emmaus", fr: "Le Chemin d'Emmaüs" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i47-a', isTruth: true,  text: { en: "Two disciples were walking to Emmaus when the risen Jesus joined them, but they did not recognize Him.", fr: "Deux disciples marchaient vers Emmaüs quand le Jésus ressuscité les rejoignit, mais ils ne le reconnurent pas." } },
       { id: 'i47-b', isTruth: true,  text: { en: "Jesus explained to them everything in the Scriptures concerning Himself, beginning with Moses and the Prophets.", fr: "Jésus leur expliqua tout ce que les Écritures disaient à son sujet, en commençant par Moïse et les Prophètes." } },
@@ -1315,7 +1312,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i48', levelNumber: 48, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Elisha and the Syrian Army", fr: "Élisée et l'Armée Syrienne" }, image: StoryImages.i48, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Elisha and the Syrian Army", fr: "Élisée et l'Armée Syrienne" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i48-a', isTruth: true,  text: { en: "The king of Syria sent a great army with chariots and horses to surround the city where Elisha was.", fr: "Le roi de Syrie envoya une grande armée avec des chars et des chevaux pour encercler la ville où se trouvait Élisée." } },
       { id: 'i48-b', isTruth: true,  text: { en: "Elisha prayed that his servant's eyes would be opened to see the spiritual army surrounding them.", fr: "Élisée pria pour que les yeux de son serviteur soient ouverts pour voir l'armée spirituelle qui les entourait." } },
@@ -1326,7 +1323,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i49', levelNumber: 49, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Absalom's Rebellion", fr: "La Rébellion d'Absalom" }, image: StoryImages.i49, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Absalom's Rebellion", fr: "La Rébellion d'Absalom" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i49-a', isTruth: true,  text: { en: "Absalom was David's son who stole the hearts of the Israelites and declared himself king.", fr: "Absalom était le fils de David qui vola le cœur des Israélites et se déclara roi." } },
       { id: 'i49-b', isTruth: true,  text: { en: "Absalom was famous for his hair, which weighed about five pounds when cut annually.", fr: "Absalom était célèbre pour ses cheveux, qui pesaient environ deux kilos et demi quand on les coupait chaque année." } },
@@ -1337,7 +1334,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i50', levelNumber: 50, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Ezra Reads the Law", fr: "Esdras Lit la Loi" }, image: StoryImages.i50, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Ezra Reads the Law", fr: "Esdras Lit la Loi" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i50-a', isTruth: true,  text: { en: "Ezra the scribe brought the Book of the Law before the assembly of men, women, and children.", fr: "Esdras le scribe apporta le livre de la Loi devant l'assemblée d'hommes, de femmes et d'enfants." } },
       { id: 'i50-b', isTruth: true,  text: { en: "Ezra read the Law from daybreak till noon while the people listened attentively.", fr: "Esdras lut la Loi depuis le lever du jour jusqu'à midi pendant que le peuple écoutait attentivement." } },
@@ -1348,7 +1345,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i51', levelNumber: 51, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Zechariah — Father of John the Baptist", fr: "Zacharie — Père de Jean-Baptiste" }, image: StoryImages.i51, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Zechariah — Father of John the Baptist", fr: "Zacharie — Père de Jean-Baptiste" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i51-a', isTruth: true,  text: { en: "Zechariah was a priest who was struck mute by the angel Gabriel for doubting the promise.", fr: "Zacharie était un sacrificateur frappé de mutisme par l'ange Gabriel pour avoir douté de la promesse." } },
       { id: 'i51-b', isTruth: true,  text: { en: "The angel appeared to Zechariah while he was burning incense in the temple.", fr: "L'ange apparut à Zacharie pendant qu'il brûlait de l'encens dans le temple." } },
@@ -1359,7 +1356,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i52', levelNumber: 52, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Parable of the Mustard Seed", fr: "La Parabole de la Graine de Sénevé" }, image: StoryImages.i52, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Parable of the Mustard Seed", fr: "La Parabole de la Graine de Sénevé" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i52-a', isTruth: true,  text: { en: "Jesus compared the kingdom of heaven to a mustard seed — the smallest of all seeds.", fr: "Jésus compara le royaume des cieux à une graine de sénevé — la plus petite de toutes les graines." } },
       { id: 'i52-b', isTruth: true,  text: { en: "Jesus said the mustard seed grows into the largest of garden plants and becomes a tree.", fr: "Jésus dit que la graine de sénevé pousse jusqu'à devenir la plus grande des plantes du jardin et forme un arbre." } },
@@ -1370,7 +1367,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i53', levelNumber: 53, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Samuel Anoints Saul", fr: "Samuel Oint Saül" }, image: StoryImages.i53, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Samuel Anoints Saul", fr: "Samuel Oint Saül" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i53-a', isTruth: true,  text: { en: "Saul was searching for his father's lost donkeys when he came to Samuel.", fr: "Saül cherchait les ânesses perdues de son père quand il rencontra Samuel." } },
       { id: 'i53-b', isTruth: true,  text: { en: "God had told Samuel a day before that He would send a man from Benjamin to be anointed as king.", fr: "Dieu avait dit à Samuel la veille qu'Il lui enverrait un homme de la tribu de Benjamin à oindre comme roi." } },
@@ -1381,7 +1378,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i54', levelNumber: 54, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Mary Magdalene at the Tomb", fr: "Marie-Madeleine au Tombeau" }, image: StoryImages.i54, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Mary Magdalene at the Tomb", fr: "Marie-Madeleine au Tombeau" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i54-a', isTruth: true,  text: { en: "Mary Magdalene went to the tomb early on the first day of the week while it was still dark.", fr: "Marie-Madeleine se rendit au tombeau tôt le premier jour de la semaine, alors qu'il faisait encore sombre." } },
       { id: 'i54-b', isTruth: true,  text: { en: "Mary initially mistook the risen Jesus for the gardener.", fr: "Marie confondit d'abord le Jésus ressuscité avec le jardinier." } },
@@ -1392,7 +1389,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i55', levelNumber: 55, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Nebuchadnezzar's Dream (Daniel 2)", fr: "Le Rêve de Nébucadnetsar (Daniel 2)" }, image: StoryImages.i55, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "Nebuchadnezzar's Dream (Daniel 2)", fr: "Le Rêve de Nébucadnetsar (Daniel 2)" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i55-a', isTruth: true,  text: { en: "Nebuchadnezzar dreamed of a great statue with a head of gold, chest of silver, belly of bronze, and legs of iron.", fr: "Nébucadnetsar rêva d'une grande statue avec une tête d'or, une poitrine d'argent, un ventre de bronze et des jambes de fer." } },
       { id: 'i55-b', isTruth: true,  text: { en: "A rock cut out without human hands struck the statue's feet and destroyed it, then became a great mountain.", fr: "Une pierre taillée sans mains frappa les pieds de la statue et la détruisit, puis devint une grande montagne." } },
@@ -1403,7 +1400,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i56', levelNumber: 56, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Peter's Restoration by Jesus", fr: "La Restauration de Pierre par Jésus" }, image: StoryImages.i56, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Peter's Restoration by Jesus", fr: "La Restauration de Pierre par Jésus" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i56-a', isTruth: true,  text: { en: "After His resurrection, Jesus appeared to His disciples at the Sea of Galilee.", fr: "Après sa résurrection, Jésus apparut à ses disciples au bord de la mer de Galilée." } },
       { id: 'i56-b', isTruth: true,  text: { en: "Jesus asked Peter three times, 'Do you love me?' and commissioned him to tend His sheep.", fr: "Jésus demanda trois fois à Pierre : 'M'aimes-tu ?' et lui confia le soin de ses brebis." } },
@@ -1414,7 +1411,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i57', levelNumber: 57, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Pharisee and the Tax Collector", fr: "Le Pharisien et le Percepteur d'Impôts" }, image: StoryImages.i57, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Pharisee and the Tax Collector", fr: "Le Pharisien et le Percepteur d'Impôts" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i57-a', isTruth: true,  text: { en: "In this parable, the Pharisee stood and prayed about himself — thanking God he was not like others.", fr: "Dans cette parabole, le Pharisien se leva et pria sur lui-même, remerciant Dieu de n'être pas comme les autres." } },
       { id: 'i57-b', isTruth: true,  text: { en: "The tax collector stood at a distance, would not look up, and beat his breast saying 'God, have mercy on me, a sinner.'", fr: "Le percepteur se tenait à distance, n'osait pas lever les yeux et se frappait la poitrine en disant : 'O Dieu, sois apaisé envers moi, pécheur !'" } },
@@ -1425,7 +1422,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i58', levelNumber: 58, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Book of Ruth — Boaz the Kinsman-Redeemer", fr: "Le Livre de Ruth — Boaz le Racheteur" }, image: StoryImages.i58, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "The Book of Ruth — Boaz the Kinsman-Redeemer", fr: "Le Livre de Ruth — Boaz le Racheteur" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i58-a', isTruth: true,  text: { en: "Boaz was a relative of Naomi's dead husband and a man of standing in Bethlehem.", fr: "Boaz était un parent du mari défunt de Naomi et un homme influent à Bethléhem." } },
       { id: 'i58-b', isTruth: true,  text: { en: "Ruth uncovered Boaz's feet at the threshing floor as a sign of appeal for him to fulfill the role of kinsman-redeemer.", fr: "Ruth découvrit les pieds de Boaz à l'aire de battage comme signe d'appel pour qu'il remplisse le rôle de racheteur." } },
@@ -1436,7 +1433,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i59', levelNumber: 59, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Day of Pentecost — Peter's Sermon", fr: "Le Jour de la Pentecôte — Le Sermon de Pierre" }, image: StoryImages.i59, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Day of Pentecost — Peter's Sermon", fr: "Le Jour de la Pentecôte — Le Sermon de Pierre" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i59-a', isTruth: true,  text: { en: "Peter quoted the prophet Joel to explain the outpouring of the Holy Spirit at Pentecost.", fr: "Pierre cita le prophète Joël pour expliquer l'effusion du Saint-Esprit à la Pentecôte." } },
       { id: 'i59-b', isTruth: true,  text: { en: "Peter declared that God had raised Jesus from the dead, as testified by the disciples.", fr: "Pierre déclara que Dieu avait ressuscité Jésus d'entre les morts, comme en témoignaient les disciples." } },
@@ -1447,7 +1444,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i60', levelNumber: 60, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Fruit of the Spirit (Galatians 5)", fr: "Le Fruit de l'Esprit (Galates 5)" }, image: StoryImages.i60, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Fruit of the Spirit (Galatians 5)", fr: "Le Fruit de l'Esprit (Galates 5)" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i60-a', isTruth: true,  text: { en: "The fruit of the Spirit includes love, joy, peace, forbearance, kindness, goodness, faithfulness.", fr: "Le fruit de l'Esprit comprend l'amour, la joie, la paix, la patience, la bienveillance, la bonté, la fidélité." } },
       { id: 'i60-b', isTruth: true,  text: { en: "Gentleness and self-control are also listed as part of the fruit of the Spirit.", fr: "La douceur et la tempérance sont également listées comme faisant partie du fruit de l'Esprit." } },
@@ -1458,7 +1455,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i61', levelNumber: 61, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Armor of God (Ephesians 6)", fr: "L'Armure de Dieu (Éphésiens 6)" }, image: StoryImages.i61, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Armor of God (Ephesians 6)", fr: "L'Armure de Dieu (Éphésiens 6)" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i61-a', isTruth: true,  text: { en: "Paul lists the belt of truth, breastplate of righteousness, and feet fitted with the readiness of the gospel of peace.", fr: "Paul cite la ceinture de la vérité, la cuirasse de la justice et les pieds chaussés de la préparation de l'Évangile de paix." } },
       { id: 'i61-b', isTruth: true,  text: { en: "The shield of faith is described as able to extinguish all the flaming arrows of the evil one.", fr: "Le bouclier de la foi est décrit comme pouvant éteindre tous les traits enflammés du Malin." } },
@@ -1469,7 +1466,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i62', levelNumber: 62, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Pentecost Preparations — Jesus' Promise", fr: "Préparatifs de la Pentecôte — La Promesse de Jésus" }, image: StoryImages.i62, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Pentecost Preparations — Jesus' Promise", fr: "Préparatifs de la Pentecôte — La Promesse de Jésus" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i62-a', isTruth: true,  text: { en: "Jesus told His disciples to wait in Jerusalem until they received the promised Holy Spirit.", fr: "Jésus dit à ses disciples d'attendre à Jérusalem jusqu'à ce qu'ils reçoivent le Saint-Esprit promis." } },
       { id: 'i62-b', isTruth: true,  text: { en: "Jesus told His disciples they would be His witnesses to the ends of the earth after receiving the Spirit.", fr: "Jésus dit à ses disciples qu'ils seraient ses témoins jusqu'aux extrémités de la terre après avoir reçu l'Esprit." } },
@@ -1480,7 +1477,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i63', levelNumber: 63, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Parable of the Wheat and Weeds", fr: "La Parabole du Blé et de l'Ivraie" }, image: StoryImages.i63, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Parable of the Wheat and Weeds", fr: "La Parabole du Blé et de l'Ivraie" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i63-a', isTruth: true,  text: { en: "An enemy sowed weeds (tares) among the wheat while everyone was sleeping.", fr: "Un ennemi sema de l'ivraie parmi le blé pendant que tout le monde dormait." } },
       { id: 'i63-b', isTruth: true,  text: { en: "The servants asked the master if they should pull up the weeds, but he said no — they might uproot the wheat.", fr: "Les serviteurs demandèrent au maître s'ils devaient arracher l'ivraie, mais il dit non — de peur d'arracher aussi le blé." } },
@@ -1491,7 +1488,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i64', levelNumber: 64, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "David Brings the Ark to Jerusalem", fr: "David Ramène l'Arche à Jérusalem" }, image: StoryImages.i64, badgeColor: 'bg-blue-700', testament: 'Old',
+    topic: { en: "David Brings the Ark to Jerusalem", fr: "David Ramène l'Arche à Jérusalem" }, badgeColor: 'bg-blue-700', testament: 'Old',
     statements: [
       { id: 'i64-a', isTruth: true,  text: { en: "David danced before the LORD with all his might when bringing the Ark of the Covenant to Jerusalem.", fr: "David dansait de toutes ses forces devant l'Éternel en ramenant l'arche de l'alliance à Jérusalem." } },
       { id: 'i64-b', isTruth: true,  text: { en: "David's wife Michal despised him in her heart for dancing and leaping before the LORD.", fr: "Michal, la femme de David, le méprisa dans son cœur pour avoir dansé et sauté devant l'Éternel." } },
@@ -1502,7 +1499,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i65', levelNumber: 65, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Love Chapter — 1 Corinthians 13", fr: "Le Chapitre sur l'Amour — 1 Corinthiens 13" }, image: StoryImages.i65, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Love Chapter — 1 Corinthians 13", fr: "Le Chapitre sur l'Amour — 1 Corinthiens 13" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i65-a', isTruth: true,  text: { en: "Paul says if he speaks in tongues of men and angels but has no love, he is only a resounding gong or clanging cymbal.", fr: "Paul dit que s'il parle les langues des hommes et des anges mais n'a pas l'amour, il est un airain qui sonne ou une cymbale qui retentit." } },
       { id: 'i65-b', isTruth: true,  text: { en: "Paul declares that love never fails, while prophecies will cease, tongues will be stilled, and knowledge will pass away.", fr: "Paul déclare que l'amour ne périra jamais, tandis que les prophéties prendront fin, les langues se tairont et la connaissance disparaîtra." } },
@@ -1513,7 +1510,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i66', levelNumber: 66, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Sheep and the Goats (Matthew 25)", fr: "Les Brebis et les Boucs (Matthieu 25)" }, image: StoryImages.i66, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Sheep and the Goats (Matthew 25)", fr: "Les Brebis et les Boucs (Matthieu 25)" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i66-a', isTruth: true,  text: { en: "In this parable, the Son of Man separates people as a shepherd separates sheep from goats.", fr: "Dans cette parabole, le Fils de l'homme sépare les hommes comme un berger sépare les brebis des boucs." } },
       { id: 'i66-b', isTruth: true,  text: { en: "The righteous (sheep) are rewarded for feeding the hungry, giving drink to the thirsty, and welcoming strangers.", fr: "Les justes (brebis) sont récompensés pour avoir nourri les affamés, désaltéré les assoiffés et accueilli les étrangers." } },
@@ -1524,7 +1521,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i67', levelNumber: 67, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "Paul's Letter to Philemon", fr: "La Lettre de Paul à Philémon" }, image: StoryImages.i67, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "Paul's Letter to Philemon", fr: "La Lettre de Paul à Philémon" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i67-a', isTruth: true,  text: { en: "Philemon was a wealthy Christian in whose house a church met.", fr: "Philémon était un chrétien aisé chez qui se réunissait une Église." } },
       { id: 'i67-b', isTruth: true,  text: { en: "Paul wrote to Philemon on behalf of Onesimus, a runaway slave who had become a Christian.", fr: "Paul écrivit à Philémon au nom d'Onésime, un esclave fugitif qui était devenu chrétien." } },
@@ -1535,7 +1532,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'i68', levelNumber: 68, difficulty: 'Intermediate', difficultyFr: 'Intermédiaire',
-    topic: { en: "The Rich Man and Lazarus", fr: "Le Riche et Lazare" }, image: StoryImages.i68, badgeColor: 'bg-blue-700', testament: 'New',
+    topic: { en: "The Rich Man and Lazarus", fr: "Le Riche et Lazare" }, badgeColor: 'bg-blue-700', testament: 'New',
     statements: [
       { id: 'i68-a', isTruth: true,  text: { en: "In this parable, the poor man Lazarus lay at the rich man's gate, longing to eat what fell from his table.", fr: "Dans cette parabole, le pauvre Lazare était couché à la porte du riche, désirant se nourrir des miettes qui tombaient de sa table." } },
       { id: 'i68-b', isTruth: true,  text: { en: "When both men died, Lazarus went to Abraham's bosom and the rich man went to Hades.", fr: "Quand les deux hommes moururent, Lazare fut emporté dans le sein d'Abraham et le riche alla dans l'Hadès." } },
@@ -1548,7 +1545,7 @@ export const LEVELS: Level[] = [
   // ─── ADVANCED ──────────────────────────────────────────────────────────────────
   {
     id: 'a1', levelNumber: 1, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Epistles of Paul", fr: "Les Épîtres de Paul" }, image: StoryImages.a1, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "The Epistles of Paul", fr: "Les Épîtres de Paul" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a1-a', isTruth: true,  text: { en: "Paul wrote the letter to Philemon specifically about a runaway enslaved man named Onesimus.", fr: "Paul écrivit la lettre à Philémon spécifiquement au sujet d'un esclave fugitif nommé Onésime." } },
       { id: 'a1-b', isTruth: false, text: { en: "The Epistle to the Romans was written by Paul while he was imprisoned in Rome.", fr: "L'Épître aux Romains fut rédigée par Paul pendant qu'il était emprisonné à Rome." } },
@@ -1559,7 +1556,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a2', levelNumber: 2, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Romans — Justification by Faith", fr: "Romains — La Justification par la Foi" }, image: StoryImages.a2, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Romans — Justification by Faith", fr: "Romains — La Justification par la Foi" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a2-a', isTruth: true,  text: { en: "Paul declares in Romans that all have sinned and fall short of the glory of God.", fr: "Paul déclare dans Romains que tous ont péché et sont privés de la gloire de Dieu." } },
       { id: 'a2-b', isTruth: true,  text: { en: "Paul argues that Abraham was justified by faith before he was circumcised.", fr: "Paul argue qu'Abraham fut justifié par la foi avant d'être circoncis." } },
@@ -1570,7 +1567,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a3', levelNumber: 3, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Romans 8 — The Holy Spirit and Adoption", fr: "Romains 8 — Le Saint-Esprit et l'Adoption" }, image: StoryImages.a3, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Romans 8 — The Holy Spirit and Adoption", fr: "Romains 8 — Le Saint-Esprit et l'Adoption" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a3-a', isTruth: true,  text: { en: "Paul says those who are led by the Spirit of God are sons and daughters of God.", fr: "Paul dit que ceux qui sont conduits par l'Esprit de Dieu sont fils et filles de Dieu." } },
       { id: 'a3-b', isTruth: true,  text: { en: "Paul uses the Aramaic word 'Abba' (Father) in Romans 8 to describe the intimacy of the believer's relationship with God.", fr: "Paul utilise le mot araméen 'Abba' (Père) dans Romains 8 pour décrire l'intimité de la relation du croyant avec Dieu." } },
@@ -1581,7 +1578,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a4', levelNumber: 4, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "1 Corinthians — The Resurrection Chapter", fr: "1 Corinthiens — Le Chapitre sur la Résurrection" }, image: StoryImages.a4, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "1 Corinthians — The Resurrection Chapter", fr: "1 Corinthiens — Le Chapitre sur la Résurrection" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a4-a', isTruth: true,  text: { en: "Paul says if Christ has not been raised, our faith is futile and we are still in our sins.", fr: "Paul dit que si Christ n'est pas ressuscité, notre foi est vaine et nous sommes encore dans nos péchés." } },
       { id: 'a4-b', isTruth: true,  text: { en: "Paul states that Christ appeared to more than 500 brothers and sisters at one time after His resurrection.", fr: "Paul affirme que Christ est apparu à plus de 500 frères et sœurs en même temps après sa résurrection." } },
@@ -1592,7 +1589,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a5', levelNumber: 5, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Galatians — The Judaizer Controversy", fr: "Galates — La Controverse des Judaïsants" }, image: StoryImages.a5, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Galatians — The Judaizer Controversy", fr: "Galates — La Controverse des Judaïsants" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a5-a', isTruth: true,  text: { en: "Paul rebuked Peter in Antioch to his face because Peter was withdrawing from Gentile believers when circumcised men came from Jerusalem.", fr: "Paul réprimanda Pierre en face à Antioche parce que Pierre se retirait des croyants non-juifs quand des hommes circoncis vinrent de Jérusalem." } },
       { id: 'a5-b', isTruth: true,  text: { en: "Paul says he received the gospel not from men but through a direct revelation of Jesus Christ.", fr: "Paul dit qu'il reçut l'Évangile non de la part des hommes, mais par une révélation directe de Jésus-Christ." } },
@@ -1603,7 +1600,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a6', levelNumber: 6, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Philippians — Joy in Prison and the Kenosis", fr: "Philippiens — La Joie en Prison et la Kénose" }, image: StoryImages.a6, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Philippians — Joy in Prison and the Kenosis", fr: "Philippiens — La Joie en Prison et la Kénose" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a6-a', isTruth: true,  text: { en: "Paul wrote Philippians while in prison, yet the letter overflows with joy and rejoicing.", fr: "Paul écrivit aux Philippiens depuis la prison, pourtant la lettre déborde de joie et d'allégresse." } },
       { id: 'a6-b', isTruth: true,  text: { en: "Philippians 2 says Jesus, being in the form of God, did not consider equality with God something to be grasped.", fr: "Philippiens 2 dit que Jésus, étant de condition divine, n'a pas regardé son égalité avec Dieu comme une proie à saisir." } },
@@ -1614,7 +1611,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a7', levelNumber: 7, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Hebrews — The High Priesthood of Christ", fr: "Hébreux — Le Grand Sacerdoce du Christ" }, image: StoryImages.a7, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Hebrews — The High Priesthood of Christ", fr: "Hébreux — Le Grand Sacerdoce du Christ" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a7-a', isTruth: true,  text: { en: "The book of Hebrews argues that Jesus is the High Priest who entered the most holy place once for all by his own blood.", fr: "L'épître aux Hébreux argue que Jésus est le Grand Sacrificateur qui est entré une fois pour toutes dans le lieu très saint par son propre sang." } },
       { id: 'a7-b', isTruth: true,  text: { en: "Hebrews describes Jesus as a High Priest after the order of Melchizedek, not the order of Aaron.", fr: "Hébreux décrit Jésus comme un Grand Sacrificateur selon l'ordre de Melchisédek, non selon celui d'Aaron." } },
@@ -1625,7 +1622,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a8', levelNumber: 8, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Hall of Faith — Hebrews 11", fr: "Le Palmarès de la Foi — Hébreux 11" }, image: StoryImages.a8, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "The Hall of Faith — Hebrews 11", fr: "Le Palmarès de la Foi — Hébreux 11" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a8-a', isTruth: true,  text: { en: "Hebrews 11 defines faith as 'confidence in what we hope for and assurance about what we do not see.'", fr: "Hébreux 11 définit la foi comme 'la certitude des choses qu'on espère et la démonstration de celles qu'on ne voit pas.'" } },
       { id: 'a8-b', isTruth: true,  text: { en: "Abel, Enoch, Noah, Abraham, Sarah, Isaac, Jacob, Moses, and Rahab are all mentioned in Hebrews 11.", fr: "Abel, Énoch, Noé, Abraham, Sara, Isaac, Jacob, Moïse et Rahab sont tous mentionnés dans Hébreux 11." } },
@@ -1636,7 +1633,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a9', levelNumber: 9, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Seven Churches of Revelation", fr: "Les Sept Églises de l'Apocalypse" }, image: StoryImages.a9, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "The Seven Churches of Revelation", fr: "Les Sept Églises de l'Apocalypse" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a9-a', isTruth: true,  text: { en: "The seven churches addressed in Revelation are Ephesus, Smyrna, Pergamum, Thyatira, Sardis, Philadelphia, and Laodicea.", fr: "Les sept Églises de l'Apocalypse sont Éphèse, Smyrne, Pergame, Thyatire, Sardes, Philadelphie et Laodicée." } },
       { id: 'a9-b', isTruth: true,  text: { en: "The church of Laodicea is rebuked for being 'lukewarm — neither hot nor cold.'", fr: "L'Église de Laodicée est réprimandée pour être 'tiède — ni froide ni chaude.'" } },
@@ -1647,7 +1644,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a10', levelNumber: 10, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Revelation — The New Jerusalem", fr: "L'Apocalypse — La Nouvelle Jérusalem" }, image: StoryImages.a10, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Revelation — The New Jerusalem", fr: "L'Apocalypse — La Nouvelle Jérusalem" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a10-a', isTruth: true,  text: { en: "John describes the New Jerusalem coming down out of heaven from God, prepared as a bride for her husband.", fr: "Jean décrit la Nouvelle Jérusalem descendant du ciel d'auprès de Dieu, préparée comme une épouse pour son mari." } },
       { id: 'a10-b', isTruth: true,  text: { en: "The New Jerusalem has twelve gates, each made of a single pearl, and twelve foundations named after the apostles.", fr: "La Nouvelle Jérusalem a douze portes, chacune faite d'une seule perle, et douze fondements portant les noms des apôtres." } },
@@ -1658,7 +1655,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a11', levelNumber: 11, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Isaiah 53 — The Suffering Servant", fr: "Ésaïe 53 — Le Serviteur Souffrant" }, image: StoryImages.a11, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "Isaiah 53 — The Suffering Servant", fr: "Ésaïe 53 — Le Serviteur Souffrant" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a11-a', isTruth: true,  text: { en: "Isaiah 53 says the Suffering Servant was 'despised and rejected by mankind, a man of suffering, and familiar with pain.'", fr: "Ésaïe 53 dit que le Serviteur souffrant était 'méprisé et abandonné des hommes, homme de douleurs et habitué à la souffrance.'" } },
       { id: 'a11-b', isTruth: true,  text: { en: "Isaiah 53 states the Servant bore our pain and was 'pierced for our transgressions' and 'crushed for our iniquities.'", fr: "Ésaïe 53 déclare que le Serviteur porta nos douleurs et fut 'transpercé à cause de nos péchés' et 'écrasé à cause de nos iniquités.'" } },
@@ -1669,7 +1666,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a12', levelNumber: 12, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Daniel's Seventy Weeks (Daniel 9)", fr: "Les Soixante-Dix Semaines de Daniel (Daniel 9)" }, image: StoryImages.a12, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "Daniel's Seventy Weeks (Daniel 9)", fr: "Les Soixante-Dix Semaines de Daniel (Daniel 9)" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a12-a', isTruth: true,  text: { en: "Daniel's 70 Weeks prophecy was given while Daniel was praying and confessing sin on behalf of Israel.", fr: "La prophétie des 70 semaines de Daniel fut donnée pendant que Daniel priait et confessait le péché au nom d'Israël." } },
       { id: 'a12-b', isTruth: true,  text: { en: "The angel Gabriel brought the message of the 70 Weeks to Daniel.", fr: "L'ange Gabriel apporta à Daniel le message des 70 semaines." } },
@@ -1680,7 +1677,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a13', levelNumber: 13, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Tabernacle and Its Furnishings", fr: "Le Tabernacle et son Mobilier" }, image: StoryImages.a13, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "The Tabernacle and Its Furnishings", fr: "Le Tabernacle et son Mobilier" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a13-a', isTruth: true,  text: { en: "The Ark of the Covenant was placed in the Most Holy Place (Holy of Holies) behind the inner veil.", fr: "L'arche de l'alliance était placée dans le lieu très saint (Saint des Saints) derrière le voile intérieur." } },
       { id: 'a13-b', isTruth: true,  text: { en: "The altar of incense stood in the Holy Place, in front of the veil that separated it from the Most Holy Place.", fr: "L'autel des parfums se trouvait dans le lieu saint, devant le voile qui le séparait du lieu très saint." } },
@@ -1691,7 +1688,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a14', levelNumber: 14, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Davidic Covenant (2 Samuel 7)", fr: "L'Alliance Davidique (2 Samuel 7)" }, image: StoryImages.a14, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "The Davidic Covenant (2 Samuel 7)", fr: "L'Alliance Davidique (2 Samuel 7)" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a14-a', isTruth: true,  text: { en: "God told David through Nathan the prophet that He would establish David's throne forever.", fr: "Dieu dit à David par le prophète Nathan qu'Il établirait son trône pour toujours." } },
       { id: 'a14-b', isTruth: true,  text: { en: "God said David's son would build the temple, and God would be to him a Father and he would be God's son.", fr: "Dieu dit que le fils de David construirait le temple, et que Dieu serait son Père et lui serait le fils de Dieu." } },
@@ -1702,7 +1699,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a15', levelNumber: 15, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Nazirite Vow (Numbers 6)", fr: "Le Vœu de Naziréat (Nombres 6)" }, image: StoryImages.a15, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "The Nazirite Vow (Numbers 6)", fr: "Le Vœu de Naziréat (Nombres 6)" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a15-a', isTruth: true,  text: { en: "A Nazirite vow required abstaining from wine, strong drink, vinegar, and grape products.", fr: "Le vœu de naziréat exigeait de s'abstenir du vin, de toute boisson forte, du vinaigre et de tout produit de la vigne." } },
       { id: 'a15-b', isTruth: true,  text: { en: "A Nazirite was not to cut their hair for the duration of the vow.", fr: "Un naziréen ne devait pas se couper les cheveux pendant la durée de son vœu." } },
@@ -1713,7 +1710,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a16', levelNumber: 16, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Melchizedek — Priest-King of Salem", fr: "Melchisédek — Roi-Prêtre de Salem" }, image: StoryImages.a16, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "Melchizedek — Priest-King of Salem", fr: "Melchisédek — Roi-Prêtre de Salem" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a16-a', isTruth: true,  text: { en: "Melchizedek was king of Salem and priest of God Most High who blessed Abraham and received a tithe from him.", fr: "Melchisédek était roi de Salem et sacrificateur de Dieu Très-Haut qui bénit Abraham et reçut de lui la dîme." } },
       { id: 'a16-b', isTruth: true,  text: { en: "Hebrews says Melchizedek was 'without father or mother, without genealogy, without beginning of days or end of life.'", fr: "Hébreux dit que Melchisédek était 'sans père, sans mère, sans généalogie, sans commencement de jours ni fin de vie.'" } },
@@ -1724,7 +1721,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a17', levelNumber: 17, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "James — Faith and Works", fr: "Jacques — La Foi et les Œuvres" }, image: StoryImages.a17, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "James — Faith and Works", fr: "Jacques — La Foi et les Œuvres" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a17-a', isTruth: true,  text: { en: "James says faith without deeds is dead — as the body without the spirit is dead.", fr: "Jacques dit que la foi sans les œuvres est morte — comme le corps sans l'esprit est mort." } },
       { id: 'a17-b', isTruth: true,  text: { en: "James says Abraham was justified by works when he offered Isaac on the altar.", fr: "Jacques dit qu'Abraham fut justifié par les œuvres quand il offrit Isaac sur l'autel." } },
@@ -1735,7 +1732,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a18', levelNumber: 18, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Seven 'I Am' Statements in John", fr: "Les Sept Déclarations 'Je Suis' dans Jean" }, image: StoryImages.a18, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "The Seven 'I Am' Statements in John", fr: "Les Sept Déclarations 'Je Suis' dans Jean" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a18-a', isTruth: true,  text: { en: "Jesus declared 'I am the bread of life' — those who come to Him will never go hungry.", fr: "Jésus déclara : 'Je suis le pain de vie' — celui qui vient à lui n'aura plus jamais faim." } },
       { id: 'a18-b', isTruth: true,  text: { en: "Jesus declared 'I am the resurrection and the life' — those who believe in Him will live even if they die.", fr: "Jésus déclara : 'Je suis la résurrection et la vie' — celui qui croit en lui vivra même s'il meurt." } },
@@ -1746,7 +1743,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a19', levelNumber: 19, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Paul's 'Thorn in the Flesh'", fr: "L'Épine dans la Chair de Paul" }, image: StoryImages.a19, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Paul's 'Thorn in the Flesh'", fr: "L'Épine dans la Chair de Paul" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a19-a', isTruth: true,  text: { en: "Paul says he was given a 'thorn in the flesh' to keep him from being conceited after receiving surpassing revelations.", fr: "Paul dit qu'une 'épine dans la chair' lui fut donnée pour l'empêcher de s'enorgueillir après avoir reçu des révélations supérieures." } },
       { id: 'a19-b', isTruth: true,  text: { en: "Paul says he pleaded with the Lord three times to take the thorn away.", fr: "Paul dit qu'il demanda trois fois au Seigneur de lui retirer cette épine." } },
@@ -1757,7 +1754,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a20', levelNumber: 20, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Revelation — The Mark of the Beast", fr: "Apocalypse — La Marque de la Bête" }, image: StoryImages.a20, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Revelation — The Mark of the Beast", fr: "Apocalypse — La Marque de la Bête" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a20-a', isTruth: true,  text: { en: "Revelation 13 says the mark of the beast is placed on the right hand or the forehead.", fr: "Apocalypse 13 dit que la marque de la bête est placée sur la main droite ou le front." } },
       { id: 'a20-b', isTruth: true,  text: { en: "Revelation says no one could buy or sell unless they had the mark.", fr: "L'Apocalypse dit que nul ne pouvait acheter ou vendre sans avoir la marque." } },
@@ -1768,7 +1765,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a21', levelNumber: 21, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Covenant of Abraham (Genesis 15 & 17)", fr: "L'Alliance d'Abraham (Genèse 15 et 17)" }, image: StoryImages.a21, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "The Covenant of Abraham (Genesis 15 & 17)", fr: "L'Alliance d'Abraham (Genèse 15 et 17)" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a21-a', isTruth: true,  text: { en: "In Genesis 15, God made a covenant with Abraham while he was in a deep sleep, represented by a smoking firepot and blazing torch.", fr: "Dans Genèse 15, Dieu établit une alliance avec Abraham pendant qu'il était dans un profond sommeil, représentée par un brasier fumant et une torche enflammée." } },
       { id: 'a21-b', isTruth: true,  text: { en: "God promised Abraham that his descendants would be slaves in a foreign country for 400 years before being freed.", fr: "Dieu promit à Abraham que ses descendants seraient esclaves en pays étranger pendant 400 ans avant d'être libérés." } },
@@ -1779,7 +1776,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a22', levelNumber: 22, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Paul's Letter to the Colossians", fr: "La Lettre de Paul aux Colossiens" }, image: StoryImages.a22, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Paul's Letter to the Colossians", fr: "La Lettre de Paul aux Colossiens" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a22-a', isTruth: true,  text: { en: "Colossians 1 says Jesus is 'the firstborn over all creation' and 'in him all things hold together.'", fr: "Colossiens 1 dit que Jésus est 'le premier-né de toute la création' et que 'tout subsiste en lui.'" } },
       { id: 'a22-b', isTruth: true,  text: { en: "Paul warns the Colossians against being captured by hollow and deceptive philosophy, according to human tradition rather than Christ.", fr: "Paul avertit les Colossiens de ne pas se laisser captiver par une philosophie creuse et trompeuse, selon la tradition humaine plutôt que selon Christ." } },
@@ -1790,7 +1787,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a23', levelNumber: 23, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "1 Thessalonians — The Second Coming", fr: "1 Thessaloniciens — Le Second Avènement" }, image: StoryImages.a23, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "1 Thessalonians — The Second Coming", fr: "1 Thessaloniciens — Le Second Avènement" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a23-a', isTruth: true,  text: { en: "Paul says the Lord will descend from heaven with a loud command, the archangel's call, and the trumpet of God.", fr: "Paul dit que le Seigneur descendra du ciel avec un signal, la voix d'un archange et la trompette de Dieu." } },
       { id: 'a23-b', isTruth: true,  text: { en: "Paul says those who have died in Christ will rise first, then those who are still alive will be caught up with them in the clouds.", fr: "Paul dit que ceux qui sont morts en Christ ressusciteront d'abord, puis ceux qui seront encore vivants seront emportés avec eux dans les nuées." } },
@@ -1801,7 +1798,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a24', levelNumber: 24, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Ezekiel's Vision of the Valley of Dry Bones", fr: "La Vision d'Ézéchiel de la Vallée des Ossements" }, image: StoryImages.a24, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "Ezekiel's Vision of the Valley of Dry Bones", fr: "La Vision d'Ézéchiel de la Vallée des Ossements" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a24-a', isTruth: true,  text: { en: "The Spirit carried Ezekiel and set him in the middle of a valley full of very dry bones.", fr: "L'Esprit transporta Ézéchiel et le déposa au milieu d'une vallée pleine d'ossements très secs." } },
       { id: 'a24-b', isTruth: true,  text: { en: "God asked Ezekiel 'Son of man, can these bones live?' and Ezekiel replied 'Sovereign LORD, you alone know.'", fr: "Dieu demanda à Ézéchiel : 'Fils de l'homme, ces ossements peuvent-ils revivre ?' et Ézéchiel répondit : 'Seigneur Éternel, toi seul le sais.'" } },
@@ -1812,7 +1809,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a25', levelNumber: 25, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Zechariah's Messianic Prophecies", fr: "Les Prophéties Messianiques de Zacharie" }, image: StoryImages.a25, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "Zechariah's Messianic Prophecies", fr: "Les Prophéties Messianiques de Zacharie" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a25-a', isTruth: true,  text: { en: "Zechariah 9:9 prophesied the Messiah would come riding on a donkey, on a colt, the foal of a donkey.", fr: "Zacharie 9:9 prophétisa que le Messie viendrait monté sur un âne, sur un ânon fils d'ânesse." } },
       { id: 'a25-b', isTruth: true,  text: { en: "Zechariah 11:12-13 prophesied the 30 pieces of silver and the potter's field, which Matthew applies to Judas's betrayal.", fr: "Zacharie 11:12-13 prophétisa les 30 pièces d'argent et le champ du potier, que Matthieu applique à la trahison de Judas." } },
@@ -1823,7 +1820,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a26', levelNumber: 26, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Revelation — The Four Living Creatures", fr: "Apocalypse — Les Quatre Êtres Vivants" }, image: StoryImages.a26, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Revelation — The Four Living Creatures", fr: "Apocalypse — Les Quatre Êtres Vivants" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a26-a', isTruth: true,  text: { en: "Revelation 4 describes four living creatures around the throne with faces like a lion, an ox, a man, and an eagle.", fr: "Apocalypse 4 décrit quatre êtres vivants autour du trône avec des faces de lion, de bœuf, d'homme et d'aigle." } },
       { id: 'a26-b', isTruth: true,  text: { en: "Each of the four living creatures in Revelation has six wings and is covered with eyes all around.", fr: "Chacun des quatre êtres vivants de l'Apocalypse a six ailes et est couvert d'yeux tout autour." } },
@@ -1834,7 +1831,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a27', levelNumber: 27, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Levitical Feasts (Leviticus 23)", fr: "Les Fêtes Lévitiques (Lévitique 23)" }, image: StoryImages.a27, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "The Levitical Feasts (Leviticus 23)", fr: "Les Fêtes Lévitiques (Lévitique 23)" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a27-a', isTruth: true,  text: { en: "The seven feasts of Israel include Passover, Unleavened Bread, Firstfruits, Pentecost (Weeks), Trumpets, Atonement, and Tabernacles.", fr: "Les sept fêtes d'Israël incluent la Pâque, les Pains sans levain, les Prémices, la Pentecôte, les Trompettes, l'Expiation et les Tabernacles." } },
       { id: 'a27-b', isTruth: true,  text: { en: "The Feast of Tabernacles (Sukkot) lasted seven days and celebrated the wilderness wandering.", fr: "La fête des Tabernacles (Soukkot) durait sept jours et célébrait l'errance dans le désert." } },
@@ -1845,7 +1842,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a28', levelNumber: 28, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "2 Peter — False Teachers", fr: "2 Pierre — Les Faux Docteurs" }, image: StoryImages.a28, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "2 Peter — False Teachers", fr: "2 Pierre — Les Faux Docteurs" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a28-a', isTruth: true,  text: { en: "Peter warns of false teachers who will secretly introduce destructive heresies, even denying the sovereign Lord who bought them.", fr: "Pierre avertit de faux docteurs qui introduiront secrètement des hérésies destructrices, niant même le Seigneur souverain qui les a rachetés." } },
       { id: 'a28-b', isTruth: true,  text: { en: "Peter says that with the Lord a day is like a thousand years, and a thousand years are like a day.", fr: "Pierre dit qu'auprès du Seigneur un jour est comme mille ans et mille ans sont comme un jour." } },
@@ -1856,7 +1853,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a29', levelNumber: 29, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The High Priestly Prayer — John 17", fr: "La Prière Sacerdotale — Jean 17" }, image: StoryImages.a29, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "The High Priestly Prayer — John 17", fr: "La Prière Sacerdotale — Jean 17" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a29-a', isTruth: true,  text: { en: "Jesus prayed that His disciples would be sanctified by the truth, saying 'Your word is truth.'", fr: "Jésus pria que ses disciples soient sanctifiés par la vérité, disant : 'Ta parole est vérité.'" } },
       { id: 'a29-b', isTruth: true,  text: { en: "Jesus prayed for believers to be one, as He and the Father are one, so the world would believe.", fr: "Jésus pria pour que les croyants soient un, comme lui et le Père sont un, afin que le monde croie." } },
@@ -1867,7 +1864,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a30', levelNumber: 30, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Olivet Discourse — Signs of the End", fr: "Le Discours Olivétique — Les Signes de la Fin" }, image: StoryImages.a30, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "The Olivet Discourse — Signs of the End", fr: "Le Discours Olivétique — Les Signes de la Fin" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a30-a', isTruth: true,  text: { en: "Jesus predicted the destruction of the temple, saying not one stone would be left on another.", fr: "Jésus prédit la destruction du temple, disant qu'il n'y resterait pas pierre sur pierre." } },
       { id: 'a30-b', isTruth: true,  text: { en: "Jesus warned of false messiahs, wars, earthquakes, and famines as 'the beginning of birth pains.'", fr: "Jésus avertit de faux messies, de guerres, de tremblements de terre et de famines comme 'le commencement des douleurs de l'enfantement.'" } },
@@ -1878,7 +1875,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a31', levelNumber: 31, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Romans 9–11 — Israel and the Gentiles", fr: "Romains 9–11 — Israël et les Nations" }, image: StoryImages.a31, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Romans 9–11 — Israel and the Gentiles", fr: "Romains 9–11 — Israël et les Nations" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a31-a', isTruth: true,  text: { en: "Paul uses the metaphor of an olive tree in Romans 11, with some natural branches broken off and wild branches grafted in.", fr: "Paul utilise la métaphore d'un olivier dans Romains 11, avec certaines branches naturelles cassées et des branches sauvages greffées." } },
       { id: 'a31-b', isTruth: true,  text: { en: "Paul says 'all Israel will be saved' and a partial hardening has come upon Israel until the full number of Gentiles comes in.", fr: "Paul dit 'tout Israël sera sauvé' et qu'un endurcissement partiel est arrivé à Israël jusqu'à ce que la totalité des nations soit entrée." } },
@@ -1889,7 +1886,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a32', levelNumber: 32, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "1 John — Fellowship and the Tests of Faith", fr: "1 Jean — La Communion et les Tests de la Foi" }, image: StoryImages.a32, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "1 John — Fellowship and the Tests of Faith", fr: "1 Jean — La Communion et les Tests de la Foi" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a32-a', isTruth: true,  text: { en: "1 John says 'God is light; in him there is no darkness at all.'", fr: "1 Jean dit : 'Dieu est lumière et en lui il n'y a pas de ténèbres.'" } },
       { id: 'a32-b', isTruth: true,  text: { en: "John says 'If we claim to be without sin, we deceive ourselves and the truth is not in us.'", fr: "Jean dit : 'Si nous disons que nous n'avons pas de péché, nous nous séduisons nous-mêmes et la vérité n'est pas en nous.'" } },
@@ -1900,7 +1897,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a33', levelNumber: 33, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Revelation — The 144,000", fr: "Apocalypse — Les 144 000" }, image: StoryImages.a33, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Revelation — The 144,000", fr: "Apocalypse — Les 144 000" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a33-a', isTruth: true,  text: { en: "Revelation 7 describes 144,000 sealed from the twelve tribes of Israel — 12,000 from each tribe.", fr: "Apocalypse 7 décrit 144 000 scellés des douze tribus d'Israël — 12 000 de chaque tribu." } },
       { id: 'a33-b', isTruth: true,  text: { en: "Revelation 14 describes the 144,000 as those who had not defiled themselves and followed the Lamb wherever He goes.", fr: "Apocalypse 14 décrit les 144 000 comme ceux qui ne s'étaient pas souillés et qui suivaient l'Agneau partout où il allait." } },
@@ -1911,7 +1908,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a34', levelNumber: 34, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Jeremiah's New Covenant (Jeremiah 31)", fr: "La Nouvelle Alliance de Jérémie (Jérémie 31)" }, image: StoryImages.a34, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "The Jeremiah's New Covenant (Jeremiah 31)", fr: "La Nouvelle Alliance de Jérémie (Jérémie 31)" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a34-a', isTruth: true,  text: { en: "Jeremiah 31 says God will make a new covenant with Israel that is not like the covenant made with their ancestors at the Exodus.", fr: "Jérémie 31 dit que Dieu établira une nouvelle alliance avec Israël qui ne sera pas comme l'alliance faite avec leurs ancêtres lors de l'Exode." } },
       { id: 'a34-b', isTruth: true,  text: { en: "God promises in Jeremiah 31 to put His law in their minds and write it on their hearts.", fr: "Dieu promet dans Jérémie 31 de mettre sa loi dans leur intelligence et de l'écrire sur leur cœur." } },
@@ -1922,7 +1919,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a35', levelNumber: 35, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Beatitudes in Luke vs. Matthew", fr: "Les Béatitudes dans Luc vs Matthieu" }, image: StoryImages.a35, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "The Beatitudes in Luke vs. Matthew", fr: "Les Béatitudes dans Luc vs Matthieu" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a35-a', isTruth: true,  text: { en: "Matthew 5 records eight beatitudes, while Luke 6 records four beatitudes paired with four 'woes.'", fr: "Matthieu 5 rapporte huit béatitudes, tandis que Luc 6 en rapporte quatre associées à quatre 'malheurs.'" } },
       { id: 'a35-b', isTruth: true,  text: { en: "Matthew says 'Blessed are the poor in spirit,' while Luke says 'Blessed are the poor' without the qualifier.", fr: "Matthieu dit 'Heureux les pauvres en esprit', tandis que Luc dit simplement 'Heureux les pauvres' sans qualificatif." } },
@@ -1933,7 +1930,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a36', levelNumber: 36, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Jude — Contending for the Faith", fr: "Jude — Défendre la Foi" }, image: StoryImages.a36, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Jude — Contending for the Faith", fr: "Jude — Défendre la Foi" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a36-a', isTruth: true,  text: { en: "Jude introduces himself as a servant of Jesus Christ and brother of James.", fr: "Jude se présente comme serviteur de Jésus-Christ et frère de Jacques." } },
       { id: 'a36-b', isTruth: true,  text: { en: "Jude references the archangel Michael disputing with the devil about the body of Moses.", fr: "Jude fait référence à l'archange Michel disputant avec le diable au sujet du corps de Moïse." } },
@@ -1944,7 +1941,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a37', levelNumber: 37, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Priestly Garments (Exodus 28)", fr: "Les Vêtements du Sacrificateur (Exode 28)" }, image: StoryImages.a37, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "The Priestly Garments (Exodus 28)", fr: "Les Vêtements du Sacrificateur (Exode 28)" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a37-a', isTruth: true,  text: { en: "The High Priest wore a breastpiece with twelve stones, each engraved with the name of one tribe of Israel.", fr: "Le Grand Sacrificateur portait un pectoral avec douze pierres, chacune gravée du nom d'une tribu d'Israël." } },
       { id: 'a37-b', isTruth: true,  text: { en: "The High Priest wore a robe of blue with golden bells and pomegranates on its hem.", fr: "Le Grand Sacrificateur portait une robe bleue avec des cloches en or et des grenades sur son ourlet." } },
@@ -1955,7 +1952,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a38', levelNumber: 38, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "1 Timothy — Qualifications for Church Leaders", fr: "1 Timothée — Qualifications des Responsables d'Église" }, image: StoryImages.a38, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "1 Timothy — Qualifications for Church Leaders", fr: "1 Timothée — Qualifications des Responsables d'Église" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a38-a', isTruth: true,  text: { en: "Paul says an overseer must be 'above reproach, faithful to his wife, temperate, self-controlled, respectable, hospitable, able to teach.'", fr: "Paul dit qu'un évêque doit être 'sans reproche, mari d'une seule femme, sobre, sensé, digne, hospitalier, propre à enseigner.'" } },
       { id: 'a38-b', isTruth: true,  text: { en: "Paul says an elder must not be a recent convert to avoid becoming conceited and falling into the devil's trap.", fr: "Paul dit qu'un ancien ne doit pas être un converti récent pour ne pas devenir orgueilleux et tomber dans le piège du diable." } },
@@ -1966,7 +1963,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a39', levelNumber: 39, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Malachi — The Final Prophetic Word", fr: "Malachie — La Dernière Parole Prophétique" }, image: StoryImages.a39, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "Malachi — The Final Prophetic Word", fr: "Malachie — La Dernière Parole Prophétique" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a39-a', isTruth: true,  text: { en: "Malachi is the last book of the Old Testament in the Protestant Bible and ends the prophetic record before the New Testament era.", fr: "Malachie est le dernier livre de l'Ancien Testament de la Bible protestante et clôt le registre prophétique avant l'ère du Nouveau Testament." } },
       { id: 'a39-b', isTruth: true,  text: { en: "God accuses the people in Malachi of robbing Him by withholding tithes and offerings.", fr: "Dieu accuse le peuple dans Malachie de le voler en retenant les dîmes et les offrandes." } },
@@ -1977,7 +1974,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a40', levelNumber: 40, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Pharisees and Sadducees — Key Differences", fr: "Pharisiens et Sadducéens — Différences Clés" }, image: StoryImages.a40, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "The Pharisees and Sadducees — Key Differences", fr: "Pharisiens et Sadducéens — Différences Clés" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a40-a', isTruth: true,  text: { en: "The Sadducees rejected belief in the resurrection of the dead, angels, and spirits, while the Pharisees affirmed all three.", fr: "Les Sadducéens rejetaient la croyance en la résurrection des morts, aux anges et aux esprits, tandis que les Pharisiens les affirmaient tous les trois." } },
       { id: 'a40-b', isTruth: true,  text: { en: "The Sadducees only accepted the five books of Moses (Pentateuch) as authoritative, not the Prophets or Writings.", fr: "Les Sadducéens n'acceptaient que les cinq livres de Moïse (Pentateuque) comme faisant autorité, pas les Prophètes ni les Écrits." } },
@@ -1988,7 +1985,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a41', levelNumber: 41, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Revelation — The Millennial Reign", fr: "Apocalypse — Le Règne Millénaire" }, image: StoryImages.a41, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Revelation — The Millennial Reign", fr: "Apocalypse — Le Règne Millénaire" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a41-a', isTruth: true,  text: { en: "Revelation 20 describes Satan being bound and thrown into the Abyss for a thousand years.", fr: "Apocalypse 20 décrit Satan enchaîné et jeté dans l'abîme pour mille ans." } },
       { id: 'a41-b', isTruth: true,  text: { en: "Revelation 20 says those who reigned with Christ for the thousand years are those who did not worship the beast.", fr: "Apocalypse 20 dit que ceux qui régnèrent avec Christ pendant mille ans sont ceux qui n'adorèrent pas la bête." } },
@@ -1999,7 +1996,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a42', levelNumber: 42, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "2 Timothy — Paul's Final Letter", fr: "2 Timothée — La Dernière Lettre de Paul" }, image: StoryImages.a42, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "2 Timothy — Paul's Final Letter", fr: "2 Timothée — La Dernière Lettre de Paul" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a42-a', isTruth: true,  text: { en: "Paul declares in 2 Timothy 3:16 that all Scripture is God-breathed (theopneustos) and useful for teaching, rebuking, correcting, and training.", fr: "Paul déclare dans 2 Timothée 3:16 que toute Écriture est inspirée de Dieu (theopneustos) et utile pour enseigner, reprendre, corriger et instruire." } },
       { id: 'a42-b', isTruth: true,  text: { en: "Paul tells Timothy to endure hardship 'like a good soldier of Christ Jesus.'", fr: "Paul dit à Timothée de supporter les souffrances 'comme un bon soldat du Christ Jésus.'" } },
@@ -2010,7 +2007,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a43', levelNumber: 43, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Parables of the Kingdom — Hidden Treasure and Pearl", fr: "Paraboles du Royaume — Trésor caché et Perle" }, image: StoryImages.a43, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Parables of the Kingdom — Hidden Treasure and Pearl", fr: "Paraboles du Royaume — Trésor caché et Perle" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a43-a', isTruth: true,  text: { en: "Jesus said the kingdom of heaven is like treasure hidden in a field — a man found it, hid it, then sold everything to buy the field.", fr: "Jésus dit que le royaume des cieux est comme un trésor caché dans un champ — un homme le trouva, le cacha, puis vendit tout pour acheter le champ." } },
       { id: 'a43-b', isTruth: true,  text: { en: "Jesus said the kingdom of heaven is like a merchant looking for fine pearls who found one of great value and sold everything to buy it.", fr: "Jésus dit que le royaume des cieux est comme un négociant qui cherchait de belles perles et en trouva une d'une grande valeur qu'il acheta après avoir tout vendu." } },
@@ -2021,7 +2018,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a44', levelNumber: 44, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Mosaic Law — Major Divisions", fr: "La Loi Mosaïque — Divisions Principales" }, image: StoryImages.a44, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "The Mosaic Law — Major Divisions", fr: "La Loi Mosaïque — Divisions Principales" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a44-a', isTruth: true,  text: { en: "Theologians traditionally divide the Mosaic Law into moral, ceremonial, and civil (judicial) categories.", fr: "Les théologiens divisent traditionnellement la Loi mosaïque en catégories morale, cérémonielle et civile (judiciaire)." } },
       { id: 'a44-b', isTruth: true,  text: { en: "The moral law (Ten Commandments) is seen by most Reformed theologians as continuing to bind Christians as a guide to righteous living.", fr: "La loi morale (Dix Commandements) est considérée par la plupart des théologiens réformés comme continuant à lier les chrétiens comme guide de vie juste." } },
@@ -2032,7 +2029,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a45', levelNumber: 45, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Book of Job — God Speaks from the Whirlwind", fr: "Le Livre de Job — Dieu Parle du Tourbillon" }, image: StoryImages.a45, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "The Book of Job — God Speaks from the Whirlwind", fr: "Le Livre de Job — Dieu Parle du Tourbillon" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a45-a', isTruth: true,  text: { en: "God's speech to Job includes the question 'Where were you when I laid the earth's foundation?'", fr: "Le discours de Dieu à Job comprend la question : 'Où étais-tu quand j'ai posé les fondements de la terre ?'" } },
       { id: 'a45-b', isTruth: true,  text: { en: "God rebuked Eliphaz and his two friends, saying they had not spoken what was right about God as Job had.", fr: "Dieu réprimanda Éliphaz et ses deux amis, disant qu'ils n'avaient pas dit de lui ce qui est juste, comme Job l'avait fait." } },
@@ -2043,7 +2040,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a46', levelNumber: 46, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Paul's Letter to the Ephesians — The Church", fr: "La Lettre de Paul aux Éphésiens — L'Église" }, image: StoryImages.a46, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Paul's Letter to the Ephesians — The Church", fr: "La Lettre de Paul aux Éphésiens — L'Église" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a46-a', isTruth: true,  text: { en: "Ephesians 2 describes believers as 'God's handiwork (masterpiece), created in Christ Jesus to do good works.'", fr: "Éphésiens 2 décrit les croyants comme 'l'ouvrage de Dieu (chef-d'œuvre), créés en Jésus-Christ pour des œuvres bonnes.'" } },
       { id: 'a46-b', isTruth: true,  text: { en: "Ephesians 4 lists five ministry gifts: apostles, prophets, evangelists, pastors, and teachers.", fr: "Éphésiens 4 énumère cinq dons ministériels : apôtres, prophètes, évangélistes, pasteurs et docteurs." } },
@@ -2054,7 +2051,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a47', levelNumber: 47, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Abrahamic Covenant — Land Promise", fr: "L'Alliance Abrahamique — La Promesse du Pays" }, image: StoryImages.a47, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "The Abrahamic Covenant — Land Promise", fr: "L'Alliance Abrahamique — La Promesse du Pays" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a47-a', isTruth: true,  text: { en: "God promised Abraham's descendants land 'from the Wadi of Egypt to the great river, the Euphrates.'", fr: "Dieu promit aux descendants d'Abraham la terre 'depuis le torrent d'Égypte jusqu'au grand fleuve, l'Euphrate.'" } },
       { id: 'a47-b', isTruth: true,  text: { en: "God also promised Abraham that all peoples on earth would be blessed through him.", fr: "Dieu promit aussi à Abraham que toutes les familles de la terre seraient bénies en lui." } },
@@ -2065,7 +2062,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a48', levelNumber: 48, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Sanhedrin and Jewish Trial of Jesus", fr: "Le Sanhédrin et le Procès Juif de Jésus" }, image: StoryImages.a48, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "The Sanhedrin and Jewish Trial of Jesus", fr: "Le Sanhédrin et le Procès Juif de Jésus" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a48-a', isTruth: true,  text: { en: "The Sanhedrin was the supreme Jewish council in Jerusalem, composed of 71 members including chief priests, elders, and teachers of the law.", fr: "Le Sanhédrin était le suprême conseil juif de Jérusalem, composé de 71 membres dont des grands sacrificateurs, des anciens et des scribes." } },
       { id: 'a48-b', isTruth: true,  text: { en: "The high priest Caiaphas presided over the Sanhedrin that condemned Jesus.", fr: "Le grand sacrificateur Caïphe présida le Sanhédrin qui condamna Jésus." } },
@@ -2076,7 +2073,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a49', levelNumber: 49, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Women Prophets in the Bible", fr: "Les Femmes Prophètes dans la Bible" }, image: StoryImages.a49, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "Women Prophets in the Bible", fr: "Les Femmes Prophètes dans la Bible" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a49-a', isTruth: true,  text: { en: "Miriam, the sister of Moses, is called a prophetess in the Old Testament.", fr: "Myriam, la sœur de Moïse, est appelée prophétesse dans l'Ancien Testament." } },
       { id: 'a49-b', isTruth: true,  text: { en: "Huldah the prophetess authenticated the Book of the Law found in Josiah's temple renovation.", fr: "La prophétesse Hulda authentifia le Livre de la Loi trouvé lors de la rénovation du temple sous Josias." } },
@@ -2087,7 +2084,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a50', levelNumber: 50, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Daniel 4 — Nebuchadnezzar's Madness", fr: "Daniel 4 — La Folie de Nébucadnetsar" }, image: StoryImages.a50, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "Daniel 4 — Nebuchadnezzar's Madness", fr: "Daniel 4 — La Folie de Nébucadnetsar" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a50-a', isTruth: true,  text: { en: "Nebuchadnezzar dreamed of a great tree that was cut down, leaving only a stump bound with iron and bronze.", fr: "Nébucadnetsar rêva d'un grand arbre qui fut abattu, ne laissant qu'une souche liée de fer et de bronze." } },
       { id: 'a50-b', isTruth: true,  text: { en: "Daniel interpreted the dream to mean Nebuchadnezzar would lose his sanity and live like an animal until he acknowledged God's sovereignty.", fr: "Daniel interpréta le rêve comme signifiant que Nébucadnetsar perdrait sa raison et vivrait comme un animal jusqu'à ce qu'il reconnaisse la souveraineté de Dieu." } },
@@ -2098,7 +2095,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a51', levelNumber: 51, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Spiritual Gifts in 1 Corinthians 12", fr: "Les Dons Spirituels dans 1 Corinthiens 12" }, image: StoryImages.a51, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "Spiritual Gifts in 1 Corinthians 12", fr: "Les Dons Spirituels dans 1 Corinthiens 12" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a51-a', isTruth: true,  text: { en: "Paul lists wisdom, knowledge, faith, healing, miraculous powers, prophecy, distinguishing spirits, tongues, and interpretation of tongues.", fr: "Paul énumère la sagesse, la connaissance, la foi, les guérisons, les miracles, la prophétie, le discernement des esprits, les langues et l'interprétation des langues." } },
       { id: 'a51-b', isTruth: true,  text: { en: "Paul says all these gifts are worked by one and the same Spirit, who distributes them just as He determines.", fr: "Paul dit que tous ces dons sont l'œuvre d'un seul et même Esprit, qui les distribue à chacun en particulier comme il le veut." } },
@@ -2109,7 +2106,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a52', levelNumber: 52, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "Isaiah 7:14 — The Virgin Birth Prophecy", fr: "Ésaïe 7:14 — La Prophétie de la Naissance Virginale" }, image: StoryImages.a52, badgeColor: 'bg-purple-800', testament: 'Old',
+    topic: { en: "Isaiah 7:14 — The Virgin Birth Prophecy", fr: "Ésaïe 7:14 — La Prophétie de la Naissance Virginale" }, badgeColor: 'bg-purple-800', testament: 'Old',
     statements: [
       { id: 'a52-a', isTruth: true,  text: { en: "Isaiah 7:14 says 'the virgin will conceive and give birth to a son, and will call him Immanuel.'", fr: "Ésaïe 7:14 dit : 'la vierge (ou jeune femme) sera enceinte et enfantera un fils, et elle lui donnera le nom d'Emmanuel.'" } },
       { id: 'a52-b', isTruth: true,  text: { en: "Matthew 1:22-23 quotes Isaiah 7:14 as fulfilled in the virgin birth of Jesus.", fr: "Matthieu 1:22-23 cite Ésaïe 7:14 comme accompli dans la naissance virginale de Jésus." } },
@@ -2120,7 +2117,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: 'a53', levelNumber: 53, difficulty: 'Advanced', difficultyFr: 'Avancé',
-    topic: { en: "The Book of Revelation — Opening Vision", fr: "Le Livre de l'Apocalypse — La Vision d'Ouverture" }, image: StoryImages.a53, badgeColor: 'bg-purple-800', testament: 'New',
+    topic: { en: "The Book of Revelation — Opening Vision", fr: "Le Livre de l'Apocalypse — La Vision d'Ouverture" }, badgeColor: 'bg-purple-800', testament: 'New',
     statements: [
       { id: 'a53-a', isTruth: true,  text: { en: "John received the Revelation while exiled on the island of Patmos because of the word of God and his testimony about Jesus.", fr: "Jean reçut l'Apocalypse alors qu'il était exilé sur l'île de Patmos à cause de la parole de Dieu et du témoignage de Jésus." } },
       { id: 'a53-b', isTruth: true,  text: { en: "The vision begins with John seeing seven golden lampstands and one 'like a son of man' with a two-edged sword coming from His mouth.", fr: "La vision commence par Jean voyant sept chandeliers d'or et un 'semblable à un fils de l'homme' avec une épée à deux tranchants sortant de sa bouche." } },

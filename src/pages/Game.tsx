@@ -11,27 +11,6 @@ import { StatementCard } from '@/components/StatementCard';
 import { BookOpen, Flame, Home, Lightbulb, Menu, Play, X, Brain, Trophy } from 'lucide-react';
 
 
-function getStoryArtwork(level: Level): string | null {
-  const topic = `${level.topic.en} ${level.topic.fr}`.toLowerCase();
-  const image = level.image?.trim();
-  if (!image) return null;
-
-  // The first dataset used Noah, David, and Paul as temporary placeholders.
-  // Only show those files for a matching story; future story-specific files
-  // are accepted automatically.
-  if (image.endsWith('/noah.jpg')) {
-    return /noah|noé|ark|arche|flood|déluge/.test(topic) ? image : null;
-  }
-  if (image.endsWith('/david.jpg')) {
-    return /david|goliath/.test(topic) ? image : null;
-  }
-  if (image.endsWith('/paul.jpg')) {
-    return /paul|saul|saül/.test(topic) ? image : null;
-  }
-
-  return image;
-}
-
 function getTimeBonus(timeLeft: number): number {
   if (timeLeft > 20) return 10;
   if (timeLeft > 10) return 5;
@@ -72,7 +51,6 @@ export default function Game() {
   const [eliminatedId, setEliminatedId] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [leaveTarget, setLeaveTarget] = useState<'levels' | 'home' | null>(null);
-  const [storyImageFailed, setStoryImageFailed] = useState(false);
   const didAnswer = useRef(false);
   const navTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -88,7 +66,6 @@ export default function Game() {
   setRevealing(false);
   setEliminatedId(null);
   setTimeLeft(challengeTimeLimit);
-  setStoryImageFailed(false);
 
   // Randomize the order of the 4 statements
   if (currentLevel) {
@@ -175,7 +152,6 @@ export default function Game() {
     : 0;
   const timerColor = timeLeft > 20 ? 'bg-emerald-400' : timeLeft > 10 ? 'bg-amber-400' : 'bg-red-400';
   const timerPulse = timeLeft <= 10 && !revealing;
-  const storyArtwork = getStoryArtwork(currentLevel);
 
   return (
     <div className="min-h-[100dvh] px-4 pb-10 pt-6 md:pt-8 sacred-gradient flex flex-col items-center">
@@ -225,54 +201,47 @@ export default function Game() {
           </div>
         </motion.section>
 
-        {/* Cinematic story artwork with compact status overlays */}
+        {/* Compact story header */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative mb-3 h-36 overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-br from-slate-800 via-slate-950 to-amber-950 shadow-2xl md:h-48"
+          className="mb-3 rounded-2xl border border-white/15 bg-[#0b1728] px-5 py-4 shadow-xl"
         >
-          {storyArtwork && !storyImageFailed ? (
-            <img
-              src={storyArtwork}
-              alt={currentLevel.topic[language]}
-              className="absolute inset-0 h-full w-full object-cover"
-              onError={() => setStoryImageFailed(true)}
-            />
-          ) : (
-            <div className="absolute inset-0 grid place-items-center bg-[radial-gradient(circle_at_50%_25%,rgba(212,175,55,0.18),transparent_42%),linear-gradient(135deg,#14243a,#08111f_58%,#2b1b10)]">
-              <div className="flex flex-col items-center gap-2 px-6 text-center text-white/55">
-                <BookOpen size={46} className="text-amber-400/55" />
-                <span className="font-serif text-base font-semibold md:text-lg">
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <BookOpen size={24} className="shrink-0 text-amber-400" />
+                <h2 className="truncate font-serif text-2xl font-bold text-white">
                   {currentLevel.topic[language]}
+                </h2>
+              </div>
+
+              <div className="mt-2 flex flex-wrap gap-2">
+                <span
+                  className={`rounded-lg px-3 py-1 text-sm font-bold text-white ${currentLevel.badgeColor}`}
+                >
+                  {t(DIFFICULTY_KEYS[currentLevel.difficulty])}
+                </span>
+
+                <span className="rounded-lg border border-white/20 px-3 py-1 text-sm font-bold text-white">
+                  {t('level')} {currentLevel.levelNumber}
                 </span>
               </div>
             </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/20" />
 
-          <div className="absolute left-3 top-3 md:left-4 md:top-4">
             <AnimatePresence>
               {streak > 0 && (
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0, opacity: 0 }}
-                  className="flex items-center gap-2 rounded-xl border border-white/20 bg-black/60 px-3 py-2 font-serif text-sm text-white backdrop-blur"
+                  className="flex shrink-0 items-center gap-2 rounded-xl border border-white/20 bg-black/30 px-3 py-2 font-serif text-sm text-white"
                 >
                   <Flame size={16} className="text-orange-400" />
                   <span>{streak} {t('streak')}</span>
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
-
-          <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-3 md:inset-x-4 md:bottom-4">
-            <span className={`inline-flex items-center rounded-lg px-3 py-1.5 text-sm font-bold text-white shadow-lg ${currentLevel.badgeColor}`}>
-              {t(DIFFICULTY_KEYS[currentLevel.difficulty])}
-            </span>
-            <span className="rounded-lg border border-white/20 bg-black/55 px-3 py-1.5 font-serif text-sm font-bold text-white backdrop-blur">
-              {t('level')} {currentLevel.levelNumber}
-            </span>
           </div>
         </motion.div>
 

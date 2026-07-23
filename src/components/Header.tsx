@@ -151,6 +151,7 @@ export function Header() {
   const showHomeButton = location === '/journey';
   const showLeftControls = !location.startsWith('/levels');
   const showSettingsButton = location === '/';
+  const showLanguageToggle = location === '/';
 
   const handleHome = () => {
     playClick();
@@ -203,7 +204,7 @@ export function Header() {
           </motion.button>
         )}
 
-        <LanguageToggle />
+        {showLanguageToggle && <LanguageToggle />}
       </div>
     </motion.header>
   );

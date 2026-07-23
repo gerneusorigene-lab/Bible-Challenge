@@ -136,36 +136,32 @@ export default function Review() {
                 transition={{ delay: idx * 0.08, duration: 0.35 }}
                 className="overflow-hidden rounded-3xl border border-gold/35 parchment-bg shadow-2xl"
               >
-                <div className="relative overflow-hidden border-b border-gold/20">
-                  <img
-                    src={level.image}
-                    alt={level.topic[language]}
-                    className="h-52 w-full object-cover md:h-64"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
+                <div className="border-b border-gold/20 bg-[#15110a] p-5 text-white md:p-7">
+                  <div className="mb-4 flex items-center gap-2 text-red-300">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full border border-red-300/50 bg-red-950/45">
+                      <X size={17} strokeWidth={2.5} />
+                    </div>
+                    <span className="font-serif text-sm font-bold uppercase tracking-[0.18em]">
+                      {t('incorrect')}
+                    </span>
+                  </div>
 
-                  <div className="absolute inset-x-0 bottom-0 p-5 md:p-7">
-                    <div className="mb-4 flex items-center gap-2 text-red-300">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full border border-red-300/50 bg-red-950/45">
-                        <X size={17} strokeWidth={2.5} />
-                      </div>
-                      <span className="font-serif text-sm font-bold uppercase tracking-[0.18em]">
-                        {t('incorrect')}
-                      </span>
+                  <div className="flex items-start gap-4">
+                    <div
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${level.badgeColor} font-serif text-lg font-bold text-white shadow-lg`}
+                    >
+                      {level.levelNumber}
                     </div>
 
-                    <div className="flex items-end gap-4">
-                      <div
-                        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${level.badgeColor} font-serif text-lg font-bold text-white shadow-lg`}
-                      >
-                        {level.levelNumber}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-white/70">
-                          {t(DIFFICULTY_KEYS[level.difficulty])}
-                          {' • '}
-                          {t(level.testament === 'Old' ? 'old_testament' : 'new_testament')}
-                        </p>
+                    <div className="min-w-0">
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-white/70">
+                        {t(DIFFICULTY_KEYS[level.difficulty])}
+                        {' • '}
+                        {t(level.testament === 'Old' ? 'old_testament' : 'new_testament')}
+                      </p>
+
+                      <div className="flex items-center gap-2">
+                        <BookOpen size={22} className="shrink-0 text-gold" />
                         <h2 className="font-serif text-2xl font-bold leading-snug text-white md:text-3xl">
                           {level.topic[language]}
                         </h2>
