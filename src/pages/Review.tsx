@@ -1,3 +1,4 @@
+import { getLocalizedText } from '@/utils/localizedText';
 import { LEVELS } from '@/data/questions';
 import { useGameState } from '@/hooks/useGameState';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -125,8 +126,12 @@ export default function Review() {
             const selectedIdx = level.statements.findIndex(
               (statement) => statement.id === wrong.selectedStatementId,
             );
-            const study = splitExplanation(level.explanation[language]);
-            const scripture = level.scripture?.[language] ?? study.scripture;
+            const study = splitExplanation(
+                  getLocalizedText(level.explanation, language),
+                );
+            const scripture = level.scripture
+                  ? getLocalizedText(level.scripture, language)
+                  : study.scripture;
 
             return (
               <motion.article

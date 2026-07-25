@@ -165,6 +165,11 @@ const pt = {
   review_one_mistake: "Rever {count} erro",
   review_multiple_mistakes: "Rever {count} erros",
 
+  benefit_all_levels: 'Acesso a todos os {levels} níveis',
+  benefit_unlimited_questions: 'Perguntas ilimitadas',
+  benefit_full_challenge: 'Acesso completo ao modo Desafio',
+  benefit_one_time_purchase: 'Compra única',
+
 };
 
 export default pt;

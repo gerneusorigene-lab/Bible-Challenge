@@ -7,8 +7,14 @@ import { motion } from 'framer-motion';
 import { useLocation } from 'wouter';
 import { Crown, Check, Sparkles, RotateCcw, X } from 'lucide-react';
 import { useState } from 'react';
+import type { TranslationKey } from '@/i18n/translations';
 
-const BENEFITS = [
+type Benefit = {
+  key: TranslationKey;
+  values?: Record<string, string | number>;
+};
+
+const BENEFITS: Benefit[] = [
   { key: 'benefit_all_levels', values: { levels: LEVELS.length } },
   { key: 'benefit_unlimited_questions' },
   { key: 'benefit_full_challenge' },

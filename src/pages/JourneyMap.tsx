@@ -13,6 +13,7 @@ import { useSound } from "@/hooks/useSound";
 import { LEVELS } from "@/data/questions";
 import { groupLevelsIntoStories } from "@/data/storyGroups";
 import { useGameState } from "@/hooks/useGameState";
+import { getLocalizedText } from '@/utils/localizedText';
 
 type StoryNode = {
   id: string;
@@ -52,7 +53,7 @@ export default function JourneyMap() {
 
     return {
       id: story.id,
-      title: story.representative.topic[language],
+      title: getLocalizedText(story.representative.topic, language),
       status,
     };
   });

@@ -11,10 +11,12 @@ import {
   TranslationKey,
 } from "@/i18n/translations";
 
+type TranslationValues = Record<string, string | number>;
+
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: TranslationKey) => string;
+  t: (key: TranslationKey, values?: TranslationValues) => string;
 }
 
 const LanguageContext =

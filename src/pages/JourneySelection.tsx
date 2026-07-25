@@ -15,7 +15,7 @@ type Journey = {
   icon: typeof BookOpen;
   theme: string;
   glow: string;
-  badge: string;
+  
 };
 
 const JOURNEYS: Journey[] = [

@@ -165,6 +165,11 @@ const es = {
   review_one_mistake: "Revisar {count} error",
   review_multiple_mistakes: "Revisar {count} errores",
 
+  benefit_all_levels: 'Acceso a los {levels} niveles',
+  benefit_unlimited_questions: 'Preguntas ilimitadas',
+  benefit_full_challenge: 'Acceso completo al modo Desafío',
+  benefit_one_time_purchase: 'Compra única',
+
 };
 
 export default es;

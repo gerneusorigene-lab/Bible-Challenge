@@ -1,11 +1,6 @@
 import { motion } from "framer-motion";
-import {
-  BookOpen,
-  Check,
-  ChevronRight,
-  Lock,
-  Star,
-} from "lucide-react";
+import { ChevronRight, Star } from "lucide-react";
+import type { Language, TranslationKey } from '@/i18n/translations';
 
 type StoryCardProps = {
   story: any;
@@ -13,7 +8,7 @@ type StoryCardProps = {
   index: number;
   theme: any;
 
-  language: "en" | "fr";
+  language: Language;
   description: string;
 
   playableQuestionCount: number;
@@ -26,7 +21,7 @@ type StoryCardProps = {
   locked: boolean;
   completed: boolean;
 
-  t: (en: string, fr: string) => string;
+  t: (key: TranslationKey) => string;
 
   onPlay: () => void;
 };
@@ -43,11 +38,9 @@ export default function StoryCard({
   masteryPercent,
   bestScore,
   locked,
-  completed,
   t,
   onPlay,
 }: StoryCardProps) {
-
   return (
     <motion.button
       type="button"
@@ -64,16 +57,6 @@ export default function StoryCard({
       }`}
     >
       <div className="flex items-center gap-4 p-4">
-        <div className={`flex h-24 w-24 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${theme.button}`}>
-          {locked ? (
-            <Lock size={26} className="text-white" />
-          ) : completed ? (
-            <Check size={28} className="text-white" />
-          ) : (
-            <BookOpen size={34} className="text-white" />
-          )}
-        </div>
-
         {/* Information */}
         <div className="min-w-0 flex-1 text-left">
           <div className="flex items-start justify-between gap-3">
@@ -103,8 +86,8 @@ export default function StoryCard({
           <p className="mt-2 text-xs font-bold text-white/80">
             🧩 {playableQuestionCount}{" "}
             {playableQuestionCount === 1
-              ? t('question')
-              : t('questions')}
+              ? t("question")
+              : t("questions")}
           </p>
 
           <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/10">
@@ -115,7 +98,7 @@ export default function StoryCard({
           </div>
 
           <p className="mt-1 text-xs text-white/60">
-            {t('mastered')} {masteredCount}/{story.levels.length}
+            {t("mastered")} {masteredCount}/{story.levels.length}
           </p>
         </div>
 

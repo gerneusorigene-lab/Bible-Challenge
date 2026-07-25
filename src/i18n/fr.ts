@@ -162,6 +162,11 @@ const fr = {
   share_score_message: "J'ai obtenu {score} points à Trois Vérités et Un Mensonge ! 🔥 Meilleure série : {streak} | Testez vos connaissances bibliques !",
   review_one_mistake: "Revoir {count} erreur",
   review_multiple_mistakes: "Revoir {count} erreurs",
+
+  benefit_all_levels: 'Accès aux {levels} niveaux',
+  benefit_unlimited_questions: 'Questions illimitées',
+  benefit_full_challenge: 'Accès complet au mode Défi',
+  benefit_one_time_purchase: 'Achat unique',
 };
 
 export default fr;

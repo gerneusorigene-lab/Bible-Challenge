@@ -1,8 +1,11 @@
-export type Language = 'en' | 'fr';
+import type { LocalizedText } from '@/utils/localizedText';
+
+export type { Language } from '@/i18n/translations';
+export type { LocalizedText } from '@/utils/localizedText';
 
 export interface Statement {
   id: string;
-  text: { en: string; fr: string };
+  text: LocalizedText;
   isTruth: boolean;
 }
 
@@ -11,17 +14,18 @@ export interface Level {
   levelNumber: number;
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
   difficultyFr: 'Débutant' | 'Intermédiaire' | 'Avancé';
-  topic: { en: string; fr: string };
+  topic: LocalizedText;
   statements: Statement[];
-  explanation: { en: string; fr: string };
-  scripture?: { en: string; fr: string };
-  keyLesson?: { en: string; fr: string };
-  teacherNote?: { en: string; fr: string };
-  didYouKnow?: { en: string; fr: string };
-  lifeApplication?: { en: string; fr: string };
+  explanation: LocalizedText;
+  scripture?: LocalizedText;
+  keyLesson?: LocalizedText;
+  teacherNote?: LocalizedText;
+  didYouKnow?: LocalizedText;
+  lifeApplication?: LocalizedText;
   badgeColor: string;
   testament: 'Old' | 'New';
 }
+
 
 
 export const LEVELS: Level[] = [

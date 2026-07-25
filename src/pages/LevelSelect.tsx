@@ -311,67 +311,60 @@ export default function LevelSelect() {
                 challengeOn ? 'opacity-100' : 'opacity-35'
               }`}
             >
-              <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+              <div className="flex flex-wrap items-center gap-3 sm:justify-end">
                 <p className="mr-1 whitespace-nowrap text-[11px] font-black uppercase tracking-widest text-white/65">
                   {t('number_of_questions')}
                 </p>
 
-                {([10, 20, 40] as const).map((count) => (
-                  <button
-                    key={count}
-                    type="button"
-                    disabled={!challengeOn}
-                    onClick={() => {
-                      playClick();
-                      setQuestionCount(count);
-                    }}
-                    className={`min-w-12 rounded-full border px-3 py-1.5 text-xs font-black transition disabled:cursor-not-allowed ${
-                      challengeOn && questionCount === count
-                        ? `border-white/70 bg-gradient-to-r ${theme.button} text-white`
-                        : 'border-white/15 bg-black/20 text-white/55'
-                    }`}
-                  >
-                    {count}
-                  </button>
-                ))}
+                <select
+                  disabled={!challengeOn}
+                  value={questionCount}
+                  onChange={(e) => {
+                    playClick();
+                    setQuestionCount(Number(e.target.value) as 10 | 20 | 40);
+                  }}
+                  className={`rounded-xl border border-white/20 bg-black/20 px-3 py-2 text-sm font-bold text-white transition
+                    ${!challengeOn ? 'cursor-not-allowed opacity-50' : ''}`}
+                >
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={40}>40</option>
+                </select>
               </div>
             </div>
           </div>
 
           <div
-            className={`mt-4 border-t border-white/10 pt-3 transition-opacity ${
-              challengeOn ? 'opacity-100' : 'opacity-35'
-            }`}
-          >
-            <div className="flex flex-wrap items-center gap-2">
-              <p className="mr-1 whitespace-nowrap text-[11px] font-black uppercase tracking-widest text-white/65">
-                {t('time_limit')}
-              </p>
+  className={`mt-4 border-t border-white/10 pt-3 transition-opacity ${
+    challengeOn ? 'opacity-100' : 'opacity-35'
+  }`}
+>
+  <div className="flex flex-wrap items-center gap-3">
+    <p className="mr-1 whitespace-nowrap text-[11px] font-black uppercase tracking-widest text-white/65">
+      {t('time_limit')}
+    </p>
 
-              {([30, 45, 60] as const).map((seconds) => (
-                <button
-                  key={seconds}
-                  type="button"
-                  disabled={!challengeOn}
-                  onClick={() => {
-                    playClick();
-                    setTimeLimit(seconds);
-                  }}
-                  className={`min-w-14 rounded-full border px-3 py-1.5 text-xs font-black transition disabled:cursor-not-allowed ${
-                    challengeOn && timeLimit === seconds
-                      ? `border-white/70 bg-gradient-to-r ${theme.button} text-white`
-                      : 'border-white/15 bg-black/20 text-white/55'
-                  }`}
-                >
-                  {seconds}s
-                </button>
-              ))}
+    <select
+      disabled={!challengeOn}
+      value={timeLimit}
+      onChange={(e) => {
+        playClick();
+        setTimeLimit(Number(e.target.value) as 30 | 45 | 60);
+      }}
+      className={`w-48 appearance-none rounded-xl border border-white/20 bg-black/20 px-3 py-2 text-sm font-bold text-white transition
+        focus:border-white/60 focus:outline-none
+        ${!challengeOn ? 'cursor-not-allowed opacity-50' : ''}`}
+            >
+      <option value={30}>30 s</option>
+      <option value={45}>45 s</option>
+      <option value={60}>60 s</option>
+    </select>
 
-              <p className="basis-full pt-1 text-xs font-semibold text-white/55 sm:ml-2 sm:basis-auto sm:pt-0">
-                {t('timed_play_speed_bonus')}
-              </p>
-            </div>
-          </div>
+    <p className="basis-full pt-1 text-xs font-semibold text-white/55 sm:ml-2 sm:basis-auto sm:pt-0">
+      {t('timed_play_speed_bonus')}
+    </p>
+  </div>
+</div>
         </section>
 
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

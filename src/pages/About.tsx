@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowLeft, BookOpen, Building2, Info } from 'lucide-react';
+import { ArrowLeft, BookOpen, Building2 } from 'lucide-react';
 import { useLocation } from 'wouter';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useSound } from '@/hooks/useSound';
@@ -75,20 +75,12 @@ export default function About() {
   };
 
   return (
-    <main className="relative min-h-[100dvh] overflow-hidden sacred-gradient px-4 pb-10 pt-24">
+    <main className="relative min-h-[100dvh] overflow-hidden sacred-gradient px-4 pb-10 pt-12">
       <motion.section
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         className="relative z-10 mx-auto flex w-full max-w-xl flex-col items-center text-center"
       >
-        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-gold/40 bg-slate-950/35 text-gold shadow-xl backdrop-blur">
-          <Info size={31} />
-        </div>
-
-        <h1 className="mb-6 font-serif text-3xl font-black uppercase tracking-[0.12em] text-gold sm:text-4xl">
-          {text.title}
-        </h1>
-
         <div className="w-full rounded-3xl border border-white/20 bg-slate-950/35 p-7 shadow-2xl backdrop-blur-md sm:p-9">
           <BookOpen size={42} className="mx-auto mb-4 text-gold" />
 

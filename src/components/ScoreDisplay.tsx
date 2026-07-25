@@ -14,7 +14,7 @@ export function ScoreDisplay() {
       data-testid="display-score"
     >
       <span className="font-serif text-gold/80 text-sm tracking-widest uppercase">
-        {t('Score', 'Score')}
+        {t('score')}
       </span>
       <span className="font-serif font-bold text-xl text-gold gold-glow">
         {score}

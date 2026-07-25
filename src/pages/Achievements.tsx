@@ -3,12 +3,16 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useSound } from '@/hooks/useSound';
 import { motion } from 'framer-motion';
 import { ArrowLeft, CheckCircle2, LockKeyhole, Trophy } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'wouter';
+
 
 const categoryOrder = ['Learning', 'Accuracy', 'Exploration', 'Dedication', 'Mastery'] as const;
 
-const categoryIcons: Record<(typeof categoryOrder)[number], string> = {
+type AchievementCategory = (typeof categoryOrder)[number];
+type LocalizedText = Record<string, string | undefined>;
+
+const categoryIcons: Record<AchievementCategory, string> = {
   Learning: '📖',
   Accuracy: '🎯',
   Exploration: '🌍',
@@ -16,14 +20,58 @@ const categoryIcons: Record<(typeof categoryOrder)[number], string> = {
   Mastery: '👑',
 };
 
+const categoryTitles: Record<AchievementCategory, string> = {
+  Learning: 'Learning',
+  Accuracy: 'Accuracy',
+  Exploration: 'Exploration',
+  Dedication: 'Dedication',
+  Mastery: 'Mastery',
+};
+function getLocalizedText(value: LocalizedText, language: string): string {
+  return value[language] ?? value.en ?? value.fr ?? Object.values(value).find(Boolean) ?? '';
+}
+
+function getValidIsoDate(value: string | number | Date | undefined): string | undefined {
+  if (value === undefined || value === null || value === '') return undefined;
+
+  const date = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
+}
+
+function formatAchievementDate(
+  value: string | number | Date | undefined,
+  locale: string,
+  fallback: string,
+): string {
+  if (value === undefined || value === null || value === '') return fallback;
+
+  const date = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.getTime())) return fallback;
+
+  try {
+    return new Intl.DateTimeFormat(locale, {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    }).format(date);
+  } catch {
+    return fallback;
+  }
+}
+
 export default function Achievements() {
   const { achievements, unlockedIds, unlockedAt, newIds, unlockedCount, total, markSeen } = useAchievements();
   const { language, t } = useLanguage();
   const { playClick } = useSound();
   const [, setLocation] = useLocation();
+  const processedNewIdsRef = useRef(new Set<string>());
 
   useEffect(() => {
-    if (newIds.length > 0) markSeen(newIds);
+    const unseenIds = newIds.filter((id) => !processedNewIdsRef.current.has(id));
+    if (unseenIds.length === 0) return;
+
+    unseenIds.forEach((id) => processedNewIdsRef.current.add(id));
+    markSeen(unseenIds);
   }, [markSeen, newIds]);
 
   const goBack = () => {
@@ -31,17 +79,22 @@ export default function Achievements() {
     setLocation('/');
   };
 
-  const progressPercentage = total > 0 ? Math.floor((unlockedCount / total) * 100) : 0;
+  const safeTotal = Math.max(0, total);
+  const safeUnlockedCount = Math.min(Math.max(0, unlockedCount), safeTotal);
+  const progressPercentage = safeTotal > 0
+    ? Math.round((safeUnlockedCount / safeTotal) * 100)
+    : 0;
   const dateLocale = language === 'fr' ? 'fr-CA' : 'en-US';
 
   return (
     <main className="min-h-[100dvh] sacred-gradient px-4 pb-12 pt-24 sm:px-6">
       <section className="mx-auto w-full max-w-4xl">
         <button
+          type="button"
           onClick={goBack}
           className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-4 py-2 text-sm font-bold text-white/80 backdrop-blur hover:bg-black/30"
         >
-          <ArrowLeft size={17} /> {t('Back', 'Retour')}
+          <ArrowLeft size={17} aria-hidden="true" /> {t('back')}
         </button>
 
         <motion.div
@@ -50,7 +103,7 @@ export default function Achievements() {
           className="mb-7 rounded-3xl border border-gold/35 bg-slate-950/45 px-5 py-5 text-center shadow-2xl backdrop-blur-md sm:px-7"
         >
           <div className="flex items-center justify-center gap-3">
-            <Trophy className="shrink-0 text-yellow-300" size={38} />
+            <Trophy className="shrink-0 text-yellow-300" size={38} aria-hidden="true" />
             <h1 className="font-serif text-3xl font-black text-gold sm:text-4xl">
               {t('achievement_gallery')}
             </h1>
@@ -65,12 +118,19 @@ export default function Achievements() {
               {t('achievements_unlocked')}
             </p>
             <p className="mt-1 text-base font-extrabold text-white">
-              {unlockedCount} {t('of')} {total} ({progressPercentage}%)
+              {safeUnlockedCount} {t('of')} {safeTotal} ({progressPercentage}%)
             </p>
-            <div className="mt-2 h-3 overflow-hidden rounded-full bg-white/10">
+            <div
+              className="mt-2 h-3 overflow-hidden rounded-full bg-white/10"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={progressPercentage}
+              aria-label={t('achievements_unlocked')}
+            >
               <motion.div
                 initial={{ width: 0 }}
-                animate={{ width: `${total > 0 ? (unlockedCount / total) * 100 : 0}%` }}
+                animate={{ width: `${progressPercentage}%` }}
                 className="h-full rounded-full bg-gradient-to-r from-amber-500 to-yellow-200"
               />
             </div>
@@ -80,32 +140,27 @@ export default function Achievements() {
         <div className="space-y-7">
           {categoryOrder.map((category) => {
             const items = achievements.filter((achievement) => achievement.category === category);
-            const translatedCategory = t(
-              category === 'Learning' ? 'learning' :
-              category === 'Accuracy' ? 'accuracy' :
-              category === 'Exploration' ? 'exploration' :
-              category === 'Dedication' ? 'dedication' :
-              'mastery'
-            );
+            if (items.length === 0) return null;
 
             return (
               <section key={category}>
                 <h2 className="mb-3 flex items-center gap-2 font-serif text-xl font-bold text-white">
                   <span aria-hidden="true">{categoryIcons[category]}</span>
-                  <span>{translatedCategory}</span>
+                  <span>{categoryTitles[category]}</span>
                 </h2>
 
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {items.map((achievement, index) => {
                     const unlocked = unlockedIds.includes(achievement.id);
                     const earnedDate = unlockedAt[achievement.id];
-                    const formattedDate = earnedDate
-                      ? new Intl.DateTimeFormat(dateLocale, {
-                          month: 'short',
-                          day: 'numeric',
-                          year: 'numeric',
-                        }).format(new Date(earnedDate))
-                      : t('today');
+                    const earnedDateIso = getValidIsoDate(earnedDate);
+                    const formattedDate = formatAchievementDate(
+                      earnedDate,
+                      dateLocale,
+                      t('today'),
+                    );
+                    const title = getLocalizedText(achievement.title as LocalizedText, language);
+                    const description = getLocalizedText(achievement.desc as LocalizedText, language);
 
                     return (
                       <motion.article
@@ -124,6 +179,7 @@ export default function Achievements() {
                             className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-2xl ${
                               unlocked ? 'bg-gold/15' : 'bg-white/10 grayscale opacity-55'
                             }`}
+                            aria-hidden="true"
                           >
                             {achievement.icon}
                           </div>
@@ -134,14 +190,14 @@ export default function Achievements() {
                                 unlocked ? 'text-card-foreground' : 'text-white/60'
                               }`}
                             >
-                              {achievement.title[language]}
+                              {title}
                             </h3>
                             <p
                               className={`mt-0.5 text-sm leading-snug ${
                                 unlocked ? 'text-card-foreground/65' : 'text-white/45'
                               }`}
                             >
-                              {achievement.desc[language]}
+                              {description}
                             </p>
                           </div>
                         </div>
@@ -150,18 +206,18 @@ export default function Achievements() {
                           {unlocked ? (
                             <>
                               <span className="inline-flex items-center gap-1.5 text-emerald-700">
-                                <CheckCircle2 size={15} /> {t('unlocked')}
+                                <CheckCircle2 size={15} aria-hidden="true" /> {t('unlocked')}
                               </span>
-                              <span className="text-right normal-case tracking-normal text-card-foreground/55">
-                                <span className="block text-[10px] font-bold uppercase tracking-wider">
-                                  {t('unlocked')}
-                                </span>
-                                <time className="block text-xs font-semibold">{formattedDate}</time>
-                              </span>
+                              <time
+                                dateTime={earnedDateIso}
+                                className="text-right text-xs font-semibold normal-case tracking-normal text-card-foreground/55"
+                              >
+                                {formattedDate}
+                              </time>
                             </>
                           ) : (
                             <span className="inline-flex items-center gap-1.5 text-white/50">
-                              <LockKeyhole size={14} /> {t('locked')}
+                              <LockKeyhole size={14} aria-hidden="true" /> {t('locked')}
                             </span>
                           )}
                         </div>

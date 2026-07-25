@@ -1,6 +1,4 @@
-
-
-
+import { getLocalizedText } from '@/utils/localizedText';
 import { useGameState } from '@/hooks/useGameState';
 import { useAchievements } from '@/hooks/useAchievements';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -130,7 +128,7 @@ export default function End() {
               const a = achievements.find(ac => ac.id === id);
               return a ? (
                 <p key={id} className="text-card-foreground/80 text-sm">
-                  {a.icon} {a.title[language]}
+                  {a.icon} {getLocalizedText(a.title, language)}
                 </p>
               ) : null;
             })}

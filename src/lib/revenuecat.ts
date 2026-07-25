@@ -56,17 +56,27 @@ export function ensureRevenueCatConfigured(): Promise<boolean> {
         );
         return false;
       }
+
       try {
         if (import.meta.env.DEV) {
           await Purchases.setLogLevel({ level: LOG_LEVEL.DEBUG });
         }
+
         await Purchases.configure({ apiKey });
         return true;
       } catch (err) {
         console.error('[RevenueCat] Failed to configure SDK', err);
         return false;
       }
-    })();
+    })().then((configured) => {
+      // Keep the successful promise for the rest of the session.
+      // Clear failed attempts so a later purchase action can retry.
+      if (!configured) {
+        configurePromise = null;
+      }
+
+      return configured;
+    });
   }
 
   return configurePromise;

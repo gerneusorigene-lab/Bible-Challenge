@@ -4,7 +4,7 @@ import { useSound } from '@/hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Trophy, ChevronDown } from 'lucide-react';
-
+import { getLocalizedText } from '@/utils/localizedText';
 export function AchievementsPanel() {
   const { ACHIEVEMENTS, unlockedIds, newIds, unlockedCount, total } = useAchievements();
   const { language, t } = useLanguage();
@@ -64,7 +64,7 @@ export function AchievementsPanel() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: i * 0.04 }}
-                    title={achievement.desc[language]}
+                    title={getLocalizedText(achievement.desc, language)}
                     className={`relative flex flex-col items-center gap-1 p-2.5 rounded-xl border text-center transition-all ${
                       unlocked
                         ? 'parchment-bg border-gold/40 shadow-[0_0_8px_rgba(212,175,55,0.15)]'
@@ -76,7 +76,7 @@ export function AchievementsPanel() {
                     )}
                     <span className={`text-2xl ${unlocked ? '' : 'opacity-30'}`}>{achievement.icon}</span>
                     <span className="font-serif text-[10px] leading-tight text-card-foreground">
-                      {achievement.title[language]}
+                      {getLocalizedText(achievement.title, language)}
                     </span>
                   </motion.div>
                 );

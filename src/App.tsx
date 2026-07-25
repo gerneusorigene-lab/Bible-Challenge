@@ -14,7 +14,7 @@ import Result from '@/pages/Result';
 import End from '@/pages/End';
 import Review from '@/pages/Review';
 import Paywall from '@/pages/Paywall';
-import Achievements from '@/pages/Achievements';
+import Achievements from '@/pages/achievements';
 import Settings from '@/pages/Settings';
 import About from '@/pages/About';
 import NotFound from '@/pages/not-found';

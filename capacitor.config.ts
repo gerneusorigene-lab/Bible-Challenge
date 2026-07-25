@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.threetruths.biblegame',
-  appName: 'Bible Challenge',
+  appId: 'com.belleus.myapp',
+  appName: 'Bible Challenge Game',
   webDir: 'dist/public',
   bundledWebRuntime: false,
 };
