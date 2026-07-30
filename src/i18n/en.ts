@@ -116,7 +116,7 @@ const en = {
   close: "Close",
   go_premium: "Go Premium",
   free_version_limit: "The free version includes limited content.",
-  one_time_price: "One-time purchase",
+  one_time_price: "Annual Subscription",
   already_premium: "You already have Premium",
   processing: "Processing...",
   restore_purchases: "Restore Purchases",
@@ -168,7 +168,7 @@ const en = {
   benefit_all_levels: 'Access all {levels} levels',
   benefit_unlimited_questions: 'Unlimited questions',
   benefit_full_challenge: 'Full access to Challenge Mode',
-  benefit_one_time_purchase: 'One-time purchase',
+  benefit_annual_subscription: "Annual subscription",
 
 };
 

@@ -116,7 +116,7 @@ const fr = {
   close: "Fermer",
   go_premium: "Passer à Premium",
   free_version_limit: "La version gratuite comprend un contenu limité.",
-  one_time_price: "Achat unique",
+  one_time_price: "Abonnement annuel",
   already_premium: "Vous avez déjà Premium",
   processing: "Traitement en cours...",
   restore_purchases: "Restaurer les achats",
@@ -166,7 +166,7 @@ const fr = {
   benefit_all_levels: 'Accès aux {levels} niveaux',
   benefit_unlimited_questions: 'Questions illimitées',
   benefit_full_challenge: 'Accès complet au mode Défi',
-  benefit_one_time_purchase: 'Achat unique',
+  benefit_annual_subscription: "Abonnement annuel",
 };
 
 export default fr;

@@ -116,7 +116,7 @@ const pt = {
   close: "Fechar",
   go_premium: "Torne-se Premium",
   free_version_limit: "A versão gratuita inclui conteúdo limitado.",
-  one_time_price: "Compra única",
+  one_time_price: "Assinatura anual",
   already_premium: "Você já tem Premium",
   processing: "Processando...",
   restore_purchases: "Restaurar compras",
@@ -168,7 +168,7 @@ const pt = {
   benefit_all_levels: 'Acesso a todos os {levels} níveis',
   benefit_unlimited_questions: 'Perguntas ilimitadas',
   benefit_full_challenge: 'Acesso completo ao modo Desafio',
-  benefit_one_time_purchase: 'Compra única',
+  benefit_annual_subscription: "Assinatura anual",
 
 };
 

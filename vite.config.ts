@@ -15,47 +15,52 @@ export default defineConfig({
     tailwindcss(),
 
     VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'favicon.svg'],
+  registerType: 'autoUpdate',
 
-      manifest: {
-        name: 'Bible Challenge Game',
-        short_name: 'Bible Challenge',
+  devOptions: {
+    enabled: false,
+  },
 
-        description:
-          'Strengthen your faith through an engaging and interactive Bible learning experience.',
+  includeAssets: ['favicon.ico', 'favicon.svg'],
 
-        theme_color: '#061526',
-        background_color: '#061526',
-        display: 'standalone',
-        orientation: 'portrait',
-        start_url: '/',
-        scope: '/',
+  manifest: {
+    name: 'Bible Challenge Game',
+    short_name: 'Bible Challenge',
 
-        icons: [
-          {
-            src: '/icons/icon-192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: '/icons/icon-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: '/icons/icon-512-maskable.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'maskable',
-          },
-        ],
+    description:
+      'Strengthen your faith through an engaging and interactive Bible learning experience.',
+
+    theme_color: '#061526',
+    background_color: '#061526',
+    display: 'standalone',
+    orientation: 'portrait',
+    start_url: '/',
+    scope: '/',
+
+    icons: [
+      {
+        src: '/icons/icon-192.png',
+        sizes: '192x192',
+        type: 'image/png',
       },
-
-      workbox: {
-        cleanupOutdatedCaches: true,
+      {
+        src: '/icons/icon-512.png',
+        sizes: '512x512',
+        type: 'image/png',
       },
-    }),
+      {
+        src: '/icons/icon-512-maskable.png',
+        sizes: '512x512',
+        type: 'image/png',
+        purpose: 'maskable',
+      },
+    ],
+  },
+
+  workbox: {
+    cleanupOutdatedCaches: true,
+  },
+}),
   ],
 
   resolve: {

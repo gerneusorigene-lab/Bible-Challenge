@@ -1,10 +1,13 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
 import { Component, useEffect, type ReactNode } from 'react';
+
 import { LanguageProvider } from '@/hooks/useLanguage';
 import { SoundProvider } from '@/hooks/useSound';
 import { useEntitlement } from '@/hooks/useEntitlement';
+
 import { Header } from '@/components/Header';
+
 import Home from '@/pages/Home';
 import JourneySelection from '@/pages/JourneySelection';
 import JourneyMap from '@/pages/JourneyMap';
@@ -17,8 +20,10 @@ import Paywall from '@/pages/Paywall';
 import Achievements from '@/pages/achievements';
 import Settings from '@/pages/Settings';
 import About from '@/pages/About';
+import Terms from '@/pages/Terms';
 import NotFound from '@/pages/not-found';
 
+import { getRevenueCatAppUserId } from '@/lib/revenuecat';
 
 const queryClient = new QueryClient();
 
@@ -28,11 +33,16 @@ class ErrorBoundary extends Component<
 > {
   constructor(props: { children: ReactNode }) {
     super(props);
-    this.state = { hasError: false };
+
+    this.state = {
+      hasError: false,
+    };
   }
 
   static getDerivedStateFromError() {
-    return { hasError: true };
+    return {
+      hasError: true,
+    };
   }
 
   render() {
@@ -42,9 +52,11 @@ class ErrorBoundary extends Component<
           <h1 className="font-serif text-3xl text-gold mb-4">
             Something went wrong
           </h1>
+
           <p className="text-foreground/70 mb-8">
             An unexpected error occurred. Please refresh to continue.
           </p>
+
           <button
             type="button"
             onClick={() => {
@@ -80,9 +92,7 @@ function Router() {
         <Route path="/paywall" component={Paywall} />
         <Route path="/achievements" component={Achievements} />
         <Route path="/settings" component={Settings} />
-        
-
-        
+        <Route path="/terms" component={Terms} />
         <Route path="/about" component={About} />
         <Route component={NotFound} />
       </Switch>
@@ -91,11 +101,92 @@ function Router() {
 }
 
 function App() {
-  const checkStatus = useEntitlement((state) => state.checkStatus);
+  const checkStatus = useEntitlement(
+    (state) => state.checkStatus,
+  );
 
   useEffect(() => {
-    // Re-sync the premium entitlement from RevenueCat on launch.
-    checkStatus();
+    let statusCheckInProgress = false;
+
+    const refreshPremiumStatus = async () => {
+      if (statusCheckInProgress) {
+        return;
+      }
+
+      statusCheckInProgress = true;
+
+      try {
+        const isPremium = await checkStatus();
+
+        console.log(
+          '[RevenueCat] Premium status refreshed:',
+          isPremium,
+        );
+      } catch (error) {
+        console.error(
+          '[RevenueCat] Could not refresh Premium status.',
+          error,
+        );
+      } finally {
+        statusCheckInProgress = false;
+      }
+    };
+
+    // Check the Premium entitlement when the app first opens.
+    void refreshPremiumStatus();
+
+    // Check again when the player returns to the browser tab.
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        void refreshPremiumStatus();
+      }
+    };
+
+    // Check again when the browser window regains focus.
+    const handleFocus = () => {
+      void refreshPremiumStatus();
+    };
+
+    // Check when the browser restores the page.
+    const handlePageShow = () => {
+      void refreshPremiumStatus();
+    };
+
+    // Check when the player returns through browser navigation.
+    const handlePopState = () => {
+      void refreshPremiumStatus();
+    };
+
+    document.addEventListener(
+      'visibilitychange',
+      handleVisibilityChange,
+    );
+
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('pageshow', handlePageShow);
+    window.addEventListener('popstate', handlePopState);
+
+    getRevenueCatAppUserId()
+      .then((id) => {
+        console.log('RevenueCat App User ID =', id);
+      })
+      .catch((error) => {
+        console.error(
+          '[RevenueCat] Could not retrieve the App User ID.',
+          error,
+        );
+      });
+
+    return () => {
+      document.removeEventListener(
+        'visibilitychange',
+        handleVisibilityChange,
+      );
+
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('pageshow', handlePageShow);
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, [checkStatus]);
 
   return (
@@ -103,7 +194,9 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <LanguageProvider>
           <SoundProvider>
-            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+            <WouterRouter
+              base={import.meta.env.BASE_URL.replace(/\/$/, '')}
+            >
               <Router />
             </WouterRouter>
           </SoundProvider>
