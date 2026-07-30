@@ -1,4 +1,4 @@
-package com.threetruths.biblegame;
+package com.belleus.myapp;
 
 import com.getcapacitor.BridgeActivity;
 

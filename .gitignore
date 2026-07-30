@@ -23,11 +23,22 @@ android/.gradle/
 android/build/
 android/app/build/
 android/app/src/main/assets/public/
+android/capacitor-cordova-android-plugins/build/
 
 # iOS
 ios/App/Pods/
 ios/App/build/
+# Generated Capacitor web assets
+ios/App/App/public/assets/
+ios/App/App/public/icons/
+ios/App/App/public/manifest.webmanifest
+ios/App/App/public/registerSW.js
+ios/App/App/public/sw.js
+ios/App/App/public/workbox-*.js
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Android secrets
+android/keystore.properties
