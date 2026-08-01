@@ -1,0 +1,10 @@
+{
+	"appId": "com.threetruths.biblegame",
+	"appName": "Three Truths and One Lie",
+	"webDir": "dist/public",
+	"bundledWebRuntime": false,
+	"packageClassList": [
+		"AppPlugin",
+		"PurchasesPlugin"
+	]
+}

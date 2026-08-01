@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+coverage/
+.vite/
+.vite-temp/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Android generated files
+android/.gradle/
+android/app/build/
+android/local.properties
+android/captures/
+
+# iOS generated files
+ios/App/Pods/
+DerivedData/
+
+# Capacitor generated web assets
+android/app/src/main/assets/public/
+ios/App/App/public/
+
+# Native Firebase config
+google-services.json
+GoogleService-Info.plist
+
+# Release artifacts
+*.apk
+*.aab
+
+# TypeScript build cache
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# IDE and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Old backup folder
+android_backup/
+
+# Replit generated metadata
+.replit-artifact/
