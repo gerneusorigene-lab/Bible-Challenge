@@ -2,6 +2,22 @@
   command = "pnpm run build:capacitor"
   publish = "dist/public"
 
+# The HTML shell is the only file that names the current hashed bundles, so it
+# must never be served from a cache without checking the origin first. Without
+# this, any cached copy of index.html pins the browser to the previous build's
+# JS/CSS until a hard refresh.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+# Vite fingerprints everything in /assets, so a given URL's contents can never
+# change. Cache it forever and skip the revalidation round-trip.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
