@@ -54,3 +54,5 @@ android_backup/
 
 # Replit generated metadata
 .replit-artifact/
+# Local Netlify folder
+.netlify
