@@ -1,11 +1,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
 import { Component, useEffect, type ReactNode } from 'react';
-
+import { AuthProvider } from '@/context/AuthContext';
 import { LanguageProvider } from '@/hooks/useLanguage';
 import { SoundProvider } from '@/hooks/useSound';
 import { useEntitlement } from '@/hooks/useEntitlement';
-
+import { useAuth } from '@/context/AuthContext';
 import { Header } from '@/components/Header';
 
 import Home from '@/pages/Home';
@@ -21,6 +21,8 @@ import Achievements from '@/pages/achievements';
 import Settings from '@/pages/Settings';
 import About from '@/pages/About';
 import Terms from '@/pages/Terms';
+import Register from '@/pages/Register';
+import Login from '@/pages/Login';
 import NotFound from '@/pages/not-found';
 
 import { getRevenueCatAppUserId } from '@/lib/revenuecat';
@@ -76,6 +78,10 @@ class ErrorBoundary extends Component<
 }
 
 function Router() {
+  const { user, loading } = useAuth();
+
+      console.log('Firebase loading =', loading);
+      console.log('Firebase user =', user);
   return (
     <>
       <Header />
@@ -94,6 +100,8 @@ function Router() {
         <Route path="/settings" component={Settings} />
         <Route path="/terms" component={Terms} />
         <Route path="/about" component={About} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
         <Route component={NotFound} />
       </Switch>
     </>
@@ -132,27 +140,22 @@ function App() {
       }
     };
 
-    // Check the Premium entitlement when the app first opens.
     void refreshPremiumStatus();
 
-    // Check again when the player returns to the browser tab.
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         void refreshPremiumStatus();
       }
     };
 
-    // Check again when the browser window regains focus.
     const handleFocus = () => {
       void refreshPremiumStatus();
     };
 
-    // Check when the browser restores the page.
     const handlePageShow = () => {
       void refreshPremiumStatus();
     };
 
-    // Check when the player returns through browser navigation.
     const handlePopState = () => {
       void refreshPremiumStatus();
     };
@@ -189,9 +192,10 @@ function App() {
     };
   }, [checkStatus]);
 
-  return (
-    <ErrorBoundary>
-      <QueryClientProvider client={queryClient}>
+ return (
+  <ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
         <LanguageProvider>
           <SoundProvider>
             <WouterRouter
@@ -201,9 +205,10 @@ function App() {
             </WouterRouter>
           </SoundProvider>
         </LanguageProvider>
-      </QueryClientProvider>
-    </ErrorBoundary>
-  );
+      </AuthProvider>
+    </QueryClientProvider>
+  </ErrorBoundary>
+);
 }
 
 export default App;

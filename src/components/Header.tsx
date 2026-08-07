@@ -2,16 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useSound } from '@/hooks/useSound';
 import { useGameState } from '@/hooks/useGameState';
-import { Volume2, VolumeX, Home, Settings } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { Volume2, VolumeX, Home, Settings, LogIn, User } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation } from 'wouter';
 
 const languages = [
   { code: 'en', label: 'English' },
-  { code: 'es', label: 'Español' },
   { code: 'fr', label: 'Français' },
- // { code: 'ht', label: 'Kreyòl Ayisyen' },
-  { code: 'pt', label: 'Português' },
 ] as const;
 
 type LanguageCode = (typeof languages)[number]['code'];
@@ -72,7 +70,7 @@ export function LanguageToggle() {
         aria-haspopup="menu"
         aria-expanded={showMenu}
       >
-        <span className="inline-block min-w-[9.5rem] text-left">{currentLanguage.label}</span>
+        <span className="inline-block min-w-[6.5rem] text-left">{currentLanguage.label}</span>
         <motion.span
           aria-hidden="true"
           animate={{ rotate: showMenu ? 180 : 0 }}
@@ -146,12 +144,14 @@ export function Header() {
   const [location, setLocation] = useLocation();
   const { playClick } = useSound();
   const { resetGame } = useGameState();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const { user, loading } = useAuth();
 
   const showHomeButton = location === '/journey';
   const showLeftControls = !location.startsWith('/levels');
   const showSettingsButton = location === '/';
   const showLanguageToggle = location === '/';
+  const showAuthControl = location === '/';
 
   const handleHome = () => {
     playClick();
@@ -163,6 +163,19 @@ export function Header() {
     playClick();
     setLocation('/settings');
   };
+
+  const handleSignIn = () => {
+    playClick();
+    setLocation('/login');
+  };
+
+  const signInLabel =
+    language === 'fr' ? 'Se connecter' : 'Sign In';
+
+  const accountLabel =
+    user?.displayName?.trim() ||
+    user?.email?.trim() ||
+    'Account';
 
   return (
     <motion.header
@@ -202,6 +215,35 @@ export function Header() {
           >
             <Settings size={18} />
           </motion.button>
+        )}
+
+        {showAuthControl && !user && (
+          <motion.button
+            type="button"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleSignIn}
+            aria-label={signInLabel}
+            className="flex items-center gap-1.5 rounded-full border-2 border-slate-900/70 bg-white/90 px-3 py-1.5 font-serif text-sm font-black text-slate-950 shadow-lg backdrop-blur transition-colors hover:bg-white"
+            data-testid="button-sign-in"
+          >
+            <LogIn size={16} />
+            <span>{signInLabel}</span>
+          </motion.button>
+        )}
+
+        {showAuthControl && user && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex max-w-[12rem] items-center gap-1.5 rounded-full border-2 border-slate-900/70 bg-white/90 px-3 py-1.5 font-serif text-sm font-black text-slate-950 shadow-lg backdrop-blur"
+            data-testid="account-status"
+            title={user.email ?? accountLabel}
+          >
+            <User size={16} className="shrink-0" />
+            <span className="truncate">{accountLabel}</span>
+          </motion.div>
         )}
 
         {showLanguageToggle && <LanguageToggle />}

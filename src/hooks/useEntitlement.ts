@@ -9,11 +9,16 @@ import { LEVELS } from '../data/questions';
 import {
   PREMIUM_ENTITLEMENT_ID,
   ensureRevenueCatConfigured,
-  getRevenueCatWebPurchases,
   isNativePlatform,
   toEntitlementErrorReason,
   type EntitlementErrorReason,
 } from '../lib/revenuecat';
+import {
+  checkStatusWeb,
+  ensureWebBillingConfigured,
+  purchaseWeb,
+  restoreWeb,
+} from '../lib/revenuecat_web';
 
 export const FREE_DIFFICULTY = 'Beginner' as const;
 export const FREE_QUESTION_LIMIT = 15;
@@ -62,18 +67,18 @@ export const useEntitlement = create<EntitlementState>()(
 
       checkStatus: async () => {
         if (!isNativePlatform()) {
-          const purchases = getRevenueCatWebPurchases();
-          if (!purchases) return get().isPremium;
+          const configured = await ensureWebBillingConfigured();
+          if (!configured) return get().isPremium;
 
-          try {
-            const customerInfo = await purchases.getCustomerInfo();
-            const isPremium = hasPremiumEntitlement(customerInfo);
-            set({ isPremium, lastError: null });
-            return isPremium;
-          } catch (error) {
-            console.error('[RevenueCat] Web entitlement check failed.', error);
+          const result = await checkStatusWeb();
+
+          if ('error' in result) {
+            set({ lastError: result.error });
             return get().isPremium;
           }
+
+          set({ isPremium: result.isPremium, lastError: null });
+          return result.isPremium;
         }
 
         const configured = await ensureRevenueCatConfigured();
@@ -94,9 +99,26 @@ export const useEntitlement = create<EntitlementState>()(
         set({ isProcessing: true, lastError: null });
 
         if (!isNativePlatform()) {
-          // The web Paywall component opens the hosted Web Purchase Link.
-          set({ isProcessing: false, lastError: 'store_unavailable' });
-          return false;
+          const configured = await ensureWebBillingConfigured();
+
+          if (!configured) {
+            set({ isProcessing: false, lastError: 'store_unavailable' });
+            return false;
+          }
+
+          const result = await purchaseWeb();
+
+          if ('error' in result) {
+            set({ isProcessing: false, lastError: result.error });
+            return false;
+          }
+
+          set({
+            isPremium: result.isPremium,
+            isProcessing: false,
+            lastError: result.isPremium ? null : 'unknown',
+          });
+          return result.isPremium;
         }
 
         const configured = await ensureRevenueCatConfigured();
@@ -147,12 +169,26 @@ export const useEntitlement = create<EntitlementState>()(
         set({ isProcessing: true, lastError: null });
 
         if (!isNativePlatform()) {
-          const restored = await get().checkStatus();
+          const configured = await ensureWebBillingConfigured();
+
+          if (!configured) {
+            set({ isProcessing: false, lastError: 'store_unavailable' });
+            return false;
+          }
+
+          const result = await restoreWeb();
+
+          if ('error' in result) {
+            set({ isProcessing: false, lastError: result.error });
+            return false;
+          }
+
           set({
+            isPremium: result.isPremium,
             isProcessing: false,
-            lastError: restored ? null : 'no_previous_purchase',
+            lastError: result.isPremium ? null : 'no_previous_purchase',
           });
-          return restored;
+          return result.isPremium;
         }
 
         const configured = await ensureRevenueCatConfigured();

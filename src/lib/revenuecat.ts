@@ -1,189 +1,180 @@
 import { Capacitor } from '@capacitor/core';
+import { Purchases as WebPurchases } from '@revenuecat/purchases-js';
 import {
-  Purchases as NativePurchases,
   LOG_LEVEL,
   PURCHASES_ERROR_CODE,
+  Purchases,
   type PurchasesError,
 } from '@revenuecat/purchases-capacitor';
-import { Purchases as WebPurchases } from '@revenuecat/purchases-js';
 
-/** RevenueCat entitlement that unlocks premium content. */
+/**
+ * RevenueCat configuration for Bible Challenge.
+ *
+ * Native (Android/iOS): uses the Capacitor SDK with the platform SDK key.
+ * Web: uses the RevenueCat Web SDK with the Web Billing public key to verify
+ *   entitlements in the browser/PWA.
+ */
+
 export const PREMIUM_ENTITLEMENT_ID = 'premium';
 
-const IOS_API_KEY = import.meta.env.VITE_REVENUECAT_IOS_API_KEY?.trim() as
-  | string
-  | undefined;
-const ANDROID_API_KEY = import.meta.env.VITE_REVENUECAT_ANDROID_API_KEY?.trim() as
-  | string
-  | undefined;
-const WEB_API_KEY = import.meta.env.VITE_REVENUECAT_WEB_API_KEY?.trim() as
-  | string
-  | undefined;
+const IOS_API_KEY = (import.meta.env.VITE_REVENUECAT_IOS_API_KEY as string | undefined)?.trim();
+const ANDROID_API_KEY = (import.meta.env.VITE_REVENUECAT_ANDROID_API_KEY as string | undefined)?.trim();
 
-const WEB_APP_USER_ID_STORAGE_KEY =
-  'bible-challenge-revenuecat-web-user-id';
+/** RevenueCat Web Billing public key (rcb_ prefix). */
+export const WEB_API_KEY = (import.meta.env.VITE_REVENUECAT_WEB_API_KEY as string | undefined)?.trim() ?? '';
+
+const WEB_USER_ID_STORAGE_KEY = 'bible-challenge-revenuecat-user-id';
 
 export function isNativePlatform(): boolean {
   return Capacitor.isNativePlatform();
 }
 
-function getNativeApiKey(): string | undefined {
-  switch (Capacitor.getPlatform()) {
-    case 'ios':
-      return IOS_API_KEY;
-    case 'android':
-      return ANDROID_API_KEY;
-    default:
-      return undefined;
-  }
+function getApiKeyForCurrentPlatform(): string | undefined {
+  const platform = Capacitor.getPlatform();
+  if (platform === 'ios') return IOS_API_KEY;
+  if (platform === 'android') return ANDROID_API_KEY;
+  return undefined;
 }
 
-let nativeConfigurePromise: Promise<boolean> | null = null;
-
-/** Configures the native RevenueCat SDK once per app session. */
-export function ensureRevenueCatConfigured(): Promise<boolean> {
-  if (!isNativePlatform()) {
-    return Promise.resolve(false);
+function createUuid(): string {
+  if (typeof globalThis.crypto?.randomUUID === 'function') {
+    return globalThis.crypto.randomUUID();
   }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = Math.floor(Math.random() * 16);
+    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+  });
+}
 
-  if (!nativeConfigurePromise) {
-    nativeConfigurePromise = (async () => {
-      const apiKey = getNativeApiKey();
-
-      if (!apiKey) {
-        console.warn(
-          `[RevenueCat] Missing API key for ${Capacitor.getPlatform()}.`,
-        );
-        return false;
-      }
-
-      try {
-        if (import.meta.env.DEV) {
-          await NativePurchases.setLogLevel({ level: LOG_LEVEL.DEBUG });
-        }
-
-        await NativePurchases.configure({ apiKey });
-        return true;
-      } catch (error) {
-        console.error(
-          '[RevenueCat] Native SDK configuration failed.',
-          error,
-        );
-        return false;
-      }
-    })().then((configured) => {
-      if (!configured) {
-        nativeConfigurePromise = null;
-      }
-
-      return configured;
-    });
+/** Returns the anonymous UUID stored in localStorage for this browser install. */
+function getAnonymousWebUserId(): string | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const existing = window.localStorage.getItem(WEB_USER_ID_STORAGE_KEY)?.trim();
+    if (existing) return existing;
+    const id = createUuid();
+    window.localStorage.setItem(WEB_USER_ID_STORAGE_KEY, id);
+    return id;
+  } catch {
+    return null;
   }
-
-  return nativeConfigurePromise;
 }
 
 /**
- * Returns a stable RevenueCat App User ID for this browser/PWA installation.
- * The same ID is used by the hosted purchase link and purchases-js.
+ * Returns the best available user ID for RevenueCat on web:
+ *   - Firebase UID when the user is signed in (enables cross-platform sync
+ *     because the same UID is used on native via Purchases.logIn)
+ *   - Anonymous UUID in localStorage when not signed in
  */
-export function getOrCreateWebAppUserId(): string {
-  if (typeof window === 'undefined') {
-    throw new Error('Web App User ID requires a browser environment.');
+export async function getEffectiveWebUserId(): Promise<string | null> {
+  try {
+    const { auth } = await import('./firebase');
+    const uid = auth?.currentUser?.uid;
+    if (uid) return uid;
+  } catch {
+    // firebase not available in this environment — fall through
   }
-
-  const existing = window.localStorage.getItem(
-    WEB_APP_USER_ID_STORAGE_KEY,
-  );
-
-  if (existing) {
-    return existing;
-  }
-
-  const generated =
-    typeof crypto !== 'undefined' &&
-    typeof crypto.randomUUID === 'function'
-      ? crypto.randomUUID()
-      : `web-${Date.now()}-${Math.random().toString(36).slice(2)}-${Math.random()
-          .toString(36)
-          .slice(2)}`;
-
-  window.localStorage.setItem(
-    WEB_APP_USER_ID_STORAGE_KEY,
-    generated,
-  );
-
-  return generated;
+  return getAnonymousWebUserId();
 }
 
-/** Returns the RevenueCat App User ID for the current platform. */
+/**
+ * Returns a stable user ID for RevenueCat's hosted Web Purchase Link.
+ * On native, returns the SDK-assigned App User ID.
+ * On web, returns the Firebase UID (if signed in) or the localStorage UUID.
+ */
 export async function getRevenueCatAppUserId(): Promise<string | null> {
-  if (!isNativePlatform()) {
+  if (isNativePlatform()) {
+    const configured = await ensureRevenueCatConfigured();
+    if (!configured) return null;
     try {
-      return getOrCreateWebAppUserId();
+      const { appUserID } = await Purchases.getAppUserID();
+      return appUserID.trim() || null;
     } catch (error) {
-      console.error(
-        '[RevenueCat] Could not create web App User ID.',
-        error,
-      );
+      console.error('[RevenueCat] Failed to retrieve App User ID', error);
       return null;
     }
   }
-
-  const configured = await ensureRevenueCatConfigured();
-  if (!configured) {
-    return null;
-  }
-
-  try {
-    const { appUserID } = await NativePurchases.getAppUserID();
-    return appUserID || null;
-  } catch (error) {
-    console.error(
-      '[RevenueCat] Could not retrieve native App User ID.',
-      error,
-    );
-    return null;
-  }
+  return getEffectiveWebUserId();
 }
 
-let webPurchases: WebPurchases | null = null;
+let configurePromise: Promise<boolean> | null = null;
 
 /**
- * Configures and returns purchases-js for the same web customer used by the
- * hosted RevenueCat purchase link.
+ * Configures the native RevenueCat SDK exactly once per app session.
+ * Returns false on web (no native store available).
+ */
+export function ensureRevenueCatConfigured(): Promise<boolean> {
+  if (!isNativePlatform()) return Promise.resolve(false);
+
+  if (!configurePromise) {
+    configurePromise = (async () => {
+      const apiKey = getApiKeyForCurrentPlatform();
+      if (!apiKey) {
+        console.warn(
+          `[RevenueCat] No API key for platform "${Capacitor.getPlatform()}". ` +
+            'Set VITE_REVENUECAT_ANDROID_API_KEY / VITE_REVENUECAT_IOS_API_KEY.',
+        );
+        return false;
+      }
+      try {
+        if (import.meta.env.DEV) await Purchases.setLogLevel({ level: LOG_LEVEL.DEBUG });
+        await Purchases.configure({ apiKey });
+        return true;
+      } catch (error) {
+        console.error('[RevenueCat] Failed to configure SDK', error);
+        return false;
+      }
+    })().then((ok) => {
+      if (!ok) configurePromise = null;
+      return ok;
+    });
+  }
+  return configurePromise;
+}
+
+// ─── Web entitlement client ────────────────────────────────────────────────────
+
+let webPurchasesInstance: WebPurchases | null = null;
+
+/**
+ * Returns the RevenueCat Web SDK instance used to check browser/PWA
+ * entitlements. Returns null on native platforms or when the Web Billing
+ * public API key is not configured.
+ *
+ * The SDK is configured only once per browser session. The same effective
+ * RevenueCat user ID used by hosted checkout is reused here so purchases and
+ * entitlement checks stay associated with the same customer.
  */
 export function getRevenueCatWebPurchases(): WebPurchases | null {
-  if (isNativePlatform()) {
-    return null;
-  }
+  if (isNativePlatform()) return null;
+  if (!WEB_API_KEY) return null;
+  if (typeof window === 'undefined') return null;
 
-  if (webPurchases) {
-    return webPurchases;
-  }
+  if (webPurchasesInstance) return webPurchasesInstance;
 
-  if (!WEB_API_KEY) {
-    console.error(
-      '[RevenueCat] VITE_REVENUECAT_WEB_API_KEY is missing.',
-    );
-    return null;
+  const existingUserId = window.localStorage
+    .getItem(WEB_USER_ID_STORAGE_KEY)
+    ?.trim();
+  const appUserId = existingUserId || createUuid();
+
+  if (!existingUserId) {
+    window.localStorage.setItem(WEB_USER_ID_STORAGE_KEY, appUserId);
   }
 
   try {
-    webPurchases = WebPurchases.configure({
+    webPurchasesInstance = WebPurchases.configure({
       apiKey: WEB_API_KEY,
-      appUserId: getOrCreateWebAppUserId(),
+      appUserId,
     });
-
-    return webPurchases;
+    return webPurchasesInstance;
   } catch (error) {
-    console.error(
-      '[RevenueCat] Web SDK configuration failed.',
-      error,
-    );
+    console.error('[RevenueCat] Failed to configure Web SDK', error);
+    webPurchasesInstance = null;
     return null;
   }
 }
+
+// ─── Error mapping ─────────────────────────────────────────────────────────────
 
 export type EntitlementErrorReason =
   | 'cancelled'
@@ -193,36 +184,20 @@ export type EntitlementErrorReason =
   | 'no_previous_purchase'
   | 'unknown';
 
-export function isPurchasesError(
-  error: unknown,
-): error is PurchasesError {
-  return (
-    typeof error === 'object' &&
-    error !== null &&
-    'code' in error
-  );
+export function isPurchasesError(error: unknown): error is PurchasesError {
+  return typeof error === 'object' && error !== null && 'code' in error;
 }
 
-export function toEntitlementErrorReason(
-  error: unknown,
-): EntitlementErrorReason {
+export function toEntitlementErrorReason(error: unknown): EntitlementErrorReason {
   if (isPurchasesError(error)) {
     switch (error.code) {
-      case PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR:
-        return 'cancelled';
-
-      case PURCHASES_ERROR_CODE.NETWORK_ERROR:
-        return 'network';
-
+      case PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR: return 'cancelled';
+      case PURCHASES_ERROR_CODE.NETWORK_ERROR: return 'network';
       case PURCHASES_ERROR_CODE.STORE_PROBLEM_ERROR:
       case PURCHASES_ERROR_CODE.PRODUCT_NOT_AVAILABLE_FOR_PURCHASE_ERROR:
-      case PURCHASES_ERROR_CODE.PURCHASE_NOT_ALLOWED_ERROR:
-        return 'store_unavailable';
-
-      default:
-        return 'unknown';
+      case PURCHASES_ERROR_CODE.PURCHASE_NOT_ALLOWED_ERROR: return 'store_unavailable';
+      default: return 'unknown';
     }
   }
-
   return 'unknown';
 }

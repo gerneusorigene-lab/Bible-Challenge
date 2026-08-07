@@ -5,6 +5,7 @@ import { Crown, Check, Sparkles, RotateCcw, X } from 'lucide-react';
 
 import { useLanguage } from '@/hooks/useLanguage';
 import { useSound } from '@/hooks/useSound';
+import { useAuth } from '@/context/AuthContext';
 import {
   useEntitlement,
   FREE_QUESTION_LIMIT,
@@ -49,6 +50,7 @@ const WEB_PURCHASE_URL =
 export default function Paywall() {
   const { t } = useLanguage();
   const { playClick } = useSound();
+  const { user } = useAuth();
 
   const {
     isPremium,
@@ -95,6 +97,11 @@ export default function Paywall() {
   const handleUnlock = async () => {
     playClick();
     setFeedback(null);
+
+    if (!user) {
+      setLocation('/login');
+      return;
+    }
 
     /*
      * Web version:
