@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  deleteUser,
 } from "firebase/auth";
 
 import { auth } from "./firebase";
@@ -51,4 +52,20 @@ export async function loginUser(
  */
 export async function logoutUser() {
   await signOut(auth);
+}
+
+/**
+ * Permanently delete the currently signed-in Firebase account.
+ *
+ * Firebase may require the user to sign in again if their
+ * authentication session is no longer recent enough.
+ */
+export async function deleteCurrentUserAccount() {
+  const user = auth.currentUser;
+
+  if (!user) {
+    throw new Error("No user is currently signed in.");
+  }
+
+  await deleteUser(user);
 }

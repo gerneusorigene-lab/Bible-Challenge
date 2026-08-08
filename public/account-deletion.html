@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+  <title>Account Deletion | Bible Challenge</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071426;
+      --panel: rgba(15, 30, 52, 0.94);
+      --gold: #f1c75b;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --border: rgba(241, 199, 91, 0.28);
+      --danger: #fca5a5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #18375b 0%, var(--bg) 58%);
+      color: var(--text);
+      line-height: 1.65;
+      padding: 32px 18px;
+    }
+    main {
+      width: min(760px, 100%);
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: clamp(24px, 5vw, 48px);
+      box-shadow: 0 24px 70px rgba(0,0,0,.35);
+    }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; }
+    h1 {
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-size: clamp(2rem, 6vw, 3rem);
+      line-height: 1.1;
+    }
+    h2 {
+      margin-top: 32px;
+      color: var(--gold);
+      font-size: 1.25rem;
+    }
+    p, li { color: var(--muted); }
+    strong { color: var(--text); }
+    .brand {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .notice {
+      border-left: 4px solid var(--gold);
+      background: rgba(241,199,91,.08);
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+    .warning { color: var(--danger); }
+    ol, ul { padding-left: 24px; }
+    footer {
+      margin-top: 38px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      color: #94a3b8;
+      font-size: .9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Bible Challenge — Account Deletion</h1>
+    <p class="brand">Belleus Educational Games</p>
+
+    <p>
+      This page explains how users of <strong>Bible Challenge</strong> can request
+      deletion of their account and associated account information.
+    </p>
+
+    <h2>Delete your account in the app</h2>
+    <ol>
+      <li>Sign in to your Bible Challenge account.</li>
+      <li>Open <strong>Settings</strong>.</li>
+      <li>Go to the <strong>Account</strong> section.</li>
+      <li>Select <strong>Delete Account</strong>.</li>
+      <li>Confirm the deletion when prompted.</li>
+    </ol>
+
+    <div class="notice">
+      Account deletion is permanent and cannot be undone. For security,
+      you may be required to sign in again before Firebase allows the account
+      to be deleted.
+    </div>
+
+    <h2>Request deletion outside the app</h2>
+    <p>
+      If you cannot access the app or your account, you may request account
+      deletion by contacting Belleus Educational Games using the developer
+      contact information published with Bible Challenge on its official
+      app-store listing. Please identify the request as a
+      <strong>Bible Challenge account deletion request</strong> and provide the
+      email address associated with the account so the request can be verified
+      and processed.
+    </p>
+
+    <h2>Data deleted</h2>
+    <p>
+      When the Bible Challenge sign-in account is deleted, the Firebase
+      Authentication account associated with that user is deleted. This
+      includes the authentication identity associated with the account, such
+      as its email address and any display name stored with that Firebase
+      Authentication profile.
+    </p>
+
+    <h2>Data that may be retained separately</h2>
+    <p>
+      Account deletion does not necessarily delete transaction, subscription,
+      or purchase records maintained separately by Google Play, RevenueCat, or
+      other payment-platform providers. Those providers may retain records
+      according to their own policies and applicable legal, accounting,
+      security, fraud-prevention, or transaction-record requirements.
+    </p>
+
+    <p>
+      Game progress or preferences stored only on a user's device may also
+      remain on that device until the app data is cleared or the app is
+      removed.
+    </p>
+
+    <h2>Need help?</h2>
+    <p>
+      Use the developer contact information shown on the official Bible
+      Challenge store listing and specify that your message concerns
+      <strong>account deletion</strong>.
+    </p>
+
+    <footer>
+      Bible Challenge · Belleus Educational Games<br />
+      Account deletion information
+    </footer>
+  </main>
+</body>
+</html>

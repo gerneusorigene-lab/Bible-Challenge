@@ -42,3 +42,4 @@ Thumbs.db
 
 # Android secrets
 android/keystore.properties
+*.tsbuildinfo

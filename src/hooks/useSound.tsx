@@ -1,13 +1,22 @@
-import { createContext, useContext, useState, useCallback, ReactNode, useRef } from 'react';
+import { createContext, useContext, useState, useCallback, ReactNode, useEffect, useRef } from 'react';
 
 interface SoundContextType {
   isMuted: boolean;
   toggleMute: () => void;
+  isMusicEnabled: boolean;
+  toggleMusic: () => void;
   playCorrect: () => void;
   playWrong: () => void;
   playClick: () => void;
   playComplete: () => void;
 }
+
+const MUSIC_TRACKS = [
+  '/piano-meditation.mp3',
+  '/piano-music.mp3',
+] as const;
+
+const MUSIC_VOLUME = 0.18;
 
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
@@ -15,7 +24,15 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   const [isMuted, setIsMuted] = useState(() => {
     return localStorage.getItem('isMuted') === 'true';
   });
+
+  const [isMusicEnabled, setIsMusicEnabled] = useState(() => {
+    return localStorage.getItem('musicEnabled') !== 'false';
+  });
+
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const musicAudioRef = useRef<HTMLAudioElement | null>(null);
+  const musicEnabledRef = useRef(isMusicEnabled);
+  const musicTrackIndexRef = useRef(Math.random() < 0.5 ? 0 : 1);
 
   const toggleMute = useCallback(() => {
     setIsMuted(prev => {
@@ -24,6 +41,88 @@ export function SoundProvider({ children }: { children: ReactNode }) {
       return next;
     });
   }, []);
+
+  const toggleMusic = useCallback(() => {
+    setIsMusicEnabled(prev => {
+      const next = !prev;
+      localStorage.setItem('musicEnabled', String(next));
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    const audio = new Audio(MUSIC_TRACKS[musicTrackIndexRef.current]);
+    audio.volume = MUSIC_VOLUME;
+    audio.preload = 'auto';
+
+    const playMusic = () => {
+      if (!musicEnabledRef.current) return;
+
+      void audio.play().catch((error) => {
+        // Browsers can block audible autoplay until the first user gesture.
+        if (error instanceof DOMException && error.name === 'NotAllowedError') {
+          return;
+        }
+
+        console.warn('[Background Music] Playback could not start.', error);
+      });
+    };
+
+    const handleEnded = () => {
+      musicTrackIndexRef.current =
+        (musicTrackIndexRef.current + 1) % MUSIC_TRACKS.length;
+
+      audio.src = MUSIC_TRACKS[musicTrackIndexRef.current];
+      audio.load();
+      playMusic();
+    };
+
+    const handleFirstInteraction = () => {
+      playMusic();
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+    };
+
+    audio.addEventListener('ended', handleEnded);
+    window.addEventListener('pointerdown', handleFirstInteraction);
+    window.addEventListener('keydown', handleFirstInteraction);
+    window.addEventListener('touchstart', handleFirstInteraction, {
+      passive: true,
+    });
+
+    musicAudioRef.current = audio;
+
+    return () => {
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      audio.removeEventListener('ended', handleEnded);
+      audio.pause();
+      audio.src = '';
+      musicAudioRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    musicEnabledRef.current = isMusicEnabled;
+
+    const audio = musicAudioRef.current;
+    if (!audio) return;
+
+    if (!isMusicEnabled) {
+      audio.pause();
+      return;
+    }
+
+    void audio.play().catch((error) => {
+      if (error instanceof DOMException && error.name === 'NotAllowedError') {
+        return;
+      }
+
+      console.warn('[Background Music] Playback could not resume.', error);
+    });
+  }, [isMusicEnabled]);
 
   const getAudioContext = useCallback(() => {
     if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
@@ -165,7 +264,18 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   }, [isMuted, getAudioContext]);
 
   return (
-    <SoundContext.Provider value={{ isMuted, toggleMute, playCorrect, playWrong, playClick, playComplete }}>
+    <SoundContext.Provider
+      value={{
+        isMuted,
+        toggleMute,
+        isMusicEnabled,
+        toggleMusic,
+        playCorrect,
+        playWrong,
+        playClick,
+        playComplete,
+      }}
+    >
       {children}
     </SoundContext.Provider>
   );
