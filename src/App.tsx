@@ -21,6 +21,7 @@ import Achievements from '@/pages/achievements';
 import Settings from '@/pages/Settings';
 import About from '@/pages/About';
 import Terms from '@/pages/Terms';
+import Privacy from '@/pages/Privacy';
 import Register from '@/pages/Register';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/not-found';
@@ -99,6 +100,7 @@ function Router() {
         <Route path="/achievements" component={Achievements} />
         <Route path="/settings" component={Settings} />
         <Route path="/terms" component={Terms} />
+        <Route path="/privacy" component={Privacy} />
         <Route path="/about" component={About} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
