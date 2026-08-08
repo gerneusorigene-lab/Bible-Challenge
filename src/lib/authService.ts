@@ -4,6 +4,7 @@ import {
   signOut,
   updateProfile,
   deleteUser,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 import { auth } from "./firebase";
@@ -45,6 +46,13 @@ export async function loginUser(
   );
 
   return credential.user;
+}
+
+/**
+ * Send a password-reset email.
+ */
+export async function resetPassword(email: string) {
+  await sendPasswordResetEmail(auth, email);
 }
 
 /**

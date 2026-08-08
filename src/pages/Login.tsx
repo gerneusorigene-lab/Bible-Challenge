@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Eye, EyeOff, LogIn, UserPlus, ArrowLeft, Mail, Lock } from 'lucide-react';
+import { Eye, EyeOff, LogIn, UserPlus, ArrowLeft, Mail, Lock, KeyRound } from 'lucide-react';
 import { useLocation } from 'wouter';
-import { loginUser } from '../lib/authService';
+import { loginUser, resetPassword } from '../lib/authService';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const copy = {
@@ -14,6 +14,11 @@ const copy = {
     passwordPlaceholder: 'Enter your password',
     signIn: 'Sign In',
     signingIn: 'Signing In...',
+    forgotPassword: 'Forgot password?',
+    resetSending: 'Sending reset email...',
+    resetSent: 'Password reset email sent. Please check your inbox.',
+    resetNeedEmail: 'Enter your email address first.',
+    resetFailed: 'Unable to send the password reset email. Please verify the email address and try again.',
     noAccount: "Don't have an account?",
     createAccount: 'Create Account',
     home: 'Return Home',
@@ -29,6 +34,11 @@ const copy = {
     passwordPlaceholder: 'Entrez votre mot de passe',
     signIn: 'Se connecter',
     signingIn: 'Connexion...',
+    forgotPassword: 'Mot de passe oublié ?',
+    resetSending: 'Envoi du courriel...',
+    resetSent: 'Courriel de réinitialisation envoyé. Veuillez vérifier votre boîte de réception.',
+    resetNeedEmail: "Entrez d'abord votre adresse courriel.",
+    resetFailed: "Impossible d'envoyer le courriel de réinitialisation. Vérifiez l'adresse et réessayez.",
     noAccount: "Vous n'avez pas de compte ?",
     createAccount: 'Créer un compte',
     home: "Retour à l'accueil",
@@ -44,6 +54,11 @@ const copy = {
     passwordPlaceholder: 'Ingresa tu contraseña',
     signIn: 'Iniciar sesión',
     signingIn: 'Iniciando...',
+    forgotPassword: '¿Olvidaste tu contraseña?',
+    resetSending: 'Enviando correo...',
+    resetSent: 'Correo de restablecimiento enviado. Revisa tu bandeja de entrada.',
+    resetNeedEmail: 'Ingresa primero tu correo electrónico.',
+    resetFailed: 'No se pudo enviar el correo de restablecimiento. Verifica la dirección e inténtalo de nuevo.',
     noAccount: '¿No tienes una cuenta?',
     createAccount: 'Crear cuenta',
     home: 'Volver al inicio',
@@ -59,6 +74,11 @@ const copy = {
     passwordPlaceholder: 'Digite sua senha',
     signIn: 'Entrar',
     signingIn: 'Entrando...',
+    forgotPassword: 'Esqueceu sua senha?',
+    resetSending: 'Enviando e-mail...',
+    resetSent: 'E-mail de redefinição enviado. Verifique sua caixa de entrada.',
+    resetNeedEmail: 'Digite primeiro seu e-mail.',
+    resetFailed: 'Não foi possível enviar o e-mail de redefinição. Verifique o endereço e tente novamente.',
     noAccount: 'Ainda não tem uma conta?',
     createAccount: 'Criar conta',
     home: 'Voltar ao início',
@@ -77,11 +97,14 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [resettingPassword, setResettingPassword] = useState(false);
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
   async function handleLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError('');
+    setMessage('');
 
     if (!email.trim() || !password) {
       setError(text.invalid);
@@ -98,6 +121,31 @@ export default function Login() {
       setError(text.failed);
     } finally {
       setLoading(false);
+    }
+  }
+
+
+  async function handleForgotPassword() {
+    setError('');
+    setMessage('');
+
+    const normalizedEmail = email.trim();
+
+    if (!normalizedEmail) {
+      setError(text.resetNeedEmail);
+      return;
+    }
+
+    setResettingPassword(true);
+
+    try {
+      await resetPassword(normalizedEmail);
+      setMessage(text.resetSent);
+    } catch (err) {
+      console.error('[Firebase Auth] Password reset failed.', err);
+      setError(text.resetFailed);
+    } finally {
+      setResettingPassword(false);
     }
   }
 
@@ -184,6 +232,19 @@ export default function Login() {
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
+                </button>
+              </div>
+
+              <div className="mt-2 text-right">
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  disabled={resettingPassword}
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-200 underline-offset-4 transition hover:text-amber-100 hover:underline disabled:cursor-not-allowed disabled:opacity-60"
+                  data-testid="login-forgot-password"
+                >
+                  <KeyRound size={15} />
+                  {resettingPassword ? text.resetSending : text.forgotPassword}
                 </button>
               </div>
             </div>
