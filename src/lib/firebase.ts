@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB6DgnQM3xjWcabgIyojsmkaIOmrgA8nAE",
-  authDomain: "bible-challenge-5c131.firebaseapp.com",
-  projectId: "bible-challenge-5c131",
-  storageBucket: "bible-challenge-5c131.firebasestorage.app",
-  messagingSenderId: "501432241990",
-  appId: "1:501432241990:web:02d5293fcf5350a627df47",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 export const app = initializeApp(firebaseConfig);
