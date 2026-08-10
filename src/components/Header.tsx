@@ -3,6 +3,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useSound } from '@/hooks/useSound';
 import { useGameState } from '@/hooks/useGameState';
 import { useAuth } from '@/context/AuthContext';
+import { logoutUser } from '@/lib/authService';
 import { Volume2, VolumeX, Home, Settings, LogIn, User } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation } from 'wouter';
@@ -146,6 +147,8 @@ export function Header() {
   const { resetGame } = useGameState();
   const { t, language } = useLanguage();
   const { user, loading } = useAuth();
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const accountMenuRef = useRef<HTMLDivElement>(null);
 
   const showHomeButton = location === '/journey';
   const showLeftControls = !location.startsWith('/levels');
@@ -167,6 +170,48 @@ export function Header() {
   const handleSignIn = () => {
     playClick();
     setLocation('/login');
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        accountMenuRef.current &&
+        !accountMenuRef.current.contains(event.target as Node)
+      ) {
+        setShowAccountMenu(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowAccountMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, []);
+
+  const handleAccountClick = () => {
+    playClick();
+    setShowAccountMenu((open) => !open);
+  };
+
+  const handleSignOut = async () => {
+    playClick();
+    setShowAccountMenu(false);
+
+    try {
+      await logoutUser();
+      setLocation('/');
+    } catch (error) {
+      console.error('[Firebase Auth] Sign out failed.', error);
+    }
   };
 
   const signInLabel =
@@ -234,16 +279,47 @@ export function Header() {
         )}
 
         {showAuthControl && user && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex max-w-[12rem] items-center gap-1.5 rounded-full border-2 border-slate-900/70 bg-white/90 px-3 py-1.5 font-serif text-sm font-black text-slate-950 shadow-lg backdrop-blur"
-            data-testid="account-status"
-            title={user.email ?? accountLabel}
-          >
-            <User size={16} className="shrink-0" />
-            <span className="truncate">{accountLabel}</span>
-          </motion.div>
+          <div ref={accountMenuRef} className="relative">
+            <motion.button
+              type="button"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleAccountClick}
+              aria-haspopup="menu"
+              aria-expanded={showAccountMenu}
+              className="flex max-w-[12rem] items-center gap-1.5 rounded-full border-2 border-slate-900/70 bg-white/90 px-3 py-1.5 font-serif text-sm font-black text-slate-950 shadow-lg backdrop-blur transition-colors hover:bg-white"
+              data-testid="account-status"
+              title={user.email ?? accountLabel}
+            >
+              <User size={16} className="shrink-0" />
+              <span className="truncate">{accountLabel}</span>
+            </motion.button>
+
+            <AnimatePresence>
+              {showAccountMenu && (
+                <motion.div
+                  role="menu"
+                  initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                  transition={{ duration: 0.16 }}
+                  className="absolute left-0 z-50 mt-2 w-full min-w-[12rem] overflow-hidden rounded-2xl border border-slate-300 bg-white text-slate-950 shadow-2xl"
+                >
+                  <button
+                    type="button"
+                    role="menuitem"
+                    onClick={handleSignOut}
+                    className="flex w-full items-center gap-2 px-4 py-3 text-left font-serif text-sm font-black transition-colors hover:bg-amber-50"
+                    data-testid="button-sign-out"
+                  >
+                    <LogIn size={16} className="rotate-180" />
+                    <span>{language === 'fr' ? 'Se déconnecter' : 'Sign Out'}</span>
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         )}
 
         {showLanguageToggle && <LanguageToggle />}

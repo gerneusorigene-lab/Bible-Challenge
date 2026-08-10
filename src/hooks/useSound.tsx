@@ -112,6 +112,8 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     const audio = new Audio(MUSIC_TRACKS[musicTrackIndexRef.current]);
     audio.volume = MUSIC_VOLUME;
     audio.preload = 'auto';
+    audio.autoplay = true;
+    audio.playsInline = true;
 
     const tryPlayMusic = async () => {
       if (!musicEnabledRef.current || document.visibilityState === 'hidden') {
@@ -119,16 +121,29 @@ export function SoundProvider({ children }: { children: ReactNode }) {
       }
 
       try {
+        audio.volume = MUSIC_VOLUME;
+
+        if (audio.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) {
+          audio.load();
+        }
+
         await audio.play();
         return true;
       } catch (error) {
         if (error instanceof DOMException && error.name === 'NotAllowedError') {
+          // Audible autoplay can be blocked by the browser. We keep retrying
+          // on media-ready/lifecycle events and use the first normal user
+          // interaction only as a silent fallback.
           return false;
         }
 
         console.warn('[Background Music] Playback could not start.', error);
         return false;
       }
+    };
+
+    const handleMediaReady = () => {
+      void tryPlayMusic();
     };
 
     const handleEnded = () => {
@@ -187,6 +202,8 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     };
 
     audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('loadeddata', handleMediaReady);
+    audio.addEventListener('canplay', handleMediaReady);
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('focus', handleWindowFocus);
     window.addEventListener('pageshow', handlePageShow);
@@ -199,18 +216,28 @@ export function SoundProvider({ children }: { children: ReactNode }) {
 
     musicAudioRef.current = audio;
 
-    // This may succeed on desktop if autoplay was previously permitted.
-    // If blocked, the first user interaction above will start it.
+    // Attempt audible autoplay immediately on page load.
     void tryPlayMusic();
+
+    // A few short retries cover cases where the page renders before the MP3
+    // has enough buffered data. These do not bypass browser autoplay policy.
+    const startupRetryTimers = [
+      window.setTimeout(() => void tryPlayMusic(), 250),
+      window.setTimeout(() => void tryPlayMusic(), 1000),
+      window.setTimeout(() => void tryPlayMusic(), 2500),
+    ];
 
     return () => {
       audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('loadeddata', handleMediaReady);
+      audio.removeEventListener('canplay', handleMediaReady);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleWindowFocus);
       window.removeEventListener('pageshow', handlePageShow);
       window.removeEventListener('pointerdown', handleUserInteraction);
       window.removeEventListener('keydown', handleUserInteraction);
       window.removeEventListener('touchstart', handleUserInteraction);
+      startupRetryTimers.forEach((timer) => window.clearTimeout(timer));
 
       audio.pause();
       audio.src = '';
