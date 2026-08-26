@@ -1,4 +1,3 @@
-import { getLocalizedText } from '@/utils/localizedText';
 import { LEVELS } from '@/data/questions';
 import { useGameState } from '@/hooks/useGameState';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -12,7 +11,6 @@ import {
   GraduationCap,
   Heart,
   Home,
-  Lightbulb,
   Sparkles,
   Star,
   X,
@@ -126,12 +124,11 @@ export default function Review() {
             const selectedIdx = level.statements.findIndex(
               (statement) => statement.id === wrong.selectedStatementId,
             );
-            const study = splitExplanation(
-                  getLocalizedText(level.explanation, language),
-                );
-            const scripture = level.scripture
-                  ? getLocalizedText(level.scripture, language)
-                  : study.scripture;
+            const explanation =
+              level.explanation[language] ?? level.explanation.en ?? level.explanation.fr ?? '';
+            const study = splitExplanation(explanation);
+            const scripture =
+              level.scripture?.[language] ?? level.scripture?.en ?? level.scripture?.fr ?? study.scripture;
 
             return (
               <motion.article
@@ -141,32 +138,29 @@ export default function Review() {
                 transition={{ delay: idx * 0.08, duration: 0.35 }}
                 className="overflow-hidden rounded-3xl border border-gold/35 parchment-bg shadow-2xl"
               >
-                <div className="border-b border-gold/20 bg-[#15110a] p-5 text-white md:p-7">
-                  <div className="mb-4 flex items-center gap-2 text-red-300">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full border border-red-300/50 bg-red-950/45">
-                      <X size={17} strokeWidth={2.5} />
-                    </div>
-                    <span className="font-serif text-sm font-bold uppercase tracking-[0.18em]">
-                      {t('incorrect')}
-                    </span>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div
-                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${level.badgeColor} font-serif text-lg font-bold text-white shadow-lg`}
-                    >
-                      {level.levelNumber}
+                <div className="border-b border-gold/20 bg-black/20 p-5 md:p-7">
+                  <div>
+                    <div className="mb-4 flex items-center gap-2 text-red-300">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full border border-red-300/50 bg-red-950/45">
+                        <X size={17} strokeWidth={2.5} />
+                      </div>
+                      <span className="font-serif text-sm font-bold uppercase tracking-[0.18em]">
+                        {t('incorrect')}
+                      </span>
                     </div>
 
-                    <div className="min-w-0">
-                      <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-white/70">
-                        {t(DIFFICULTY_KEYS[level.difficulty])}
-                        {' • '}
-                        {t(level.testament === 'Old' ? 'old_testament' : 'new_testament')}
-                      </p>
-
-                      <div className="flex items-center gap-2">
-                        <BookOpen size={22} className="shrink-0 text-gold" />
+                    <div className="flex items-end gap-4">
+                      <div
+                        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${level.badgeColor} font-serif text-lg font-bold text-white shadow-lg`}
+                      >
+                        {level.levelNumber}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-white/70">
+                          {t(DIFFICULTY_KEYS[level.difficulty])}
+                          {' • '}
+                          {t(level.testament === 'Old' ? 'old_testament' : 'new_testament')}
+                        </p>
                         <h2 className="font-serif text-2xl font-bold leading-snug text-white md:text-3xl">
                           {level.topic[language]}
                         </h2>
@@ -302,21 +296,6 @@ export default function Review() {
                         </div>
                       </div>
                     )}
-                  </section>
-
-                  <section className="flex items-start gap-3 rounded-2xl border border-amber-700/20 bg-amber-500/[0.07] p-4 md:p-5">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-500/10 text-amber-700">
-                      <Lightbulb size={18} />
-                    </div>
-                    <div>
-                      <h3 className="mb-1 font-serif font-bold text-card-foreground">
-                        {t('key_lesson')}
-                      </h3>
-                      <p className="text-sm leading-relaxed text-card-foreground/70 md:text-base">
-                        {level.keyLesson?.[language] ??
-                          t('default_key_lesson')}
-                      </p>
-                    </div>
                   </section>
 
                   {level.teacherNote && (

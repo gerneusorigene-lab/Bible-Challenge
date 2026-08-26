@@ -44,3 +44,6 @@ Thumbs.db
 android/keystore.properties
 *.tsbuildinfo
 .firebase/
+
+# Local Netlify folder
+.netlify

@@ -109,11 +109,10 @@ export function SoundProvider({ children }: { children: ReactNode }) {
    * survives route changes without restarting.
    */
   useEffect(() => {
-    const audio = new Audio(MUSIC_TRACKS[musicTrackIndexRef.current]);
-    audio.volume = MUSIC_VOLUME;
-    audio.preload = 'auto';
-    audio.autoplay = true;
-    audio.playsInline = true;
+     const audio = new Audio(MUSIC_TRACKS[musicTrackIndexRef.current]);
+      audio.volume = MUSIC_VOLUME;
+      audio.preload = 'auto';
+      audio.autoplay = true;
 
     const tryPlayMusic = async () => {
       if (!musicEnabledRef.current || document.visibilityState === 'hidden') {

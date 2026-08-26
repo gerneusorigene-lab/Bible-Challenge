@@ -15,52 +15,53 @@ export default defineConfig({
     tailwindcss(),
 
     VitePWA({
-  registerType: 'autoUpdate',
+      registerType: 'autoUpdate',
 
-  devOptions: {
-    enabled: false,
-  },
-
-  includeAssets: ['favicon.ico', 'favicon.svg'],
-
-  manifest: {
-    name: 'Bible Challenge Game',
-    short_name: 'Bible Challenge',
-
-    description:
-      'Strengthen your faith through an engaging and interactive Bible learning experience.',
-
-    theme_color: '#061526',
-    background_color: '#061526',
-    display: 'standalone',
-    orientation: 'portrait',
-    start_url: '/',
-    scope: '/',
-
-    icons: [
-      {
-        src: '/icons/icon-192.png',
-        sizes: '192x192',
-        type: 'image/png',
+      devOptions: {
+        enabled: false,
       },
-      {
-        src: '/icons/icon-512.png',
-        sizes: '512x512',
-        type: 'image/png',
-      },
-      {
-        src: '/icons/icon-512-maskable.png',
-        sizes: '512x512',
-        type: 'image/png',
-        purpose: 'maskable',
-      },
-    ],
-  },
 
-  workbox: {
-    cleanupOutdatedCaches: true,
-  },
-}),
+      includeAssets: ['favicon.ico', 'favicon.svg'],
+
+      manifest: {
+        name: 'Bible Challenge Quiz',
+        short_name: 'Bible Challenge Quiz',
+
+        description:
+          'Strengthen your faith through an engaging and interactive Bible learning experience.',
+
+        theme_color: '#061526',
+        background_color: '#061526',
+        display: 'standalone',
+        orientation: 'portrait',
+        start_url: '/',
+        scope: '/',
+
+        icons: [
+          {
+            src: '/icons/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/icons/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: '/icons/icon-512-maskable.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
+      },
+
+      workbox: {
+        cleanupOutdatedCaches: true,
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+      },
+    }),
   ],
 
   resolve: {
@@ -76,6 +77,21 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, 'dist/public'),
     emptyOutDir: true,
+    // Added rollupOptions to break up the 2MB vendor file and clear the warning
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            // Group massive core frameworks like Firebase together if they exist
+            if (id.includes('firebase')) {
+              return 'vendor-firebase';
+            }
+            // Group everything else under a general vendor chunk
+            return 'vendor-core';
+          }
+        },
+      },
+    },
   },
 
   server: {

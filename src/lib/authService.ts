@@ -5,75 +5,68 @@ import {
   updateProfile,
   deleteUser,
   sendPasswordResetEmail,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updatePassword,
 } from "firebase/auth";
 
 import { auth } from "./firebase";
 
-/**
- * Register a new user
- */
-export async function registerUser(
-  name: string,
-  email: string,
-  password: string
-) {
-  const credential = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-
+export async function registerUser(name: string, email: string, password: string) {
+  const credential = await createUserWithEmailAndPassword(auth, email, password);
   if (name.trim()) {
-    await updateProfile(credential.user, {
-      displayName: name,
-    });
+    await updateProfile(credential.user, { displayName: name });
+  }
+  return credential.user;
+}
+
+export async function loginUser(email: string, password: string) {
+  const credential = await signInWithEmailAndPassword(auth, email, password);
+  return credential.user;
+}
+
+export async function resetPassword(email: string) {
+  await sendPasswordResetEmail(auth, email.trim());
+}
+
+export async function changePassword(
+  email: string,
+  currentPassword: string,
+  newPassword: string
+) {
+  const normalizedEmail = email.trim();
+  let user = auth.currentUser;
+
+  if (
+    user &&
+    user.email &&
+    user.email.toLowerCase() === normalizedEmail.toLowerCase()
+  ) {
+    const credential = EmailAuthProvider.credential(
+      normalizedEmail,
+      currentPassword
+    );
+    await reauthenticateWithCredential(user, credential);
+  } else {
+    const credential = await signInWithEmailAndPassword(
+      auth,
+      normalizedEmail,
+      currentPassword
+    );
+    user = credential.user;
   }
 
-  return credential.user;
+  await updatePassword(user, newPassword);
 }
 
-/**
- * Login
- */
-export async function loginUser(
-  email: string,
-  password: string
-) {
-  const credential = await signInWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-
-  return credential.user;
-}
-
-/**
- * Send a password-reset email.
- */
-export async function resetPassword(email: string) {
-  await sendPasswordResetEmail(auth, email);
-}
-
-/**
- * Logout
- */
 export async function logoutUser() {
   await signOut(auth);
 }
 
-/**
- * Permanently delete the currently signed-in Firebase account.
- *
- * Firebase may require the user to sign in again if their
- * authentication session is no longer recent enough.
- */
 export async function deleteCurrentUserAccount() {
   const user = auth.currentUser;
-
   if (!user) {
     throw new Error("No user is currently signed in.");
   }
-
   await deleteUser(user);
 }

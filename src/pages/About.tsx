@@ -14,7 +14,7 @@ const copy = {
     description:
       "Bible Challenge is more than a game—it's a mission to help people everywhere discover, learn, and remember the Word of God in an enjoyable and meaningful way. Designed for players of all ages, it combines fun, challenge, and biblical learning to strengthen faith and knowledge.",
     vision:
-      "From its very first release, Bible Challenge is available in four languages. My vision is to expand it into many more so that people around the world can experience God's Word in their own language. With your encouragement, feedback, and support, together we can make this vision a reality.",
+      "From its very first release, Bible Challenge is available in two languages. My vision is to expand it into many more so that people around the world can experience God's Word in their own language. With your encouragement, feedback, and support, together we can make this vision a reality.",
     version: 'Version 1.0.0',
     copyright: '© 2026 Belleus Educational Games',
     back: 'Back to Settings',
@@ -28,7 +28,7 @@ const copy = {
     description:
       "Bible Challenge est bien plus qu'un jeu : c'est une mission qui vise à aider les gens du monde entier à découvrir, apprendre et retenir la Parole de Dieu d'une manière agréable et enrichissante. Conçu pour les joueurs de tous âges, il combine plaisir, défi et apprentissage biblique afin de renforcer la foi et la connaissance.",
     vision:
-      "Dès sa toute première version, Bible Challenge est disponible en quatre langues. Ma vision est de l'offrir dans de nombreuses autres langues afin que les gens du monde entier puissent découvrir la Parole de Dieu dans leur propre langue. Grâce à vos encouragements, vos commentaires et votre soutien, nous pouvons ensemble faire de cette vision une réalité.",
+      "Dès sa toute première version, Bible Challenge est disponible en deux langues. Ma vision est de l'offrir dans de nombreuses autres langues afin que les gens du monde entier puissent découvrir la Parole de Dieu dans leur propre langue. Grâce à vos encouragements, vos commentaires et votre soutien, nous pouvons ensemble faire de cette vision une réalité.",
     version: 'Version 1.0.0',
     copyright: '© 2026 Belleus Educational Games',
     back: 'Retour aux paramètres',
