@@ -1,11 +1,10 @@
 import { useGameState } from '@/hooks/useGameState';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useSound } from '@/hooks/useSound';
-import { useEntitlement, isLevelFree } from '@/hooks/useEntitlement';
 import { getDailyLevel, getTodayString } from '@/utils/daily';
 import { motion } from 'framer-motion';
 import { useLocation } from 'wouter';
-import { Calendar, Check, ChevronRight, Lock } from 'lucide-react';
+import { Calendar, Check, ChevronRight } from 'lucide-react';
 
 type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced';
 type TranslationKey = Parameters<ReturnType<typeof useLanguage>['t']>[0];
@@ -17,8 +16,7 @@ const DIFFICULTY_KEYS: Record<Difficulty, TranslationKey> = {
 };
 
 export function DailyChallenge() {
-  const { dailyChallengeLastCompleted, completeDailyChallenge, startLevel } = useGameState();
-  const { isPremium } = useEntitlement();
+  const { dailyChallengeLastCompleted, startLevel } = useGameState();
   const { t, language } = useLanguage();
   const { playClick } = useSound();
   const [, setLocation] = useLocation();
@@ -26,12 +24,12 @@ export function DailyChallenge() {
   const today = getTodayString();
   const dailyLevel = getDailyLevel();
   const isCompletedToday = dailyChallengeLastCompleted === today;
-  const locked = !isPremium && !isLevelFree(dailyLevel.id);
 
   const handlePlay = () => {
     if (isCompletedToday) return;
+
     playClick();
-    if (locked) { setLocation('/paywall'); return; }
+
     // Completion is recorded in Result.tsx after the question is answered
     startLevel(dailyLevel.id);
     setLocation('/game');
@@ -43,11 +41,16 @@ export function DailyChallenge() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
       className={`w-full max-w-sm mx-auto parchment-bg rounded-xl border p-4 ${
-        isCompletedToday ? 'border-emerald-700/40' : 'border-gold/40 shadow-[0_0_20px_rgba(212,175,55,0.15)]'
+        isCompletedToday
+          ? 'border-emerald-700/40'
+          : 'border-gold/40 shadow-[0_0_20px_rgba(212,175,55,0.15)]'
       }`}
     >
       <div className="flex items-center gap-2 mb-2">
-        <Calendar size={14} className={isCompletedToday ? 'text-emerald-400' : 'text-gold/60'} />
+        <Calendar
+          size={14}
+          className={isCompletedToday ? 'text-emerald-400' : 'text-gold/60'}
+        />
         <span className="text-xs uppercase tracking-widest font-serif text-gold/60">
           {t('daily_challenge')}
         </span>
@@ -58,7 +61,10 @@ export function DailyChallenge() {
           <h3 className="font-serif text-sm font-bold text-card-foreground truncate">
             {dailyLevel.topic[language]}
           </h3>
-          <span className={`inline-block mt-1 text-xs px-2 py-0.5 rounded font-bold text-white ${dailyLevel.badgeColor}`}>
+
+          <span
+            className={`inline-block mt-1 text-xs px-2 py-0.5 rounded font-bold text-white ${dailyLevel.badgeColor}`}
+          >
             {t(DIFFICULTY_KEYS[dailyLevel.difficulty])}
           </span>
         </div>
@@ -74,16 +80,8 @@ export function DailyChallenge() {
             className="shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full border border-gold text-gold font-serif text-xs uppercase tracking-wider hover:bg-gold/10 transition-colors"
             data-testid="button-daily-challenge-play"
           >
-            {locked ? (
-              <>
-                <Lock size={12} />
-                {t('premium')}
-              </>
-            ) : (
-              <>
-                {t('play')} <ChevronRight size={12} />
-              </>
-            )}
+            {t('play')}
+            <ChevronRight size={12} />
           </button>
         )}
       </div>

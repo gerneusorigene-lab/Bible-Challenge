@@ -7,6 +7,7 @@ import { useEntitlement } from '@/hooks/useEntitlement';
 import { useAchievements, useAchievementsStore } from '@/hooks/useAchievements';
 import { DevPremiumToggle } from '@/components/DevPremiumToggle';
 import { GameMenuButton } from '@/components/GameMenuButton';
+import { getDailyLevel } from '@/utils/daily';
 import { Capacitor } from '@capacitor/core';
 import { App } from '@capacitor/app';
 import {
@@ -23,7 +24,7 @@ import {
 export default function Home() {
   const { t } = useLanguage();
   const { playClick } = useSound();
-  const { highScore, resetAllProgress } = useGameState();
+  const { highScore, resetAllProgress, startLevel } = useGameState();
   const { unlockedCount, total } = useAchievements();
   const clearAchievements = useAchievementsStore((state) => state.clearAll);
   const { isPremium } = useEntitlement();
@@ -50,6 +51,15 @@ export default function Home() {
   const go = (path: string) => {
     playClick();
     setLocation(path);
+  };
+
+  const startDailyChallenge = () => {
+    playClick();
+
+    const dailyLevel = getDailyLevel();
+
+    startLevel(dailyLevel.id);
+    setLocation('/game');
   };
 
   return (
@@ -125,7 +135,7 @@ export default function Home() {
           <GameMenuButton
             icon={<CalendarDays />}
             tone="blue"
-            onClick={() => go('/levels')}
+            onClick={startDailyChallenge}
             testId="button-daily-home"
           >
             {t('daily_challenge')}
@@ -182,7 +192,7 @@ export default function Home() {
 
         <footer className="mt-6 text-center text-xs font-semibold text-white/70 drop-shadow">
           <p>Version 1.0.0</p>
-          <p className="mt-1">© 2026 Belleus Educational Games</p>
+          <p className="mt-1">┬⌐ 2026 Belleus Educational Games</p>
         </footer>
       </motion.section>
     </main>

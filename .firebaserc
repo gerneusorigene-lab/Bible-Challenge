@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "bible-challenge-5c131"
-  }
+  },
+  "targets": {
+    "bible-challenge-5c131": {
+      "hosting": {
+        "bible-challenge": [
+          "bible-challenge"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

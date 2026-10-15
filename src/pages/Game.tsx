@@ -100,7 +100,7 @@ export default function Game() {
     const bonus = challengeMode ? getTimeBonus(timeLeft) : 0;
     const correct = !isTruth;
     if (correct) playCorrect(); else playWrong();
-    submitAnswer(statementId, isTruth, bonus);
+    submitAnswer(statementId, isTruth, bonus, shuffledStatements.map((statement) => statement.id));
     navTimeout.current = setTimeout(() => setLocation('/result'), 1500);
   };
 
@@ -110,7 +110,7 @@ export default function Game() {
     setRevealing(true);
     const firstTruth = shuffledStatements.find(s => s.isTruth)!;
     playWrong();
-    submitAnswer(firstTruth.id, true, 0);
+    submitAnswer(firstTruth.id, true, 0, shuffledStatements.map((statement) => statement.id));
     navTimeout.current = setTimeout(() => setLocation('/result'), 1500);
   }, [shuffledStatements, submitAnswer, playWrong, setLocation]);
 

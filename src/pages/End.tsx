@@ -40,7 +40,23 @@ export default function End() {
   const bestStreak = Math.max(streak, allTimeMaxStreak);
 
   const handleHome = () => { playClick(); resetGame(); setLocation('/'); };
-  const handleLevels = () => { playClick(); resetGame(); setLocation('/levels'); };
+  const handleLevels = () => {
+  playClick();
+
+  const completedDifficulty =
+    difficultyPlayMode ??
+    (sessionQueue?.length
+      ? LEVELS.find((level) => level.id === sessionQueue[0])?.difficulty
+      : undefined);
+
+  resetGame();
+
+  if (completedDifficulty) {
+    setLocation(`/levels?difficulty=${completedDifficulty}`);
+  } else {
+    setLocation('/journey');
+  }
+};
   const handleReview = () => { playClick(); setLocation('/review'); };
 
   const handleShare = async () => {

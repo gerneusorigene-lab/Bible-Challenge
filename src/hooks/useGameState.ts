@@ -6,6 +6,7 @@ import { getStoryIdForLevel } from '../data/storyGroups';
 export interface WrongAnswer {
   levelId: string;
   selectedStatementId: string;
+  statementOrderIds: string[];
 }
 
 export interface StoryProgress {
@@ -52,7 +53,7 @@ interface GameState {
   startStory: (levelIds: string[], storyId?: string) => void;
   startPlayAll: () => void;
   startDifficultyPlay: (difficulty: 'Beginner' | 'Intermediate' | 'Advanced', questionLimit?: number, allowedLevelIds?: string[]) => void;
-  submitAnswer: (statementId: string, isTruth: boolean, timeBonus?: number) => void;
+  submitAnswer: (statementId: string, isTruth: boolean, timeBonus?: number, statementOrderIds?: string[]) => void;
   useHint: () => void;
   nextLevel: () => void;
   resetGame: () => void;
@@ -156,7 +157,7 @@ export const useGameState = create<GameState>()(
         });
       },
 
-      submitAnswer: (statementId, isTruth, timeBonus = 0) => set((state) => {
+      submitAnswer: (statementId, isTruth, timeBonus = 0, statementOrderIds = []) => set((state) => {
         const correct = !isTruth;
         const newStreak = correct ? state.streak + 1 : 0;
         const comboBonus = correct && newStreak >= 10 ? 15
@@ -192,7 +193,7 @@ export const useGameState = create<GameState>()(
           allTimeMaxStreak: Math.max(state.allTimeMaxStreak, newStreak),
           wrongAnswers: correct
             ? state.wrongAnswers
-            : [...state.wrongAnswers, { levelId: state.currentLevelId!, selectedStatementId: statementId }],
+            : [...state.wrongAnswers, { levelId: state.currentLevelId!, selectedStatementId: statementId, statementOrderIds }],
           allTimeCorrectLevels: correct && state.currentLevelId && !state.allTimeCorrectLevels.includes(state.currentLevelId)
             ? [...state.allTimeCorrectLevels, state.currentLevelId]
             : state.allTimeCorrectLevels,

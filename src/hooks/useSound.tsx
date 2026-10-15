@@ -13,6 +13,7 @@ interface SoundContextType {
   toggleMute: () => void;
   isMusicEnabled: boolean;
   toggleMusic: () => void;
+  stopAllSound: () => void;
   playCorrect: () => void;
   playWrong: () => void;
   playClick: () => void;
@@ -40,6 +41,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   const audioCtxRef = useRef<AudioContext | null>(null);
   const musicAudioRef = useRef<HTMLAudioElement | null>(null);
   const musicEnabledRef = useRef(isMusicEnabled);
+  const exitedRef = useRef(false);
   const musicTrackIndexRef = useRef(Math.random() < 0.5 ? 0 : 1);
 
   const toggleMute = useCallback(() => {
@@ -56,6 +58,18 @@ export function SoundProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('musicEnabled', String(next));
       return next;
     });
+  }, []);
+
+  // Stop audio for this session only; do not alter saved preferences.
+  const stopAllSound = useCallback(() => {
+    exitedRef.current = true;
+    musicAudioRef.current?.pause();
+    const ctx = audioCtxRef.current;
+    if (ctx && ctx.state === 'running') {
+      void ctx.suspend().catch((error) => {
+        console.warn('[Sound Effects] Unable to suspend audio context.', error);
+      });
+    }
   }, []);
 
   const getAudioContext = useCallback(() => {
@@ -78,6 +92,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
    */
   const withRunningAudioContext = useCallback(
     (play: (ctx: AudioContext) => void) => {
+      if (exitedRef.current) return;
       try {
         const ctx = getAudioContext();
 
@@ -109,14 +124,13 @@ export function SoundProvider({ children }: { children: ReactNode }) {
    * survives route changes without restarting.
    */
   useEffect(() => {
-    const audio = new Audio(MUSIC_TRACKS[musicTrackIndexRef.current]);
-    audio.volume = MUSIC_VOLUME;
-    audio.preload = 'auto';
-    audio.autoplay = true;
-    audio.playsInline = true;
+     const audio = new Audio(MUSIC_TRACKS[musicTrackIndexRef.current]);
+      audio.volume = MUSIC_VOLUME;
+      audio.preload = 'auto';
+      audio.autoplay = true;
 
     const tryPlayMusic = async () => {
-      if (!musicEnabledRef.current || document.visibilityState === 'hidden') {
+      if (exitedRef.current || !musicEnabledRef.current || document.visibilityState === 'hidden') {
         return false;
       }
 
@@ -156,6 +170,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     };
 
     const handleUserInteraction = () => {
+      if (exitedRef.current) return;
       // Unlock Web Audio for sound effects.
       const ctx = getAudioContext();
       if (ctx.state === 'suspended') {
@@ -175,7 +190,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     };
 
     const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') {
+      if (!exitedRef.current && document.visibilityState === 'visible') {
         const ctx = audioCtxRef.current;
         if (ctx?.state === 'suspended') {
           void ctx.resume().catch(() => {
@@ -190,13 +205,13 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     };
 
     const handleWindowFocus = () => {
-      if (document.visibilityState === 'visible') {
+      if (!exitedRef.current && document.visibilityState === 'visible') {
         void tryPlayMusic();
       }
     };
 
     const handlePageShow = () => {
-      if (document.visibilityState === 'visible') {
+      if (!exitedRef.current && document.visibilityState === 'visible') {
         void tryPlayMusic();
       }
     };
@@ -252,7 +267,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     musicEnabledRef.current = isMusicEnabled;
 
     const audio = musicAudioRef.current;
-    if (!audio) return;
+    if (!audio || exitedRef.current) return;
 
     if (!isMusicEnabled) {
       audio.pause();
@@ -392,6 +407,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
         toggleMute,
         isMusicEnabled,
         toggleMusic,
+        stopAllSound,
         playCorrect,
         playWrong,
         playClick,

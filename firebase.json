@@ -1,5 +1,7 @@
+
 {
   "hosting": {
+    "target": "bible-challenge",
     "public": "dist/public",
     "ignore": [
       "firebase.json",
